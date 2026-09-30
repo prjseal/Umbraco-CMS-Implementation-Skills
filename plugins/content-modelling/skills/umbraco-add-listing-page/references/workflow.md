@@ -131,4 +131,4 @@ Report, separately:
 2. What was **read back and matched**, and what was only confirmed by the user or not checked.
 3. What is left: the listing template's rendering of its children (paging, ordering on the
    website), the item template's markup, any data folders for shared item data (with
-   umbraco-add-data-folder), and anything in the Apply log.
+   [umbraco-add-data-folder](../../umbraco-add-data-folder/SKILL.md)), and anything in the Apply log.
