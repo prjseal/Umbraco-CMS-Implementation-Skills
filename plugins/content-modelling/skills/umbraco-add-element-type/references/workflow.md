@@ -21,7 +21,7 @@ before deciding anything:
 | Do `Elements/`, `Elements/Settings/` and `Elements/Compositions/` exist? | Missing folders join the change first |
 | Which settings models and settings compositions exist, and what do they offer? | Reuse a shared settings model before creating one |
 | Which data types exist for the fields (text, rich text, media, link, colour)? | Reuse before creating |
-| Where will the block be used? | Not changed here, but named in the summary for umbraco-configure-block-editor |
+| Where will the block be used? | Not changed here, but named in the summary for [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md) |
 | Does the project follow a different convention? | The project's convention wins; note the departure |
 
 Aliases come only from `get-document-type-by-id`. Without the MCP, ask these in one message, and
@@ -66,7 +66,7 @@ Points specific to a block:
   lists its settings compositions in the Compositions row.
 - The content element's `Used by` says where it will be registered; if that is not part of this
   change, write `—` and name the placement in the changeset summary as the follow-up for
-  umbraco-configure-block-editor. Say there which settings model belongs with the block.
+  [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md). Say there which settings model belongs with the block.
 - Folders are listed in Dependencies as `document-type-container` or `data-type-container`, and
   the `Folder` breadcrumbs link to index pages. Write missing index pages from
   [folder-index.md](../../umbraco-content-model-spec/assets/folder-index.md).
@@ -132,5 +132,5 @@ Report, separately:
 1. What was created, by name: each element, settings model, settings composition and data type.
 2. What was **read back and matched**, and what was only confirmed by the user or not checked.
 3. What is left: registering the block (and its settings model) in a page's Block Grid or Block
-   List with umbraco-configure-block-editor, anything in the Apply log, and the block's Razor
+   List with [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md), anything in the Apply log, and the block's Razor
    partial view, which is implementation work.

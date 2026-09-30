@@ -68,7 +68,7 @@ Points specific to a composition:
 - **The targets.** If a target already has a spec page, add the composition to its Compositions
   row, set it back to `proposed` and list it with the action `Update`. If it has none and the MCP
   is connected, write its page from the `get-document-type-by-id` read-back, complete, and list it
-  as `Update`. Without the MCP, do not reconstruct pages you cannot read: name each target as plain
+  as `Update`. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged". Without the MCP, do not reconstruct pages you cannot read: name each target as plain
   text, make each one a checklist item, and say in the summary that the list of targets and their
   current fields are the user's word.
 - Types left out because of a clash are named in the summary with the reason.

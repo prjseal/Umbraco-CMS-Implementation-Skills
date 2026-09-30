@@ -12,7 +12,7 @@ Work down this table and stop at the first row that fits.
 | A data type with the same editor and the same configuration exists | **Reuse it** | — | `Textstring` for a plain title |
 | A built-in default differs by one setting, and the variant will be useful elsewhere | Create a **generic variant** with a bracket qualifier | `<Editor> (<qualifier>)` | `Toggle (default on)`, `Textarea (3 rows)` |
 | The configuration exists for one purpose: a limit, a list of values, a media type filter | Create a **purpose-specific** data type | `<Subject> <Editor kind>` | `Meta Description Text Area`, `Alignment Dropdown` |
-| A block editor or a collection view | Not this skill | — | umbraco-configure-block-editor, umbraco-add-listing-page |
+| A block editor or a collection view | Not this skill | — | [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md), [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 
 Names and folders are defined in
 [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types) and

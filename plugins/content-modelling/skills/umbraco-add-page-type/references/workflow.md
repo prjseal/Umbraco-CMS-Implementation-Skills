@@ -62,7 +62,7 @@ Give the page a field only when no composition already supplies it. Put it on th
 configuration fits. When a field genuinely needs a configuration no data type on the site has,
 the new data type joins the changeset as its own spec page, named and foldered by
 [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types); block
-editors are configured separately, by umbraco-configure-block-editor. A page with no own properties
+editors are configured separately, by [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md). A page with no own properties
 writes the one line the spec format gives for that case.
 
 ### The root question
@@ -102,7 +102,7 @@ Points specific to a page type:
   have one yet.
 - **The parent.** If it already has a spec page, edit its Allowed children, set it back to
   `proposed` and list it with the action `Update`. If it has none and the MCP is connected, write
-  its page from the `get-document-type-by-id` read-back, complete, and list it as `Update`.
+  its page from the `get-document-type-by-id` read-back, complete, and list it as `Update`. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged".
   Without the MCP, do not reconstruct a page you cannot read: name the parent as plain text flagged
   `Exists`, make the change a checklist item, and say in the summary that the parent is the user's
   word.

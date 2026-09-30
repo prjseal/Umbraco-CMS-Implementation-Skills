@@ -17,7 +17,7 @@ alternative approaches: the workflow is the same for all of them.
 | **Default template** | Yes, named after the alias | Yes | Yes, even though code drives it | Yes |
 | **Compositions** | Those every page takes | Those every page takes | Only what applies: SEO fields, usually no sharing image | Those every page takes |
 | **Icon** | `icon-home color-light-blue` | A noun that fits, `color-light-blue` | A noun that fits, `color-light-blue` | `icon-list color-light-blue` |
-| **This skill** | Adds it | Adds it | Adds it | **Hands off** to umbraco-add-listing-page |
+| **This skill** | Adds it | Adds it | Adds it | **Hands off** to [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 
 The rules behind each row are in
 [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md),
@@ -31,7 +31,7 @@ Check any icon name against the site before using it.
 1. If the name makes the kind obvious (`Home Page`, `Search Page`, `Contact Page`), use it
    without asking.
 2. If it is plural or says "listing", "feed" or "archive", it is a listing and a new item type
-   together. That is a listing pair: say so and hand off to umbraco-add-listing-page instead of
+   together. That is a listing pair: say so and hand off to [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) instead of
    building half of it here.
 3. If the user says the page is rendered by a controller, a search index or an API, it is
    programmatic, whatever it is called.
@@ -67,7 +67,7 @@ search results page wants SEO fields but rarely a sharing image, and it may want
 ### Listing
 
 Out of scope here. A listing is only useful with its item type, its own collection view data type
-and the allowed-children pairing between them, which umbraco-add-listing-page creates together.
+and the allowed-children pairing between them, which [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) creates together.
 If the user insists on only the listing type, say that it will not be usable until the item type
 exists.
 

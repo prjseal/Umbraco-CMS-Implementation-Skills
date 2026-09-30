@@ -24,7 +24,7 @@ artefact, and this skill decides which of them are needed and how they fit toget
 spec first: write the change down, stop for the user's approval, apply it, then read it back.
 
 Making the finished block available in a page's Block Grid or Block List is a separate step,
-done with umbraco-configure-block-editor.
+done with [`umbraco-configure-block-editor`](../umbraco-configure-block-editor/SKILL.md).
 
 The rules come from the sibling skill
 [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the spec

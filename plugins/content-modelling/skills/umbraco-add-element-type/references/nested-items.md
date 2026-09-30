@@ -46,7 +46,7 @@ Write it from
 `Umbraco.BlockList`, the amount as the configuration sentence, and one row whose content element is
 the child and whose settings element is `—`. It is used by the parent element's `items` property.
 Configuring a Block List beyond this, such as a block that appears in several lists or has its own
-settings, is umbraco-configure-block-editor's job.
+settings, is covered by [approach B of umbraco-configure-block-editor](../../umbraco-configure-block-editor/references/approach-b-block-list-repeater.md).
 
 ## Order
 

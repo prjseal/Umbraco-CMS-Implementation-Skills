@@ -15,7 +15,7 @@ The rules behind it are in
 
 The settings model is attached to the content element where the block is registered in a Block
 Grid or Block List, not on the element itself. That registration belongs to
-umbraco-configure-block-editor; this skill only makes the settings model exist and says which
+[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md); this skill only makes the settings model exist and says which
 block it is for.
 
 ## Which settings model a block uses

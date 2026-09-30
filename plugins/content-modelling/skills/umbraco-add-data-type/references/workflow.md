@@ -57,7 +57,7 @@ Points specific to a data type:
   it also lists every existing user, so the approver sees what else changes.
 - A type that gains the property follows the same rule as the other add-* skills: an existing spec
   page is edited and set back to `proposed`; with the MCP, a page is written from the read-back;
-  without it, the change is a checklist item and the summary says the type is the user's word.
+  without it, the change is a checklist item and the summary says the type is the user's word. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged".
 
 The changeset's checklist, in apply order:
 

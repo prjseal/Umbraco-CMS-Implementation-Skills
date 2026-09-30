@@ -31,8 +31,8 @@ site's own list wins.
 | A link, internal or external | `Umbraco.MultiUrlPicker` | `Umb.PropertyEditorUi.MultiUrlPicker` | Multi URL Picker (set the maximum to 1 for a single link) |
 | One page on the site | `Umbraco.ContentPicker` | `Umb.PropertyEditorUi.DocumentPicker` | Content Picker |
 | Several pages, or items from a data folder | `Umbraco.MultiNodeTreePicker` | `Umb.PropertyEditorUi.ContentPicker` | — (a new data type with its start node and allowed types) |
-| A repeated set of fields, or a layout of blocks | `Umbraco.BlockList`, `Umbraco.BlockGrid` | — | Not here: umbraco-configure-block-editor |
-| The children of a listing, as a table | `Umbraco.ListView` | `Umb.PropertyEditorUi.Collection` | Not here: umbraco-add-listing-page |
+| A repeated set of fields, or a layout of blocks | `Umbraco.BlockList`, `Umbraco.BlockGrid` | — | Not here: [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md) |
+| The children of a listing, as a table | `Umbraco.ListView` | `Umb.PropertyEditorUi.Collection` | Not here: [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 
 Umbraco 17 also keeps `Umbraco.DateTime` (the older date picker). Prefer the specific date editors
 above for new fields, and follow the project if it already uses `Umbraco.DateTime` throughout.
