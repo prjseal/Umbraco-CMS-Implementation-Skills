@@ -29,6 +29,9 @@ fix anything that fails. A skill is ready only when every applicable item passes
 **assets/ (if present)**
 - [ ] Templates use `<Placeholder>` tokens with optional/removable lines marked
 - [ ] Template code follows the skill's own best-practices section
+- [ ] Markdown assets (spec page templates, report templates) are documents, not code. They still
+  use `<Placeholder>` tokens, but an optional row or line is named in the reference file that
+  describes the format, because a comment inside a markdown table breaks the table
 
 **scripts/ (if present)**
 - [ ] Deterministic, repeatable work lives in a script the skill points at, not re-derived in prose
@@ -47,9 +50,22 @@ fix anything that fails. A skill is ready only when every applicable item passes
   | **Asserted** | `examples/<approach>/` + a `<ProjectReference>` from a host + a fixture on rendered output | "this runs on the pinned Umbraco" |
   | **Compiled** | `examples/<approach>/` in the .sln, referenced by no host | "this builds against the pinned Umbraco" |
   | **Documented** | no example; ships no code anywhere in the repo | "an eval graded the guidance; nothing ran" |
-- [ ] At least one approach is **Asserted**. A skill where nothing runs isn't gated.
+- [ ] At least one approach is **Asserted**. A skill where nothing runs isn't gated. The one
+  exception is a **Documented-only** skill, below.
 - [ ] **Documented** is only legal when the approach ships no code at all. "Committed but ungated" is
-  not a tier.
+  not a tier. Markdown in `assets/` is not code: a skill whose assets are all `.md` ships no code.
+- [ ] **Documented-only skills.** A skill that ships no code (no `assets/`, or markdown assets only)
+  is tier **Documented** throughout, with no Asserted approach and no `examples/`. That is legal only
+  when all of these hold:
+  - its `## Validation` section states the tier in words ("Documented ... nothing ran"), so nobody
+    assumes runtime coverage that isn't there;
+  - it is validated by `evals/evals.json`, with one MCP-connected and one MCP-absent prompt when the
+    skill touches the backoffice;
+  - if it writes or applies schema specs, the specs it produces pass
+    `plugins/content-modelling/skills/umbraco-content-model-spec/scripts/lint-spec.mjs`, which CI
+    runs against that skill's golden spec and broken fixture;
+  - Umbraco Developer MCP versus manual backoffice steps is one approach with two mechanisms, not an
+    A/B pair, so it does not count towards the two-approach limit.
 - [ ] Variants *inside* an approach carry their own tier. The two-host split does not fix
   intra-approach collisions — sitemap's split-index controller still maps the same `/sitemap.xml` as
   the single-file one, so it stays **Compiled**.
@@ -68,7 +84,7 @@ fix anything that fails. A skill is ready only when every applicable item passes
   Umbraco's own `ContentFinderByConfigured404` — so a content-finder 404 approach and a config-based
   404 approach can never both be live in one process, whatever they're named.
 
-**Runtime gate (skip only if the skill ships nothing in `assets/` — and say so)**
+**Runtime gate (skip only if the skill ships no code in `assets/`: nothing, or markdown only — and say so)**
 - [ ] `.generate.json` maps **every** placeholder the assets carry. Enforced by
   `scripts/generate-examples.py --lint`, because a missed one survives substitution as a literal
   string, still compiles, and silently never matches.
@@ -84,4 +100,6 @@ fix anything that fails. A skill is ready only when every applicable item passes
 
 **Before shipping**
 - [ ] Passes `umbraco-skill-validator` and `umbraco-skill-code-analyzer` (if available)
+- [ ] `node scripts/check-skill-links.mjs` passes — every relative link, including links into a
+  sibling skill, resolves
 - [ ] Eval'd against a baseline with `umbraco-skill-evaluator`
