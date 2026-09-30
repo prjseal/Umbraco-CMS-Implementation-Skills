@@ -7,7 +7,7 @@
 | Two or more types need the same fields, or will soon | Make a composition |
 | One type needs the fields and nothing else will | Keep them on that type. Say why; the user can revisit when a second type appears |
 | The site already has a composition for this concern | Reuse it, or extend it (an Update of that composition), never a second one |
-| The fields are block styling (background colour, anchor, spacing) | Not this skill: a settings composition for a block settings model belongs to umbraco-add-element-type |
+| The fields are block styling (background colour, anchor, spacing) | Not this skill: a settings composition for a block settings model belongs to [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) |
 | The request is for a composition that includes another composition | Refuse the nesting. Make the new concern its own flat composition and apply both side by side |
 
 The rules behind these are in

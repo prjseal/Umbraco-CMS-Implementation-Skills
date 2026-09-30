@@ -52,7 +52,7 @@ Property sorts go 100, 200 within each. A field whose values come from a fixed l
 sizes) needs its own purpose data type, named and foldered by
 [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types), for example
 `Background Colour Picker` in `Color Picker/`. That data type joins the changeset ahead of the
-settings composition. Choosing and configuring it in depth belongs to umbraco-add-data-type.
+settings composition. Choosing and configuring it in depth belongs to [umbraco-add-data-type](../../umbraco-add-data-type/SKILL.md).
 
 A settings composition never composes another one, has no template and is never applied to a
 content element or a page type.

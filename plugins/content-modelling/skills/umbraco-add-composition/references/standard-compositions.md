@@ -50,7 +50,7 @@ its configuration fits. A field with a constraint the built-in cannot express, s
 named and foldered by [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types)
 (`Meta Description Text Area` in `Text Area/`, `Toggle (default on)` in `Toggle/`). That data type
 joins the changeset as its own spec page, ahead of the composition. The reuse-or-create decision
-in depth belongs to umbraco-add-data-type.
+in depth belongs to [umbraco-add-data-type](../../umbraco-add-data-type/SKILL.md).
 
 ## Descriptions
 
