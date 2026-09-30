@@ -52,7 +52,7 @@ restating it.
 
 Creating a composition is not part of this skill. If the page needs one the site lacks (SEO
 fields, sharing fields), leave it out of this spec, say so in the changeset summary, and name
-umbraco-add-composition as the follow-up that adds it and then applies it to this page. Do not
+[umbraco-add-composition](../../umbraco-add-composition/SKILL.md) as the follow-up that adds it and then applies it to this page. Do not
 list it as a `Missing` dependency: that blocks approval of a page that is useful without it.
 
 ### Own properties
@@ -132,6 +132,10 @@ Show the changeset's summary and spec list, and call out two things: the **exist
 that will change, and anything that rests on the user's word rather than a read of the site. Then
 stop. A request to "just create it", however firm, is a request for the page type; it is not
 approval of a spec the user has not seen.
+
+Without the MCP, if the user asked for the backoffice steps, give the walkthrough in the same reply,
+headed as steps to follow once the changeset is approved. Writing it is not applying it, and the
+status stays `proposed`.
 
 ## 5. Apply
 

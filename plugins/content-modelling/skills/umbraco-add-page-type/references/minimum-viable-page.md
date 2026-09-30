@@ -33,7 +33,7 @@ Adjust it to what the inspection found:
 | A body block grid data type (for example `Main Content Block Grid`) | Use it as `mainContent` instead of `bodyText` |
 | No home page | Ask whether to add one in the same change ([the root question](workflow.md#the-root-question)) |
 | No master template | Add a Master template to the change, first |
-| No compositions at all | Leave Compositions empty and name the SEO composition as a follow-up for umbraco-add-composition |
+| No compositions at all | Leave Compositions empty and name the SEO composition as a follow-up for [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) |
 | A `contentPage` already | Nothing to add; say so and offer to extend it |
 
 ## Worked example
