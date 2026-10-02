@@ -15,6 +15,7 @@
 | Description | A block of formatted text. |
 | Folder | [Document Types](../../Document-Types.md) / [Elements](../Elements.md) |
 | Allowed at root | No |
+| Vary by culture | No |
 | Allowed children | — |
 | Compositions | — |
 

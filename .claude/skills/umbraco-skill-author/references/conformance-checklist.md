@@ -17,7 +17,9 @@ fix anything that fails. A skill is ready only when every applicable item passes
 - [ ] Thin/routing — doesn't inline detail or `if/else` branching that belongs in references/assets
 - [ ] Decision table + "how to decide" present when there's more than one approach
 - [ ] Version compatibility stated
-- [ ] Best-practices section is domain guidance, not just restated code
+- [ ] Best-practices section is domain guidance specific to this skill, not restated code. A rule a hub
+  skill owns (`umbraco-content-model-conventions`, `umbraco-content-requirements-documentation`) is
+  linked with an anchor, never restated: a copy drifts, and the agent then reads whichever it finds first
 - [ ] Validation section points at `evals/evals.json`
 - [ ] No doc link duplicated between SKILL.md and a reference file
 
@@ -59,8 +61,12 @@ fix anything that fails. A skill is ready only when every applicable item passes
   when all of these hold:
   - its `## Validation` section states the tier in words ("Documented ... nothing ran"), so nobody
     assumes runtime coverage that isn't there;
+  - it ships no compiled code. An inline snippet a reference needs for context (a two-line Razor
+    layout stub) is allowed only when it is marked as uncompiled in `## Validation` and points at the
+    implementation plugin or the Umbraco docs for the real thing;
   - it is validated by `evals/evals.json`, with one MCP-connected and one MCP-absent prompt when the
-    skill touches the backoffice;
+    skill touches the backoffice. A recorded fixture of MCP read results (`evals/files/mcp/*.md`)
+    satisfies the MCP-connected prompt: evals cannot reach a live server;
   - if it writes or applies schema requirements docs, the requirements docs it produces pass
     `plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-requirements.mjs`, which CI
     runs against that skill's golden requirements and broken fixture;
@@ -99,7 +105,9 @@ fix anything that fails. A skill is ready only when every applicable item passes
 - [ ] The test was **proven able to fail** — broken deliberately, seen red, reverted.
 
 **Before shipping**
-- [ ] Passes `umbraco-skill-validator` and `umbraco-skill-code-analyzer` (if available)
 - [ ] `node scripts/check-skill-links.mjs` passes — every relative link, including links into a
-  sibling skill, resolves
+  sibling skill, resolves, and every `#anchor` names a heading
+- [ ] `node scripts/check-skill-frontmatter.mjs` passes — `name` matches the folder, only `name` and
+  `description` keys, description at most 1024 characters (the Agent Skills limit; Claude Code allows
+  1536), and every file an eval names exists
 - [ ] Eval'd against a baseline with `umbraco-skill-evaluator`

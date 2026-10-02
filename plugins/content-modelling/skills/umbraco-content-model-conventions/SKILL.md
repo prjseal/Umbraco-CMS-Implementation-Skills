@@ -10,7 +10,8 @@ description: >
   tab have", "how should I structure compositions", "should this be allowed at root", or
   "does this type need a template", or when another content-modelling skill needs a rule.
   SKIP: non-Umbraco projects; writing or applying a schema requirements doc (use
-  umbraco-content-requirements-documentation); reviewing C# or Razor code (use umbraco-common-pitfalls).
+  umbraco-content-requirements-documentation); auditing a whole model (use
+  umbraco-review-content-model); media types, member types and C# or Razor code.
 ---
 
 # Content Model Conventions
@@ -20,16 +21,17 @@ that any developer can tell what an artefact is, where it lives and how it behav
 and position alone. The rules were derived from a production Umbraco 17 schema; they are house
 conventions, not Umbraco requirements.
 
-This skill **creates nothing**. It answers "what is the rule?" and the reason behind it. Writing
-the requirements doc and applying it to a site belong to the sibling skill
+This skill **creates nothing**. It answers "what is the rule?" and the reason behind it. Writing the
+requirements doc and applying it to a site belong to the sibling skill
 [`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md).
 
 ## How to use this index
 
 - **Designing something new:** find the row for the decision you are making, open only that
   reference file, and apply the rule before you write the requirements doc.
-- **Reviewing an existing model:** scan for the signatures in the *Look for* column, then open the
-  files that match. Report what breaks a rule and why; do not fix anything unasked.
+- **Checking one decision in an existing model:** scan for the signatures in the *Look for*
+  column, then open the files that match. A review of a whole model, ranked and reported, is
+  [`umbraco-review-content-model`](../umbraco-review-content-model/SKILL.md)'s job.
 - **Explaining a rule:** each reference file gives the reason and, where one exists, the rejected
   alternative. Quote the reason rather than inventing one.
 - **An existing project disagrees with a rule:** the project's established convention wins for
@@ -59,10 +61,16 @@ the requirements doc and applying it to a site belong to the sibling skill
 | Allowed children and allow-at-root | Several page types allowed at root, a listing that allows everything | [allowed-children-and-root.md](references/allowed-children-and-root.md) |
 | Templates | A routable type with no template, a template on a composition or element | [templates.md](references/templates.md) |
 
+## Out of scope
+
+Media types and member types follow Umbraco's own defaults and are not covered by this plugin.
+Reviewing C# or Razor that reads the model belongs to `umbraco-common-pitfalls` in the sibling
+`umbraco-cms-implementation-skills` plugin, which is installed separately.
+
 ## Version compatibility
 
 The conventions describe schema shape, which has been stable since tabs and groups were reworked
-in Umbraco 9 and block editors arrived. They were derived from, and checked against, an
+in Umbraco 8.17 and block editors arrived. They were derived from, and checked against, an
 **Umbraco 17** schema; nothing here depends on an API. Skills that apply these rules target
 Umbraco 17+.
 
@@ -72,9 +80,9 @@ Umbraco 17+.
   breaks templates, models and content queries.
 - Prefer consistency with the project over purity. One convention applied everywhere beats two
   good conventions mixed.
-- These rules are checkable. `umbraco-content-requirements-documentation` ships a linter that enforces the
-  mechanical ones on a written requirements doc, so write the requirements doc and run the linter instead of checking by
-  eye.
+- These rules are checkable. `umbraco-content-requirements-documentation` ships a linter that
+  enforces the mechanical ones on a written requirements doc, so write the requirements doc and run
+  the linter instead of checking by eye.
 - Stating a rule is not the same as verifying a site follows it. Only claim a live model conforms
   after reading it from the site.
 

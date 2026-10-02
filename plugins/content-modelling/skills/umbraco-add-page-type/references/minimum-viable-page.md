@@ -5,8 +5,8 @@ and says nothing more, propose a **Content Page** instead of asking a list of qu
 deliberately small: the right name, place, compositions, template and parent, and two fields.
 Everything else is layered on later.
 
-It still goes through the whole [workflow](workflow.md): inspect, write the requirements doc, stop for
-approval. The default only saves the decisions.
+It still goes through the whole [workflow](workflow.md): inspect, write the requirements doc,
+stop for approval. The default only saves the decisions.
 
 ## The default
 
@@ -22,7 +22,7 @@ approval. The default only saves the decisions.
 | Template | Content Page, `contentPage.cshtml`, under the master |
 | Allowed at root | No |
 | Allowed as a child of | The home page, and itself |
-| Allowed children | Itself |
+| Allowed children | Itself, plus any listing page types the site has |
 | Vary by culture | No, unless the site has more than one language; then ask |
 
 Adjust it to what the inspection found:
@@ -30,6 +30,7 @@ Adjust it to what the inspection found:
 | The site has | Change |
 |---|---|
 | A composition that already gives a page title | Drop `pageTitle` |
+| A listing page type (`...ListingPage`) | Add it to Allowed children, so a section can hold a listing |
 | A body block grid data type (for example `Main Content Block Grid`) | Use it as `mainContent` instead of `bodyText` |
 | No home page | Ask whether to add one in the same change ([the root question](workflow.md#the-root-question)) |
 | No master template | Add a Master template to the change, first |
@@ -38,10 +39,12 @@ Adjust it to what the inspection found:
 
 ## Worked example
 
-A single-language site with a home page (`homePage`), a master template and an existing
-`seoComposition`. The requirements folder is `docs/umbraco-schema/`. The home page has no requirements page and
-is read with the MCP, so its page is written from the read-back as an `Update`; that page is not
-shown here.
+A single-language site with a home page (`homePage`), a master template, an existing
+`seoComposition` and no listing pages. The requirements folder is `docs/umbraco-schema/`. The
+home page has no requirements page and is read with the MCP, so its page is written from the
+read-back as an `Update`
+([requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#updating-a-type-that-already-exists));
+that page is not shown here.
 
 `Document-Types/ContentPage.md`:
 
@@ -151,7 +154,7 @@ text of its own. The Home Page is updated to allow it as a child.
 ```
 
 Without the MCP, `HomePage.md` is not written: the Used by line names Home Page as plain text,
-row 3 of Requirements docs is dropped, and the summary says the home page was confirmed by the user, not read
-from the site.
+row 3 of Requirements pages is dropped, and the summary says the home page was confirmed by the
+user, not read from the site.
 
 **Related:** [workflow.md](workflow.md), [page-kinds.md](page-kinds.md).

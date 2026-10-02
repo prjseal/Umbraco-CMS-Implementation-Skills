@@ -12,7 +12,7 @@
         "Two page type requirements pages exist directly in docs/umbraco-schema/Document-Types/: a listing with alias `blogListingPage` and an item with an alias ending in Page (e.g. `blogPage` or `blogPostPage`); neither is `blogListing` or `blogPost`",
         "The listing has Allowed at root No, and the Home Page is updated (requirements page or checklist item) to allow the listing while keeping its existing allowed children",
         "The listing's Allowed children are the item type and the listing itself; the item's Allowed children are —",
-        "A collection view data type requirements doc exists under docs/umbraco-schema/Data-Types/Collection-View/ named `Blog Listing Page Collection View` (not reusing Article Listing Page Collection View), ordered by the item's publish date property descending, and the listing's `List view` row links to it",
+        "A collection view data type requirements doc exists under docs/umbraco-schema/Data-Types/Collection-View/ named `Blog Listing Page Collection View` (not reusing Article Listing Page Collection View), ordered by the item's publish date property descending, and the listing's `Collection` row links to it",
         "The item's author field reuses the existing `Author Picker` data type, and its own fields sit on the `Content` tab (Tab Sort 100) with sorts in hundreds",
         "Both pages have a default template named after their alias under the existing `master`",
         "Every requirements page and the changeset have the status `proposed`; the agent stops for approval and does not claim anything was created or verified on the site"

@@ -22,7 +22,7 @@
 
 | Tab | Tab Sort | Group | Group Sort | Name | Alias | Data Type | Editor | Value Type | Mandatory | Sort | Description |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| SEO & Sharing | 600 | — | — | Meta Title | `metaTitle` | Textstring | `Umbraco.TextBox` | `System.String` | No | 100 | The title shown in search results. |
+| SEO | 600 | — | — | Meta Title | `metaTitle` | Textstring | `Umbraco.TextBox` | `System.String` | No | 100 | The title shown in search results. |
 
 ## Dependencies
 

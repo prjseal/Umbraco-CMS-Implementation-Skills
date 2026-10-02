@@ -15,6 +15,7 @@
 | Description | <Description> |
 | Folder | <FolderBreadcrumb> |
 | Allowed at root | No |
+| Vary by culture | <YesOrNo> |
 | Allowed children | — |
 | Compositions | <CompositionLinksOrDash> |
 

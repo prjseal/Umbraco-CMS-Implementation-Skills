@@ -15,8 +15,8 @@ site's own list wins.
 | Several lines of plain text (a summary) | `Umbraco.TextArea` | `Umb.PropertyEditorUi.TextArea` | Textarea |
 | Formatted text with links and headings | `Umbraco.RichText` | `Umb.PropertyEditorUi.Tiptap` | Richtext editor |
 | Yes or no | `Umbraco.TrueFalse` | `Umb.PropertyEditorUi.Toggle` | True/false |
-| One value from a fixed list | `Umbraco.DropDown` (single) or `Umbraco.RadioButtonList` | `Umb.PropertyEditorUi.Dropdown`, `Umb.PropertyEditorUi.RadioButtonList` | — (always a new data type holding the values) |
-| Several values from a fixed list | `Umbraco.CheckBoxList` or `Umbraco.DropDown` (multiple) | `Umb.PropertyEditorUi.CheckBoxList`, `Umb.PropertyEditorUi.Dropdown` | — |
+| One value from a fixed list | `Umbraco.DropDown.Flexible` (single) or `Umbraco.RadioButtonList` | `Umb.PropertyEditorUi.Dropdown`, `Umb.PropertyEditorUi.RadioButtonList` | — (always a new data type holding the values) |
+| Several values from a fixed list | `Umbraco.CheckBoxList` or `Umbraco.DropDown.Flexible` (multiple) | `Umb.PropertyEditorUi.CheckBoxList`, `Umb.PropertyEditorUi.Dropdown` | — |
 | Free-form keywords | `Umbraco.Tags` | `Umb.PropertyEditorUi.Tags` | Tags |
 | A whole number | `Umbraco.Integer` | `Umb.PropertyEditorUi.Integer` | Numeric |
 | A decimal number | `Umbraco.Decimal` | `Umb.PropertyEditorUi.Decimal` | — |
@@ -33,6 +33,10 @@ site's own list wins.
 | Several pages, or items from a data folder | `Umbraco.MultiNodeTreePicker` | `Umb.PropertyEditorUi.ContentPicker` | — (a new data type with its start node and allowed types) |
 | A repeated set of fields, or a layout of blocks | `Umbraco.BlockList`, `Umbraco.BlockGrid` | — | Not here: [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md) |
 | The children of a listing, as a table | `Umbraco.ListView` | `Umb.PropertyEditorUi.Collection` | Not here: [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
+
+`Umbraco.DropDown.Flexible` is the one dropdown editor: single or multiple selection is its
+`multiple` setting, so a single-value dropdown and a multi-value one are two data types with the
+same editor.
 
 Umbraco 17 also keeps `Umbraco.DateTime` (the older date picker). Prefer the specific date editors
 above for new fields, and follow the project if it already uses `Umbraco.DateTime` throughout.
@@ -54,9 +58,9 @@ editor UI `Umb.PropertyEditorUi.DocumentPicker`, while the **multiple** one is
 
 ## The Value Type column
 
-The requirements doc's Value Type is the type Models Builder gives the property. Take it from an existing
-property on the site that uses the same data type, or from the generated model. For the common
-editors:
+The requirements doc's Value Type is the type Models Builder gives the property. Take it from an
+existing property on the site that uses the same data type, or from the generated model. For the
+common editors:
 
 | Editor | Value Type |
 |---|---|

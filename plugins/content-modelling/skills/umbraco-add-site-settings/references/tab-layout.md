@@ -1,9 +1,9 @@
 # Tab layout
 
-Site settings is the one type whose tabs do not follow the global tab sorts
-([tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md)).
-No other type shares its tabs, so they are simply numbered **0 to 9 in the order an editor reads
-them**, top of the page first. The linter rejects a sort above 9 on `siteSettings`.
+Site settings is the one type whose tabs do not follow the global tab sorts: they are numbered
+**0 to 9 in the order an editor reads them**, as
+[tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md#global-tab-sorts)
+says. The linter rejects a sort above 9 on `siteSettings`.
 
 ## A typical layout
 

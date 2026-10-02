@@ -34,8 +34,8 @@ Say what an editor cannot work out from the label. Cover whichever of these appl
 Leave a description empty only when the label is genuinely complete (`Title` on a block). Do not
 restate the label.
 
-Descriptions are part of the schema, so they go in the requirements doc and are applied with everything else.
-The MCP create tools do not set property descriptions; they are written in the fix-up pass that
-`umbraco-content-requirements-documentation` describes.
+Descriptions are part of the schema, so they go in the requirements doc and are applied with
+everything else. The MCP create tools do not set property descriptions; they are written in the
+fix-up pass that `umbraco-content-requirements-documentation` describes.
 
 **Related:** [Property aliases](property-aliases.md).

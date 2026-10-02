@@ -1,18 +1,12 @@
 # Workflow
 
-Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
-are the requirements documentation skill's; this file adds only what a composition needs at each one. Read the linked
-file at each step rather than working from this summary.
-
-Before step 1, find or agree the requirements folder as
-[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
-describes. Ask once; never again once it is recorded.
+Follow
+[the six steps](../../umbraco-content-requirements-documentation/references/change-workflow.md).
+This file adds only what a composition needs at each step.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)
-for the tools and for what to do without the MCP. For a composition, these are the answers you
-need before deciding anything:
+For a composition, these are the answers you need before deciding anything:
 
 | Question | Why it matters here |
 |---|---|
@@ -21,41 +15,37 @@ need before deciding anything:
 | Which compositions already put fields in the tab this one will use? | A shared tab means groups, and an Update of the existing composition |
 | Which types would take it, and what do they define now? | Every target is an Update; an alias clash blocks a target |
 | Which data types exist for the fields? | Reuse before creating |
-| How many languages? | Vary by culture is asked about only when there is more than one |
-| Does the project follow a different convention? | The project's convention wins; note the departure |
 
 Read every candidate target with `get-document-type-by-id`, and every composition it already has,
 so the alias comparison in [when-to-apply.md](when-to-apply.md#what-blocks-a-type-from-taking-it)
 is made against the real schema. `get-document-type-composition-references` tells you what already
-uses an existing composition. Without the MCP, ask these in one message, and treat every answer as
-the user's word, not as something read from the site.
+uses an existing composition.
 
 ## 2. Decide
 
 | Decision | For a composition | Rule |
 |---|---|---|
-| The concern | One job. Two jobs are two compositions | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
-| Name and alias | Title Case name ending `Composition`; camelCase alias ending `Composition`, acronyms collapsed (`seoComposition`) | [naming.md](../../umbraco-content-model-conventions/references/naming.md) |
+| The concern | One job; two jobs are two compositions | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md#when-to-make-one) |
+| Name and alias | Title Case name and camelCase alias, both ending `Composition` (`seoComposition`) | [naming.md](../../umbraco-content-model-conventions/references/naming.md) |
 | Folder | `Compositions/` | [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md) |
-| Icon | `icon-settings` or a noun that fits, no colour | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md) |
+| Icon | `icon-settings` or a noun that fits, no colour | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md#colour-by-role) |
 | Description | "Adds ..." | [descriptions.md](../../umbraco-content-model-conventions/references/descriptions.md) |
-| Tab, group and sorts | The global tab sort; a group only when the tab is shared; property sorts in hundreds | [standard-compositions.md](standard-compositions.md), [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md) |
+| Tab, group and sorts | The standard tab and group for the concern | [standard-compositions.md](standard-compositions.md), [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md) |
 | Fields and data types | Short list, area-prefixed aliases, existing data types first | [standard-compositions.md](standard-compositions.md) |
-| Behaviour | No template, no children, not allowed at root, no compositions of its own | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
+| Behaviour | None of its own | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md#rules) |
 | Targets | Selective, by type kind; clashes excluded | [when-to-apply.md](when-to-apply.md) |
 | Vary by culture | Match the targets. `No` on a single-language site | — |
 
 ## 3. Write the requirements doc
 
-Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md). A composition
-change is these pages:
+A composition change is these pages:
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| A new data type, only if a field needs one | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor kind>/<Name>.md` | Create |
-| The composition | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/<Alias>.md` | Create |
-| An existing composition that now shares the tab and gains a group | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/<Alias>.md` | Update |
-| Each target type, with the composition added to its Compositions row | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | Where the type lives | Update |
+| A new data type, only if a field needs one | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor-Kind>/<Name-Slug>.md` | Create |
+| The composition | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/<AliasPascalCase>.md` | Create |
+| An existing composition that now shares the tab and gains a group | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/<AliasPascalCase>.md` | Update |
+| Each target type, with the composition added to its Compositions row | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | Where the type lives, e.g. `Document-Types/<AliasPascalCase>.md` | Update |
 | The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to a composition:
@@ -65,12 +55,10 @@ Points specific to a composition:
   `New in this changeset` if it is created now, and the `Folder` breadcrumb links to the index
   pages. Write missing index pages from
   [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md).
-- **The targets.** If a target already has a requirements page, add the composition to its Compositions
-  row, set it back to `proposed` and list it with the action `Update`. If it has none and the MCP
-  is connected, write its page from the `get-document-type-by-id` read-back, complete, and list it
-  as `Update`. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged". Without the MCP, do not reconstruct pages you cannot read: name each target as plain
-  text, make each one a checklist item, and say in the summary that the list of targets and their
-  current fields are the user's word.
+- **The targets.** Every target is an existing type, written as
+  [requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#updating-a-type-that-already-exists)
+  describes; each one is its own checklist item, so the user approves the exact list and a failure
+  leaves a record of which types have the composition.
 - Types left out because of a clash are named in the summary with the reason.
 
 The changeset's checklist, in apply order:
@@ -84,35 +72,20 @@ The changeset's checklist, in apply order:
 - [ ] 6. Verify every requirements doc against the site and set each status line
 ```
 
-Then lint the folder with the requirements documentation skill's
-[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
-errors. If Node.js is not available, say the requirements doc was not linted.
-
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
-Show the changeset's summary and requirements doc list, and call out: every **existing** type that will change,
-any type left out and why, anything that would need a content migration, and anything that rests
-on the user's word. Then stop. "Just add it to every page" is a request for the composition, not
-approval of a list of types the user has not seen.
-
-Without the MCP, if the user asked for the backoffice steps, give the walkthrough in the same reply,
-headed as steps to follow once the changeset is approved. Writing it is not applying it, and the
-status stays `proposed`.
+For a composition, call out: every **existing** type that will change, any type left out and why,
+and anything that would need a content migration. Then stop; see
+[the approval gate](../../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
+If the user asked for the backoffice steps and the MCP is not connected, see
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md#asked-for-the-steps-before-approval).
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
-including the fix-up pass after the create. Without it, follow
-[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For a
-composition, also:
+For a composition, also:
 
-- **The create.** Pass `parentId` as the `Compositions` folder's id, looked up at apply time.
-  Each property carries its `tab` and, when the tab is shared, its `group`. Sorts, mandatory and
-  descriptions are written in the fix-up.
-- **The tab name.** `SEO & Sharing` is refused by the MCP; follow
-  [Values the MCP rejects](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#values-the-mcp-rejects)
-  and leave the requirements doc as written.
+- **The create.** `parentId` is the `Compositions` folder's id, looked up at apply time. Each
+  property carries its `tab` and, when the tab is shared, its `group`.
 - **An existing composition gaining a group.** Read it, add a group container whose parent is the
   tab's container, point each of its properties at the new group, and send the whole body back.
   Take the container shape from a type on the site that already has a group. Its property count
@@ -125,14 +98,9 @@ composition, also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For a composition, also
-confirm that `get-document-type-composition-references` on the new composition lists exactly the
-targets in the requirements doc, and that each target's own properties are the ones it had before.
+For a composition, also confirm that `get-document-type-composition-references` on the new
+composition lists exactly the targets in the requirements doc, and that each target's own
+properties are the ones it had before.
 
-Report, separately:
-
-1. What was created or changed, by name: the composition, any data type, each target.
-2. What was **read back and matched**, and what was only confirmed by the user or not checked.
-3. What is left: anything in the Apply log (such as the tab name the MCP refused), types left out
-   and why, any field move that needs a content migration, and the Razor or C# that reads the new
-   fields, which is implementation work.
+In the report's "what is left", name the types left out and why, any field move that needs a
+content migration, and the Razor or C# that reads the new fields, which is implementation work.

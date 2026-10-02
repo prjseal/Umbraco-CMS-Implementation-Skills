@@ -41,7 +41,7 @@
       "expectations": [
         "The agent does not create a `micrositeSettings` (or similar second) settings document type, and explains that the microsite gets its own content node of the existing `siteSettings` type",
         "The agent explains that code must find the right settings node per site (e.g. a picker from each home page to its settings, a site folder, or matching by root) and that this choice is made with the developer",
-        "If the agent proposes any schema change (such as a settings picker on homePage), it is written as a requirements doc with the status `proposed` and the agent stops for approval",
+        "The agent ends its reply by asking the user something: which per-site lookup to use, or approval of a changeset whose requirements pages (for example a settings picker on homePage) are all `proposed`. It marks nothing `approved` or `applied` and applies nothing in this turn",
         "The agent does not claim that anything was created, copied or verified on the site"
       ]
     }

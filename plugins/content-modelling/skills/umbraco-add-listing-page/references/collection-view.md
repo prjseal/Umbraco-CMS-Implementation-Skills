@@ -2,15 +2,16 @@
 
 A listing page with dozens or hundreds of items is unusable as a tree. A **collection view**
 shows the listing's children as a sortable, searchable table in the backoffice, and the items no
-longer crowd the content tree. Every listing gets its own collection view data type, set on the
-listing type's `List view` row. The rule is in
+longer crowd the content tree. Each listing gets its own collection view data type, set on the
+listing type's `Collection` row; the one exception is listings of the same item type, which may
+share one. The rule is in
 [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#listings).
 
 ## The data type
 
 | Setting | Rule | Example |
 |---|---|---|
-| Name | `<Listing type name> Collection View` | `Article Listing Page Collection View` |
+| Name | `<Listing type name> Collection View`, or `<Item type name> Collection View` when shared | `Article Listing Page Collection View` |
 | Folder | `Collection View/` | |
 | Property editor, editor UI | `Umbraco.ListView`, `Umb.PropertyEditorUi.Collection` | |
 | Database type | `Nvarchar` | |
@@ -23,8 +24,8 @@ listing type's `List view` row. The rule is in
 
 Start from the template
 [collection-view-data-type.md](../../umbraco-content-requirements-documentation/assets/collection-view-data-type.md).
-A requirements page for this data type lives in `Data-Types/Collection-View/`, and the linter checks that a
-listing page's `List view` row names one.
+A requirements page for this data type lives in `Data-Types/Collection-View/`, and the linter
+checks that a listing page's `Collection` row names one.
 
 ## Columns
 
@@ -49,7 +50,8 @@ controller orders what it renders; say so when you report.
 An article listing wants `publishDate` and `author`; an event listing wants `eventDate` and
 `venue`. A shared collection view would force one set of columns on both, and a change for one
 listing would silently change the other. A second listing of the **same** item type (for example
-two regional news listings) may share one, named after the item it lists.
+two regional news listings) may share one, named after the item it lists, because the same
+columns fit both.
 
 ## What it changes for editors
 

@@ -15,6 +15,7 @@
 | Description | A set of expandable panels. |
 | Folder | Document Types / Elements |
 | Allowed at root | No |
+| Vary by culture | No |
 | Allowed children | — |
 | Compositions | — |
 

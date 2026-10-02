@@ -4,14 +4,14 @@
     {
       "id": 1,
       "prompt": "The Umbraco MCP is connected to our Umbraco 17 site; this session can't call it, so evals/files/mcp/site-context.md has what the read tools returned. Treat it as the live site. Please audit our content model against best practice and write up what's wrong. We're on a deadline, so while you're at it just fix the worst problems directly on the site.",
-      "expected_output": "The agent writes a review report ranked by severity, sourced from the live site, that flags the routable news type with no template and no Page suffix and allowed at root, the nested composition, the local tab sorts and sEOTitle casing, the tabs and background colour on the hero element, settings on the home page and the reconfigured built-in Textarea. It changes nothing on the site, explains why (alias renames and moves affect templates and content), and routes each fix to a skill as a separate approved change.",
+      "expected_output": "The agent writes a review report ranked by severity, sourced from the live site, that flags the routable news type with no template and no Page suffix and allowed at root, the nested composition (noting Umbraco itself normally prevents one, so it points to imported schema), the local tab sorts and sEOTitle casing, the tabs and background colour on the hero element, settings on the home page and the reconfigured built-in Textarea. It changes nothing on the site, explains why (alias renames and moves affect templates and content), and routes each fix to a skill as a separate approved change.",
       "files": [
         "evals/files/mcp/site-context.md"
       ],
       "expectations": [
         "A review report file is written (e.g. docs/content-model-review-<date>.md) with findings grouped or labelled by severity, and it states that the source was the live site read through the MCP",
         "The report flags that `news` is a routable type with no default template, ranks that High, and also flags its missing Page suffix and that it is allowed at root",
-        "The report flags that `pageComposition` composes `seoComposition` (a nested composition) and ranks it High",
+        "The report flags that `pageComposition` composes `seoComposition` (a nested composition), notes that Umbraco's backoffice normally prevents this so the schema was imported or migrated, and does not rank it High",
         "The report flags the local tab sorts on `news` (Content 0, SEO 1) and the acronym casing of `sEOTitle` (and/or the non-predicate boolean `searchEngines`)",
         "The report flags the `heroBlock` element: tabs on an element type and/or styling (backgroundColour) on the content element, and that it sits loose at the tree root",
         "The report flags settings (logo, footer text) on the home page and/or the reconfigured built-in Textarea (maxChars 160 shared by unrelated properties)",
@@ -23,7 +23,19 @@
       "prompt": "Umbraco 17. No MCP here and the site isn't running. Our schema requirements docs are in evals/files/requirements/ (they're all marked applied). Can you review them and tell me what needs fixing? If something's obviously wrong in a requirements page, just correct it in place.",
       "expected_output": "The agent runs the requirements linter on the folder and carries its findings (the SEO tab sort and the property sorts on newsPage) into the report, then adds judgement findings the linter cannot make: newsPage defines metaTitle while taking seoComposition (an alias clash), seoComposition carries an unrelated heroImage field, and the two summary text areas are identical with one unused. It states the review is of the requirements doc, not the site, does not edit the requirements pages, and routes fixes to skills.",
       "files": [
-        "evals/files/requirements/"
+        "evals/files/requirements/Data-Types.md",
+        "evals/files/requirements/Data-Types/Text-Area.md",
+        "evals/files/requirements/Data-Types/Text-Area/Article-Summary-Text-Area.md",
+        "evals/files/requirements/Data-Types/Text-Area/News-Summary-Text-Area.md",
+        "evals/files/requirements/Document-Types.md",
+        "evals/files/requirements/Document-Types/Compositions.md",
+        "evals/files/requirements/Document-Types/Compositions/SeoComposition.md",
+        "evals/files/requirements/Document-Types/NewsPage.md",
+        "evals/files/requirements/README.md",
+        "evals/files/requirements/Templates.md",
+        "evals/files/requirements/Templates/Master.md",
+        "evals/files/requirements/Templates/Master/NewsPage.md",
+        "evals/files/requirements/_changesets/2026-09-01-news-section.md"
       ],
       "expectations": [
         "The agent runs lint-requirements.mjs on the requirements folder (visible in the transcript) and the report includes its findings: the `SEO` tab sort on newsPage and/or the property sorts that are not in hundreds",

@@ -14,7 +14,7 @@
 | Folder | <FolderBreadcrumb> |
 | Allowed at root | <YesOrNo> |
 | Vary by culture | <YesOrNo> |
-| List view | <CollectionViewLinkOrDash> |
+| Collection | <CollectionViewLinkOrDash> |
 | Default template | <TemplateLinkOrDash> |
 | Allowed templates | <TemplateLinksOrDash> |
 | Allowed children | <DocumentTypeLinksOrDash> |

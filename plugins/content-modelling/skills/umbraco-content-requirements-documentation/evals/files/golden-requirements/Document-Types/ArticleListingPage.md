@@ -14,7 +14,7 @@
 | Folder | [Document Types](../Document-Types.md) |
 | Allowed at root | No |
 | Vary by culture | No |
-| List view | [Article Listing Page Collection View](../Data-Types/Collection-View/Article-Listing-Page-Collection-View.md) |
+| Collection | [Article Listing Page Collection View](../Data-Types/Collection-View/Article-Listing-Page-Collection-View.md) |
 | Default template | [Article Listing Page](../Templates/Master/ArticleListingPage.md) |
 | Allowed templates | [Article Listing Page](../Templates/Master/ArticleListingPage.md) |
 | Allowed children | [Article Page](ArticlePage.md), [Article Listing Page](ArticleListingPage.md) |

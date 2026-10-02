@@ -102,7 +102,8 @@ against a golden requirements that must pass and a broken fixture that must fail
 
 ## Step 8 — Audit and hand off
 
-- Run `umbraco-skill-validator` (links) and `umbraco-skill-code-analyzer` (code).
+- Run `node scripts/check-skill-links.mjs` (links and anchors) and `node scripts/check-skill-frontmatter.mjs`
+  (frontmatter, description length, eval file references) from the repo root.
 - Run `node scripts/check-skill-links.mjs`: every relative link under `plugins/` must resolve,
   including links into a sibling skill.
 - Self-audit against the [conformance checklist](conformance-checklist.md).

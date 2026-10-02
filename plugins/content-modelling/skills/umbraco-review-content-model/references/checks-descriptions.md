@@ -21,10 +21,10 @@ mostly on Article Page and News Page" is more useful than 31 findings.
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
 | Default icon everywhere | Many types on `icon-document` or the backoffice default | Low | the owning skill |
-| Colour not by role | Pages not `color-light-blue`, data not `color-green`, or colour on compositions and elements | Low | the owning skill |
-| Icon name that does not exist | An icon not returned by `get-icons` | Low | the owning skill |
+| Colour not by role | Pages not `color-light-blue`, data and site settings not `color-green`, or colour on compositions and elements | Low | the owning skill |
+| Icon name that does not exist | An icon not returned by `get-icons` and not known to be a package or project icon | Low | the owning skill |
 
-`get-icons` returns names only, so a wrong colour class cannot be proven; report colour findings as
-seen, not as validated.
+`get-icons` lists the MCP package's built-in icons, names only: a project icon it does not list
+may still exist, and a wrong colour class cannot be proven. Report both as seen, not as validated.
 
 **Related:** [checks-naming.md](checks-naming.md).

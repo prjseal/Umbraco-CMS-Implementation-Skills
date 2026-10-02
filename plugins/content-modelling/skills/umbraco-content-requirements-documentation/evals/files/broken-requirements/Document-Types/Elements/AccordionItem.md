@@ -15,6 +15,7 @@
 | Description | One expandable panel inside an Accordion. |
 | Folder | Document Types / Elements |
 | Allowed at root | No |
+| Vary by culture | No |
 | Allowed children | — |
 | Compositions | — |
 

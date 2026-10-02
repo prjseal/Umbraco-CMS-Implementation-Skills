@@ -3,30 +3,32 @@ name: umbraco-add-composition
 description: >
   Add one single-concern composition to an Umbraco 17+ site and apply it to the document types
   that need it: SEO fields, sharing fields, page details, visibility and the like. The change is
-  written as a markdown requirements doc, approved, then applied through the Umbraco Developer MCP or a manual
+  written as a requirements doc, approved, applied through the Umbraco Developer MCP or a manual
   backoffice walkthrough, and read back.
   Use this whenever the user asks to "add a composition", "create an SEO composition", "add open
   graph fields to every page", "share these fields between page types", "add meta title and
   description to our pages", "move these fields into a composition", or "which pages should get
   this composition".
-  SKIP: non-Umbraco projects or Umbraco < 17; settings compositions for block settings models (use
-  umbraco-add-element-type); adding a page type (use umbraco-add-page-type); creating or choosing
-  data types in depth (use umbraco-add-data-type); questions about naming only (use
-  umbraco-content-model-conventions); reading composition fields in Razor or C#.
+  SKIP: non-Umbraco projects or Umbraco < 17; adding or removing fields on one existing type (use
+  umbraco-change-document-type); settings compositions for block settings models (use
+  umbraco-add-element-type); adding a page type (use umbraco-add-page-type); questions about
+  naming only (use umbraco-content-model-conventions).
 ---
 
 # Add Composition
 
 Adds **one composition for document types**: a reusable set of fields that does one job, placed
-in `Compositions/`, and applied to the page types that need that job. It works requirements doc first: write
-the change down, stop for the user's approval, apply it, then read it back.
+in `Compositions/`, and applied to the page types that need that job. It works
+requirements-first: write the change down, stop for the user's approval, apply it, then read it
+back.
 
-This skill decides only what is specific to a composition. The rules come from the sibling skill
-[`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the requirements doc
-format, inspect, apply and verify steps come from
-[`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md). **Both must be installed
-alongside this one.** If a link into either cannot be read, stop and say so; do not work from
-memory.
+This skill decides only what is specific to a composition. The rules come from
+[`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the
+requirements doc format and
+[the six-step workflow](../umbraco-content-requirements-documentation/references/change-workflow.md)
+from
+[`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md);
+both must be installed alongside this one. If a link into either cannot be read, stop and say so.
 
 ## Steps
 
@@ -42,34 +44,33 @@ memory.
 
 ### How to decide between MCP and manual
 
-There is one approach with two mechanisms, tried in order. Use the Umbraco Developer MCP when its
-tools are in the connected tool list and the site answers. Otherwise write the same requirements doc and hand
-the user a manual backoffice walkthrough generated from it. Missing tools are never a reason to
-skip the requirements doc, to output uSync or `package.xml` files, or to say the composition exists.
+One approach, two mechanisms: the Umbraco Developer MCP when it is connected, otherwise a manual
+walkthrough generated from the same requirements doc; see
+[change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#5-apply).
 
 ## Version compatibility
 
-Targets **Umbraco 17+**, the version the conventions were derived from and the MCP tools were
-checked against (`@umbraco-cms/mcp-dev` 17.6.8 and 18.1.7; see the requirements documentation skill). Tool names drift
-between MCP versions, so the connected tool list is the authority.
+Targets **Umbraco 17+**. MCP tool names were checked as described in
+[`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md#version-compatibility);
+the connected tool list is the authority.
 
 ## Best practices
 
-- **One concern per composition.** SEO and sharing are two compositions even when they share a
-  tab, so a page can take one without the other.
-- **Flat, and fields only.** A composition never composes another, and has no template, children
-  or allow-at-root.
+- **One concern, flat, fields only.** The composition rules are in
+  [compositions.md](../umbraco-content-model-conventions/references/compositions.md#rules).
 - **Applying is editing existing types.** Every target is an existing type, often with content,
   changed by a full-body replace. Read it, modify it, write it, and compare the property count.
 - **A clashing alias blocks the composition.** A type that already has a property with one of the
   composition's aliases cannot take it. Moving such a field into a composition deletes the stored
   values unless they are migrated first, so stop and say so; never remove a property to make room.
-- **Approval is a separate turn.** A request to "just add it to every page" is a request for the
-  composition, not approval of a requirements doc the user has not seen.
+- **"Just add it to every page" is not approval.** It is a request for the composition; the user
+  still approves the exact list of targets at
+  [the approval gate](../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
 
 ## Validation
 
 Objective assertions live in [`evals/evals.json`](evals/evals.json); run them with
 `umbraco-skill-evaluator`. Coverage tier: **Documented**. This skill ships no code and no assets.
-The requirements docs it writes are checked by the linter in umbraco-content-requirements-documentation, and an eval graded the guidance.
-Nothing ran against a live site.
+The requirements docs it writes are checked by the linter in
+`umbraco-content-requirements-documentation`, and an eval graded the guidance. Nothing ran against
+a live site.

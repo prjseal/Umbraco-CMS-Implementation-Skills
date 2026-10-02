@@ -6,15 +6,15 @@ connected server reports. Nothing has been written to the site.
 
 ## Connected document-type tools (abbreviated)
 
-`get-all-document-types`, `get-document-type-by-id`, `get-document-types-by-id-array`,
-`get-document-type-tree-search`, `get-document-type-ancestors`,
+`get-all-document-types`, `get-document-type-by-id`, `get-document-type-batch`,
+`get-document-types-by-id-array`, `get-document-type-tree-search`, `get-document-type-ancestors`,
 `get-document-type-composition-references`, `get-document-type-available-compositions`,
 `create-document-type`, `create-element-type`, `update-document-type`, `move-document-type`,
 `create-document-type-folder`, `get-document-type-folder`, `get-icons`, `get-all-data-types`,
 `find-data-type`, `get-data-type`, `create-data-type`, `create-data-type-folder`, `get-template`,
 `get-template-root`, `get-language`.
 
-## Document Types tree (get-all-document-types, with aliases from get-document-types-by-id-array)
+## Document Types tree (get-all-document-types, with aliases and `allowedAsRoot` from get-document-type-batch)
 
 ```
 Document Types/
@@ -38,7 +38,7 @@ Document Types/
 
 | Type | Compositions | Own properties: alias (tab, sort) |
 |---|---|---|
-| SEO Composition | — | `metaTitle` (SEO & Sharing 600, no group, 100), `metaDescription` (SEO & Sharing 600, no group, 200), `isIndexable` (SEO & Sharing 600, no group, 300) |
+| SEO Composition | — | `metaTitle` (SEO 600, no group, 100), `metaDescription` (SEO 600, no group, 200), `isIndexable` (SEO 600, no group, 300) |
 | Home Page | seoComposition | — |
 | Content Page | seoComposition | `bodyText` (Content 100, 100) |
 | Article Listing Page | seoComposition | — |
