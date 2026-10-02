@@ -5,12 +5,12 @@ are the spec skill's; this file adds only what a data type needs at each one. Re
 at each step rather than working from this summary.
 
 Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-model-spec/references/spec-lifecycle.md#where-specs-live)
+[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md)
+Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)
 for the tools and for what to do without the MCP. For a data type, these are the answers you need:
 
 | Question | How | Why it matters here |
@@ -38,13 +38,13 @@ stop there unless a property is being changed.
 
 ## 3. Write the spec
 
-Follow [spec-format.md](../../umbraco-content-model-spec/references/spec-format.md).
+Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md).
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| The data type | [data-type.md](../../umbraco-content-model-spec/assets/data-type.md) | `Data-Types/<Editor kind>/<Name>.md` | Create, or Update for a changed one |
-| The type whose property uses it, when a property is added or moved | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) or [element-type.md](../../umbraco-content-model-spec/assets/element-type.md) | Where the type lives | Update |
-| The changeset | [changeset.md](../../umbraco-content-model-spec/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
+| The data type | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor kind>/<Name>.md` | Create, or Update for a changed one |
+| The type whose property uses it, when a property is added or moved | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) or [element-type.md](../../umbraco-content-requirements-documentation/assets/element-type.md) | Where the type lives | Update |
+| The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to a data type:
 
@@ -69,12 +69,12 @@ The changeset's checklist, in apply order:
 ```
 
 Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs) until it reports no
+[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
 errors. If Node.js is not available, say the spec was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate).
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
 Show the changeset's summary and spec list, and call out every existing property that the change
 touches, any constraint that existing content may now break, and anything that rests on the user's
 word. Then stop.
@@ -85,8 +85,8 @@ status stays `proposed`.
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md).
-Without it, follow [apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md).
+With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md).
+Without it, follow [apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md).
 For a data type, also:
 
 - **The folder.** `create-data-type-folder` returns no id. Pass your own new UUID as `id`, then
@@ -101,7 +101,7 @@ For a data type, also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-model-spec/references/verify.md). For a data type, compare
+Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For a data type, compare
 `name`, `editorAlias`, `editorUiAlias` and every configuration value in the spec, and check the
 folder with `get-data-type-ancestors`.
 

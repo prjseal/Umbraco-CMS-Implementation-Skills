@@ -5,12 +5,12 @@ are the spec skill's; this file adds only what a block needs at each one. Read t
 each step rather than working from this summary.
 
 Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-model-spec/references/spec-lifecycle.md#where-specs-live)
+[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md)
+Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)
 for the tools and for what to do without the MCP. For a block, these are the answers you need
 before deciding anything:
 
@@ -46,18 +46,18 @@ vary by culture at the type level.
 
 ## 3. Write the spec
 
-Follow [spec-format.md](../../umbraco-content-model-spec/references/spec-format.md). A block is
+Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). A block is
 these pages, as needed, in this order:
 
 | Page | From | Location |
 |---|---|---|
-| A new data type for a field, only if needed | [data-type.md](../../umbraco-content-model-spec/assets/data-type.md) | `Data-Types/<Editor kind>/<Name>.md` |
-| Each new settings composition | [element-type.md](../../umbraco-content-model-spec/assets/element-type.md) | `Document-Types/Elements/Compositions/<Alias>.md` |
-| A new settings model | [element-type.md](../../umbraco-content-model-spec/assets/element-type.md) | `Document-Types/Elements/Settings/<Alias>.md` |
-| The child element of a repeater | [element-type.md](../../umbraco-content-model-spec/assets/element-type.md) | `Document-Types/Elements/<Alias>.md` |
-| The repeater's Block List | [block-data-type.md](../../umbraco-content-model-spec/assets/block-data-type.md) | `Data-Types/Block-List/<Name>.md` |
-| The content element | [element-type.md](../../umbraco-content-model-spec/assets/element-type.md) | `Document-Types/Elements/<Alias>.md` |
-| The changeset | [changeset.md](../../umbraco-content-model-spec/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` |
+| A new data type for a field, only if needed | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor kind>/<Name>.md` |
+| Each new settings composition | [element-type.md](../../umbraco-content-requirements-documentation/assets/element-type.md) | `Document-Types/Elements/Compositions/<Alias>.md` |
+| A new settings model | [element-type.md](../../umbraco-content-requirements-documentation/assets/element-type.md) | `Document-Types/Elements/Settings/<Alias>.md` |
+| The child element of a repeater | [element-type.md](../../umbraco-content-requirements-documentation/assets/element-type.md) | `Document-Types/Elements/<Alias>.md` |
+| The repeater's Block List | [block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md) | `Data-Types/Block-List/<Name>.md` |
+| The content element | [element-type.md](../../umbraco-content-requirements-documentation/assets/element-type.md) | `Document-Types/Elements/<Alias>.md` |
+| The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` |
 
 Points specific to a block:
 
@@ -69,7 +69,7 @@ Points specific to a block:
   [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md). Say there which settings model belongs with the block.
 - Folders are listed in Dependencies as `document-type-container` or `data-type-container`, and
   the `Folder` breadcrumbs link to index pages. Write missing index pages from
-  [folder-index.md](../../umbraco-content-model-spec/assets/folder-index.md).
+  [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md).
 - Existing data types, settings models and settings compositions with no spec page are plain text
   flagged `Exists`.
 
@@ -87,12 +87,12 @@ The changeset's checklist, in apply order:
 ```
 
 Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs) until it reports no
+[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
 errors. If Node.js is not available, say the spec was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate).
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
 Show the changeset's summary and spec list, and call out which parts are shared (a settings model
 or settings composition other blocks will reuse) and anything that rests on the user's word. Then
 stop.
@@ -103,9 +103,9 @@ status stays `proposed`.
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md),
+With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
 including the fix-up pass after every create. Without it, follow
-[apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md). For a block,
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For a block,
 also:
 
 - **Create, then move.** `create-element-type` has no folder parameter, so each element is created
@@ -122,7 +122,7 @@ also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-model-spec/references/verify.md). For a block, also
+Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For a block, also
 confirm on the read-back that each element sits in the right folder, has no tab and exactly one
 `Content` group, that the settings model has no own properties, and that the Block List registers
 the child with the specified amount.

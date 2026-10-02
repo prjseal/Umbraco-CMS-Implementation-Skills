@@ -1,5 +1,5 @@
 ---
-name: umbraco-content-model-spec
+name: umbraco-content-requirements-documentation
 description: >
   Write an Umbraco schema change as a markdown spec, get it approved, then apply it and verify it.
   Defines the spec page format for document types, compositions, element types, data types and
@@ -15,7 +15,7 @@ description: >
   content nodes rather than schema.
 ---
 
-# Content Model Spec
+# Content Requirements Documentation
 
 Schema changes are written down before they are made. A change is a set of markdown spec pages,
 one per artefact, grouped by a changeset. The user approves the changeset; only then is it

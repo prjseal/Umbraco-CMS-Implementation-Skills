@@ -5,12 +5,12 @@ are the spec skill's; this file adds only what a page type needs at each one. Re
 file at each step rather than working from this summary.
 
 Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-model-spec/references/spec-lifecycle.md#where-specs-live)
+[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md)
+Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)
 for the tools and for what to do without the MCP. For a page type, these are the answers you need
 before deciding anything:
 
@@ -79,16 +79,16 @@ writes the one line the spec format gives for that case.
 
 ## 3. Write the spec
 
-Follow [spec-format.md](../../umbraco-content-model-spec/references/spec-format.md). A page type
+Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). A page type
 change is these pages:
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| The page type | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/<Alias>.md` | Create |
-| Its template | [template.md](../../umbraco-content-model-spec/assets/template.md) | `Templates/<Master>/<Alias>.md` | Create |
-| The master template, only if the site has none | [template.md](../../umbraco-content-model-spec/assets/template.md) | `Templates/Master.md` | Create |
-| The parent, with the new type added to Allowed children | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/HomePage.md` | Update |
-| The changeset | [changeset.md](../../umbraco-content-model-spec/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
+| The page type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/<Alias>.md` | Create |
+| Its template | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/<Master>/<Alias>.md` | Create |
+| The master template, only if the site has none | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/Master.md` | Create |
+| The parent, with the new type added to Allowed children | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/HomePage.md` | Update |
+| The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to a page type:
 
@@ -98,7 +98,7 @@ Points specific to a page type:
 - Existing compositions, the master and built-in data types that have no spec page are written as
   plain text and flagged `Exists` in Dependencies.
 - The `Folder` breadcrumb links to the `Document-Types.md` index page. Write it from
-  [folder-index.md](../../umbraco-content-model-spec/assets/folder-index.md) if the folder does not
+  [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md) if the folder does not
   have one yet.
 - **The parent.** If it already has a spec page, edit its Allowed children, set it back to
   `proposed` and list it with the action `Update`. If it has none and the MCP is connected, write
@@ -119,15 +119,15 @@ The changeset's checklist for a page type, in apply order:
 ```
 
 A new data type, if there is one, comes first, as
-[apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md#order) orders.
+[apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#order) orders.
 
 Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs) until it reports no
+[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
 errors. If Node.js is not available, say the spec was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate).
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
 Show the changeset's summary and spec list, and call out two things: the **existing** parent type
 that will change, and anything that rests on the user's word rather than a read of the site. Then
 stop. A request to "just create it", however firm, is a request for the page type; it is not
@@ -139,9 +139,9 @@ status stays `proposed`.
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md),
+With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
 including the fix-up pass after the create. Without it, follow
-[apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md). For a page
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For a page
 type, also:
 
 - **Template content.** Create the page template with only what makes it a page under the master:
@@ -169,7 +169,7 @@ type, also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-model-spec/references/verify.md). For a page type, also
+Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For a page type, also
 confirm on the read-back that the default and allowed templates point at the new template, that
 the template is a child of the master, and that the parent lists the new type.
 

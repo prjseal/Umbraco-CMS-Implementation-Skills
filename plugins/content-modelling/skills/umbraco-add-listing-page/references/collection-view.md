@@ -22,7 +22,7 @@ listing type's `List view` row. The rule is in
 | Tab name | The plural of the item, as editors say it | `Articles` |
 
 Start from the template
-[collection-view-data-type.md](../../umbraco-content-model-spec/assets/collection-view-data-type.md).
+[collection-view-data-type.md](../../umbraco-content-requirements-documentation/assets/collection-view-data-type.md).
 A spec page for this data type lives in `Data-Types/Collection-View/`, and the linter checks that a
 listing page's `List view` row names one.
 

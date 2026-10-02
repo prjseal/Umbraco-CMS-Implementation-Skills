@@ -5,12 +5,12 @@ are the spec skill's; this file adds only what a composition needs at each one. 
 file at each step rather than working from this summary.
 
 Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-model-spec/references/spec-lifecycle.md#where-specs-live)
+[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md)
+Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)
 for the tools and for what to do without the MCP. For a composition, these are the answers you
 need before deciding anything:
 
@@ -47,16 +47,16 @@ the user's word, not as something read from the site.
 
 ## 3. Write the spec
 
-Follow [spec-format.md](../../umbraco-content-model-spec/references/spec-format.md). A composition
+Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). A composition
 change is these pages:
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| A new data type, only if a field needs one | [data-type.md](../../umbraco-content-model-spec/assets/data-type.md) | `Data-Types/<Editor kind>/<Name>.md` | Create |
-| The composition | [composition.md](../../umbraco-content-model-spec/assets/composition.md) | `Document-Types/Compositions/<Alias>.md` | Create |
-| An existing composition that now shares the tab and gains a group | [composition.md](../../umbraco-content-model-spec/assets/composition.md) | `Document-Types/Compositions/<Alias>.md` | Update |
-| Each target type, with the composition added to its Compositions row | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | Where the type lives | Update |
-| The changeset | [changeset.md](../../umbraco-content-model-spec/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
+| A new data type, only if a field needs one | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor kind>/<Name>.md` | Create |
+| The composition | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/<Alias>.md` | Create |
+| An existing composition that now shares the tab and gains a group | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/<Alias>.md` | Update |
+| Each target type, with the composition added to its Compositions row | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | Where the type lives | Update |
+| The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to a composition:
 
@@ -64,7 +64,7 @@ Points specific to a composition:
 - The `Compositions` folder is listed in Dependencies as a `document-type-container`, flagged
   `New in this changeset` if it is created now, and the `Folder` breadcrumb links to the index
   pages. Write missing index pages from
-  [folder-index.md](../../umbraco-content-model-spec/assets/folder-index.md).
+  [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md).
 - **The targets.** If a target already has a spec page, add the composition to its Compositions
   row, set it back to `proposed` and list it with the action `Update`. If it has none and the MCP
   is connected, write its page from the `get-document-type-by-id` read-back, complete, and list it
@@ -85,12 +85,12 @@ The changeset's checklist, in apply order:
 ```
 
 Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs) until it reports no
+[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
 errors. If Node.js is not available, say the spec was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate).
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
 Show the changeset's summary and spec list, and call out: every **existing** type that will change,
 any type left out and why, anything that would need a content migration, and anything that rests
 on the user's word. Then stop. "Just add it to every page" is a request for the composition, not
@@ -102,16 +102,16 @@ status stays `proposed`.
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md),
+With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
 including the fix-up pass after the create. Without it, follow
-[apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md). For a
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For a
 composition, also:
 
 - **The create.** Pass `parentId` as the `Compositions` folder's id, looked up at apply time.
   Each property carries its `tab` and, when the tab is shared, its `group`. Sorts, mandatory and
   descriptions are written in the fix-up.
 - **The tab name.** `SEO & Sharing` is refused by the MCP; follow
-  [Values the MCP rejects](../../umbraco-content-model-spec/references/apply-via-mcp.md#values-the-mcp-rejects)
+  [Values the MCP rejects](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#values-the-mcp-rejects)
   and leave the spec as written.
 - **An existing composition gaining a group.** Read it, add a group container whose parent is the
   tab's container, point each of its properties at the new group, and send the whole body back.
@@ -125,7 +125,7 @@ composition, also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-model-spec/references/verify.md). For a composition, also
+Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For a composition, also
 confirm that `get-document-type-composition-references` on the new composition lists exactly the
 targets in the spec, and that each target's own properties are the ones it had before.
 

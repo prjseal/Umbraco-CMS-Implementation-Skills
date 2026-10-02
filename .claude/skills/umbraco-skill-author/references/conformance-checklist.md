@@ -62,7 +62,7 @@ fix anything that fails. A skill is ready only when every applicable item passes
   - it is validated by `evals/evals.json`, with one MCP-connected and one MCP-absent prompt when the
     skill touches the backoffice;
   - if it writes or applies schema specs, the specs it produces pass
-    `plugins/content-modelling/skills/umbraco-content-model-spec/scripts/lint-spec.mjs`, which CI
+    `plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-spec.mjs`, which CI
     runs against that skill's golden spec and broken fixture;
   - Umbraco Developer MCP versus manual backoffice steps is one approach with two mechanisms, not an
     A/B pair, so it does not count towards the two-approach limit.

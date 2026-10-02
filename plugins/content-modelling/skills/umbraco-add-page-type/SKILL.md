@@ -25,7 +25,7 @@ read it back.
 This skill decides only what is specific to a page type. The rules come from the sibling skill
 [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the spec
 format, inspect, apply and verify steps come from
-[`umbraco-content-model-spec`](../umbraco-content-model-spec/SKILL.md). **Both must be installed
+[`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md). **Both must be installed
 alongside this one.** If a link into either cannot be read, stop and say so; do not work from
 memory.
 

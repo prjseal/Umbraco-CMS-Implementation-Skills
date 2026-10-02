@@ -41,8 +41,8 @@ jobs:
       # broken. The rule list is compared so a rule that silently stops firing is caught too.
       - name: Spec linter passes the golden spec and fails the broken fixture
         run: |
-          lint=plugins/content-modelling/skills/umbraco-content-model-spec/scripts/lint-spec.mjs
-          files=plugins/content-modelling/skills/umbraco-content-model-spec/evals/files
+          lint=plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-spec.mjs
+          files=plugins/content-modelling/skills/umbraco-content-requirements-documentation/evals/files
           node "$lint" "$files/golden-spec"
           status=0
           node "$lint" "$files/broken-spec" > /dev/null || status=$?

@@ -10,7 +10,7 @@ description: >
   tab have", "how should I structure compositions", "should this be allowed at root", or
   "does this type need a template", or when another content-modelling skill needs a rule.
   SKIP: non-Umbraco projects; writing or applying a schema spec (use
-  umbraco-content-model-spec); reviewing C# or Razor code (use umbraco-common-pitfalls).
+  umbraco-content-requirements-documentation); reviewing C# or Razor code (use umbraco-common-pitfalls).
 ---
 
 # Content Model Conventions
@@ -22,7 +22,7 @@ conventions, not Umbraco requirements.
 
 This skill **creates nothing**. It answers "what is the rule?" and the reason behind it. Writing
 the spec and applying it to a site belong to the sibling skill
-[`umbraco-content-model-spec`](../umbraco-content-model-spec/SKILL.md).
+[`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md).
 
 ## How to use this index
 
@@ -72,7 +72,7 @@ Umbraco 17+.
   breaks templates, models and content queries.
 - Prefer consistency with the project over purity. One convention applied everywhere beats two
   good conventions mixed.
-- These rules are checkable. `umbraco-content-model-spec` ships a linter that enforces the
+- These rules are checkable. `umbraco-content-requirements-documentation` ships a linter that enforces the
   mechanical ones on a written spec, so write the spec and run the linter instead of checking by
   eye.
 - Stating a rule is not the same as verifying a site follows it. Only claim a live model conforms

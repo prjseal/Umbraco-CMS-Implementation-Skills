@@ -36,6 +36,6 @@ restate the label.
 
 Descriptions are part of the schema, so they go in the spec and are applied with everything else.
 The MCP create tools do not set property descriptions; they are written in the fix-up pass that
-`umbraco-content-model-spec` describes.
+`umbraco-content-requirements-documentation` describes.
 
 **Related:** [Property aliases](property-aliases.md).

@@ -53,7 +53,7 @@ built-in is a project artefact and goes in its editor's folder.
 The spec file name is the data type name with each run of other characters replaced by one hyphen:
 `Toggle (default on)` becomes `Toggle-default-on.md`, in `Data-Types/Toggle/`. The linter checks
 this. The folder is listed in Dependencies as a `data-type-container`, and its index page is
-written from [folder-index.md](../../umbraco-content-model-spec/assets/folder-index.md) if it does
+written from [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md) if it does
 not exist yet.
 
 **Related:** [reuse-or-create.md](reuse-or-create.md), [workflow.md](workflow.md).

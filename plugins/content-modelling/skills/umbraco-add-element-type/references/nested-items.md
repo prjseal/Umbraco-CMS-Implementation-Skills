@@ -42,7 +42,7 @@ child sits beside its parent in `Elements/`, where alphabetical order keeps them
 ## The Block List spec page
 
 Write it from
-[block-data-type.md](../../umbraco-content-model-spec/assets/block-data-type.md): property editor
+[block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md): property editor
 `Umbraco.BlockList`, the amount as the configuration sentence, and one row whose content element is
 the child and whose settings element is `—`. It is used by the parent element's `items` property.
 Configuring a Block List beyond this, such as a block that appears in several lists or has its own

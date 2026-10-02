@@ -39,7 +39,7 @@ So adding the second composition to a shared tab is also an **Update** of the fi
 property into a group within the same tab changes where it is shown, not the values stored in it.
 
 `SEO & Sharing` contains an ampersand, which the MCP refuses; see
-[Values the MCP rejects](../../umbraco-content-model-spec/references/apply-via-mcp.md#values-the-mcp-rejects)
+[Values the MCP rejects](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#values-the-mcp-rejects)
 for what to do. The spec keeps the real name.
 
 ## Data types

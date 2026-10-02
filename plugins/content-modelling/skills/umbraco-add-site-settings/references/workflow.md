@@ -5,12 +5,12 @@ are the spec skill's; this file adds only what the settings singleton needs at e
 linked file at each step rather than working from this summary.
 
 Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-model-spec/references/spec-lifecycle.md#where-specs-live)
+[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md).
+Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md).
 For site settings, establish:
 
 | Question | Why it matters here |
@@ -47,14 +47,14 @@ the values have moved. The same rule applies to any existing property moved betw
 
 ## 3. Write the spec
 
-Follow [spec-format.md](../../umbraco-content-model-spec/references/spec-format.md).
+Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md).
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| Any new data type (pickers, a script text area) | [data-type.md](../../umbraco-content-model-spec/assets/data-type.md) | `Data-Types/<Editor kind>/` | Create |
+| Any new data type (pickers, a script text area) | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor kind>/` | Create |
 | Any repeater element and its Block List | via [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) | `Document-Types/Elements/`, `Data-Types/Block-List/` | Create |
-| The settings type | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/SiteSettings.md` | Create |
-| The changeset | [changeset.md](../../umbraco-content-model-spec/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
+| The settings type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/SiteSettings.md` | Create |
+| The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to site settings:
 
@@ -73,12 +73,12 @@ The changeset's checklist, in apply order:
 ```
 
 Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs) until it reports no
+[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
 errors. If Node.js is not available, say the spec was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate).
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
 Show the changeset's summary and spec list, and call out any settings that currently live elsewhere
 and would need migrating, any script fields (editors can inject markup), and anything that rests on
 the user's word. Then stop.
@@ -89,9 +89,9 @@ status stays `proposed`.
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md),
+With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
 including the fix-up pass after the create. Without it, follow
-[apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md). For site
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For site
 settings, also:
 
 - **The create** passes `allowedAsRoot: true` and no `parentId`.
@@ -101,7 +101,7 @@ settings, also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-model-spec/references/verify.md). Also confirm that the
+Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). Also confirm that the
 type is allowed at root, has no template and no allowed children, and that every tab sort matches
 the spec.
 

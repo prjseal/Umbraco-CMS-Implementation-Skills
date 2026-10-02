@@ -10,7 +10,7 @@ description: >
   model any good", "health check the document types", or "review the spec folder".
   SKIP: non-Umbraco projects or Umbraco < 17; fixing what the review finds (use the add-* skills,
   after approval); reviewing C#, Razor or query performance (use umbraco-common-pitfalls); linting
-  a spec before applying it (use umbraco-content-model-spec); explaining one rule (use
+  a spec before applying it (use umbraco-content-requirements-documentation); explaining one rule (use
   umbraco-content-model-conventions).
 ---
 
@@ -23,7 +23,7 @@ input to a later, approved change, not the change itself.
 The rules come from the sibling skill
 [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and reading
 the schema and linting a spec folder come from
-[`umbraco-content-model-spec`](../umbraco-content-model-spec/SKILL.md). **Both must be installed
+[`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md). **Both must be installed
 alongside this one.** If a link into either cannot be read, stop and say so; do not work from
 memory.
 
@@ -31,7 +31,7 @@ memory.
 
 | Source | How | What it can prove |
 |---|---|---|
-| The live site, through the Umbraco Developer MCP | Read every type, data type and template with the read tools in [inspect-existing-schema.md](../umbraco-content-model-spec/references/inspect-existing-schema.md) | What the site actually has |
+| The live site, through the Umbraco Developer MCP | Read every type, data type and template with the read tools in [inspect-existing-schema.md](../umbraco-content-requirements-documentation/references/inspect-existing-schema.md) | What the site actually has |
 | A spec folder | Run the spec linter first, then the judgement checks below on the pages | What the spec says; not that the site matches it |
 | Schema the user provides (an export, a read-back, a description) | Review what is given; list what was not provided | Only what was given |
 
@@ -57,7 +57,7 @@ Write the report from [review-report.md](assets/review-report.md).
 1. **Gather.** Read everything the source offers. With the MCP, read every document type with
    `get-document-type-by-id` (the only way to learn aliases) and every custom data type with
    `get-data-type`. With a spec folder, run
-   [`lint-spec.mjs`](../umbraco-content-model-spec/scripts/lint-spec.mjs) and keep its output.
+   [`lint-spec.mjs`](../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) and keep its output.
 2. **Check.** Go through each checks file. Record every finding with the artefact, the rule, the
    evidence and a severity.
 3. **Find the project's own convention.** Where the whole model consistently departs from a rule

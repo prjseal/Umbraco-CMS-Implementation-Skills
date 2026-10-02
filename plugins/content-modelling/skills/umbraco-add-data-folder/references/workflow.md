@@ -5,12 +5,12 @@ are the spec skill's; this file adds only what shared data needs at each one. Re
 at each step rather than working from this summary.
 
 Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-model-spec/references/spec-lifecycle.md#where-specs-live)
+[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md).
+Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md).
 For shared data, establish:
 
 | Question | Why it matters here |
@@ -42,16 +42,16 @@ Without the MCP, ask these in one message, and treat every answer as the user's 
 
 ## 3. Write the spec
 
-Follow [spec-format.md](../../umbraco-content-model-spec/references/spec-format.md). Shared data is
+Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). Shared data is
 these pages:
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| The item type | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/Data/<ItemAlias>.md` | Create |
-| The folder type | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/Data/<FolderAlias>.md` | Create |
-| The picker data type | [data-type.md](../../umbraco-content-model-spec/assets/data-type.md) | `Data-Types/Content-Picker/<Name>.md` | Create |
-| Each type or composition that gains the picker | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) or [composition.md](../../umbraco-content-model-spec/assets/composition.md) | Where it lives | Update |
-| The changeset | [changeset.md](../../umbraco-content-model-spec/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
+| The item type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/Data/<ItemAlias>.md` | Create |
+| The folder type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/Data/<FolderAlias>.md` | Create |
+| The picker data type | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/Content-Picker/<Name>.md` | Create |
+| Each type or composition that gains the picker | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) or [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | Where it lives | Update |
+| The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to shared data:
 
@@ -81,12 +81,12 @@ Step 5 is content, not schema, and is carried out by the user in the Content sec
 so the checklist order is right, and the verification does not depend on it.
 
 Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs) until it reports no
+[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
 errors. If Node.js is not available, say the spec was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate).
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
 Show the changeset's summary and spec list, and call out every existing type that gains a picker,
 any values already stored elsewhere that would need migrating into items, and anything that rests
 on the user's word. Then stop.
@@ -97,9 +97,9 @@ status stays `proposed`.
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md),
+With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
 including the fix-up pass after each create. Without it, follow
-[apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md). For shared data,
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For shared data,
 also:
 
 - **Both types in `Data/`.** `create-document-type` takes the `Data` folder's id as `parentId`;
@@ -112,7 +112,7 @@ also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-model-spec/references/verify.md). For shared data, also
+Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For shared data, also
 confirm that the folder is allowed at root and allows the item, that neither type has a template,
 and that the picker's start node and allowed type are the ones in the spec.
 

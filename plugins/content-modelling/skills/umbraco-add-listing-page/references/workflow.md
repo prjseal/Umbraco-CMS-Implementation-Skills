@@ -8,12 +8,12 @@ pages is decided the way
 stub, parent update, compositions that do not exist yet) rather than repeating them here.
 
 Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-model-spec/references/spec-lifecycle.md#where-specs-live)
+[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md).
+Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md).
 For a listing pair, establish:
 
 | Question | Why it matters here |
@@ -49,20 +49,20 @@ The listing allows itself so a large section can be divided into sub-listings of
 
 ## 3. Write the spec
 
-Follow [spec-format.md](../../umbraco-content-model-spec/references/spec-format.md). A listing pair
+Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). A listing pair
 is these pages:
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| Any new data type for an item field | [data-type.md](../../umbraco-content-model-spec/assets/data-type.md) | `Data-Types/<Editor kind>/` | Create |
-| The collection view | [collection-view-data-type.md](../../umbraco-content-model-spec/assets/collection-view-data-type.md) | `Data-Types/Collection-View/<Name>.md` | Create |
-| The master template, only if the site has none | [template.md](../../umbraco-content-model-spec/assets/template.md) | `Templates/Master.md` | Create |
-| The item's template | [template.md](../../umbraco-content-model-spec/assets/template.md) | `Templates/<Master>/<ItemAlias>.md` | Create |
-| The listing's template | [template.md](../../umbraco-content-model-spec/assets/template.md) | `Templates/<Master>/<ListingAlias>.md` | Create |
-| The item page type | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/<ItemAlias>.md` | Create |
-| The listing page type, with its `List view` row | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/<ListingAlias>.md` | Create |
-| The parent, with the listing added to Allowed children | [document-type.md](../../umbraco-content-model-spec/assets/document-type.md) | `Document-Types/HomePage.md` | Update |
-| The changeset | [changeset.md](../../umbraco-content-model-spec/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
+| Any new data type for an item field | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor kind>/` | Create |
+| The collection view | [collection-view-data-type.md](../../umbraco-content-requirements-documentation/assets/collection-view-data-type.md) | `Data-Types/Collection-View/<Name>.md` | Create |
+| The master template, only if the site has none | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/Master.md` | Create |
+| The item's template | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/<Master>/<ItemAlias>.md` | Create |
+| The listing's template | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/<Master>/<ListingAlias>.md` | Create |
+| The item page type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/<ItemAlias>.md` | Create |
+| The listing page type, with its `List view` row | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/<ListingAlias>.md` | Create |
+| The parent, with the listing added to Allowed children | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/HomePage.md` | Update |
+| The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to a listing pair:
 
@@ -89,12 +89,12 @@ The changeset's checklist, in apply order:
 ```
 
 Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs) until it reports no
+[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
 errors. If Node.js is not available, say the spec was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate).
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
 Show the changeset's summary and spec list, and call out the **existing** parent that will change,
 any data (authors, categories) left for a separate change, and anything that rests on the user's
 word. Then stop.
@@ -105,9 +105,9 @@ status stays `proposed`.
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md),
+With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
 including the fix-up pass after each create. Without it, follow
-[apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md). For a listing
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For a listing
 pair, also:
 
 - **The collection view.** Create it with `create-data-type`, copying the `values` shape from an
@@ -121,7 +121,7 @@ pair, also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-model-spec/references/verify.md). For a listing pair, also
+Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For a listing pair, also
 confirm that the listing's `collection` is the new collection view, that each type's allowed
 children are exactly as specified, and that the parent lists the listing.
 

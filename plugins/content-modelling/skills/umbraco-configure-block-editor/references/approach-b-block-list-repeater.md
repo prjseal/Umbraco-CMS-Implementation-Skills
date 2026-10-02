@@ -52,23 +52,23 @@ content that already has more, fewer or those items: say which, and ask before p
 
 Follow the spec skill for each step, with the points below.
 
-1. **Inspect** ([inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md)):
+1. **Inspect** ([inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)):
    the existing Block List if any (`get-data-type`), what uses it, the child element(s) and the
    `Block List/` folder.
-2. **Write the spec** ([spec-format.md](../../umbraco-content-model-spec/references/spec-format.md)):
+2. **Write the spec** ([spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md)):
    the data type page from
-   [block-data-type.md](../../umbraco-content-model-spec/assets/block-data-type.md), with the
+   [block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md), with the
    amount as the configuration sentence ("Amount (min/max): 1 / 6.") and one table row per item
    element, settings element `—`. Add an `Update` for the type or element that gains the property.
-   Lint with [`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs).
-3. **Stop for approval** ([the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate)).
+   Lint with [`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs).
+3. **Stop for approval** ([the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate)).
    Without the MCP, the walkthrough may be given now, headed as steps to follow after approval.
-4. **Apply** ([apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md) or
-   [apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md)): the child
+4. **Apply** ([apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md) or
+   [apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md)): the child
    element first, then the Block List, then the property that uses it. Copy the `values` shape
    from an existing Block List read with `get-data-type` (`blocks` with `contentElementTypeKey`,
    `validationLimit`, `useSingleBlockMode`, `useInlineEditingAsDefault`).
-5. **Verify** ([verify.md](../../umbraco-content-model-spec/references/verify.md)): read the data
+5. **Verify** ([verify.md](../../umbraco-content-requirements-documentation/references/verify.md)): read the data
    type back and compare the registered items and the amount; read the type that uses it.
 
 ## Done

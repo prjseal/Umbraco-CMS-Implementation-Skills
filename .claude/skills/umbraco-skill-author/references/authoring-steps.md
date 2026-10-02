@@ -97,7 +97,7 @@ there is nothing to compile and no `examples/` project. It is tier **Documented*
 its `## Validation` section. The spec-driven content-modelling skills are the case this exists for.
 They write a markdown spec and apply it through the Umbraco Developer MCP or a manual walkthrough
 (one approach, two mechanisms), and they are validated by evals plus the Node spec linter,
-`plugins/content-modelling/skills/umbraco-content-model-spec/scripts/lint-spec.mjs`, which CI runs
+`plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-spec.mjs`, which CI runs
 against a golden spec that must pass and a broken fixture that must fail.
 
 ## Step 8 — Audit and hand off

@@ -56,32 +56,32 @@ uses the block before planning its removal. Never remove a block that content us
 
 Follow the spec skill for each step, with the points below.
 
-1. **Inspect** ([inspect-existing-schema.md](../../umbraco-content-model-spec/references/inspect-existing-schema.md)):
+1. **Inspect** ([inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)):
    the placement's existing Block Grid and its blocks (`get-data-type`), the elements and settings
    models to register (`get-document-type-by-id`), the types that have or will have the property,
    and the `Block Grid/` folder. An element that does not exist yet is made first with
    [`umbraco-add-element-type`](../../umbraco-add-element-type/SKILL.md).
-2. **Write the spec** ([spec-format.md](../../umbraco-content-model-spec/references/spec-format.md)):
+2. **Write the spec** ([spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md)):
    the data type page from
-   [block-data-type.md](../../umbraco-content-model-spec/assets/block-data-type.md), with "Grid
+   [block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md), with "Grid
    columns: 12." as the configuration sentence and one table row per block. Existing elements with
    no spec page are plain text flagged `Exists`. Add an `Update` page, or a checklist item without
    the MCP, for each type or composition that gains the property. If the read-back does not give
    every row the page needs, treat the type as you would without the MCP; never write a partial
    page or fill cells with placeholders such as "Unchanged". Lint with
-   [`lint-spec.mjs`](../../umbraco-content-model-spec/scripts/lint-spec.mjs).
-3. **Stop for approval** ([the approval gate](../../umbraco-content-model-spec/references/spec-lifecycle.md#the-approval-gate)).
+   [`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs).
+3. **Stop for approval** ([the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate)).
    Call out any existing content affected and anything that is the user's word. Without the MCP,
    the walkthrough may be given now, headed as steps to follow after approval.
-4. **Apply** ([apply-via-mcp.md](../../umbraco-content-model-spec/references/apply-via-mcp.md) or
-   [apply-manually.md](../../umbraco-content-model-spec/references/apply-manually.md)): elements
+4. **Apply** ([apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md) or
+   [apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md)): elements
    and settings models first, then the Block Grid, then the property on its type or composition.
    Build the data type's `values` by reading an existing Block Grid on the site with `get-data-type`
    and copying its shape (the `blocks` entries with `contentElementTypeKey`,
    `settingsElementTypeKey`, `allowAtRoot`, `allowInAreas` and `columnSpanOptions`; `blockGroups`;
    `gridColumns`; `validationLimit`). For an update, send the whole configuration back with
    `update-data-type`. Look up every element id at apply time.
-5. **Verify** ([verify.md](../../umbraco-content-model-spec/references/verify.md)): read the data
+5. **Verify** ([verify.md](../../umbraco-content-requirements-documentation/references/verify.md)): read the data
    type back and compare every block row, settings element, span and limit; read each type that
    gained the property and confirm its property count grew by one.
 

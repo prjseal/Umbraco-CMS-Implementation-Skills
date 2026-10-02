@@ -27,7 +27,7 @@ page template's content must name the master.
 
 Templates are created after data types and elements and before the page types that use them, with
 the master first. The default template is attached to the document type in the fix-up pass; the
-MCP create tool for document types does not accept a template. `umbraco-content-model-spec`
+MCP create tool for document types does not accept a template. `umbraco-content-requirements-documentation`
 describes the order and the fix-up pass.
 
 **Related:** [Allowed children and root](allowed-children-and-root.md), [Names, aliases and suffixes](naming.md).
