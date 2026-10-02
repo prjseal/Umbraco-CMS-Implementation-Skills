@@ -197,7 +197,7 @@ Umbraco-CMS-Implementation-Skills/
 ├── plugins/
 │   ├── content-modelling/               # Content modelling plugin
 │   │   ├── .claude-plugin/plugin.json
-│   │   └── skills/                      # Published skills
+│   │   └── skills/<skill>/              # SKILL.md, references/, evals/ — requirements-first: markdown requirements doc, approve, apply via MCP (no examples/; linted, not compiled)
 │   └── implementation/                  # Implementation plugin
 │       ├── .claude-plugin/plugin.json
 │       └── skills/<skill>/
