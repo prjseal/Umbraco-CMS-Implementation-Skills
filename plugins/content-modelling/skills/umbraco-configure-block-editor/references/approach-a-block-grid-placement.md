@@ -46,7 +46,7 @@ the property's tab and sort from
 The most common request. Read the data type with `get-data-type`, add one entry to its blocks with
 the content element, the settings element, root/areas and spans, keep every existing entry
 unchanged, and write it back. Pages that already use the placement are unaffected; editors simply
-see a new block in the catalogue. The spec page for the data type becomes an `Update`.
+see a new block in the catalogue. The requirements page for the data type becomes an `Update`.
 
 **Removing** a block, or tightening a limit, affects content already on pages. Check
 `get-references-data-type` for the properties using the grid and ask the user whether any page
@@ -54,23 +54,23 @@ uses the block before planning its removal. Never remove a block that content us
 
 ## Steps
 
-Follow the spec skill for each step, with the points below.
+Follow the requirements documentation skill for each step, with the points below.
 
 1. **Inspect** ([inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)):
    the placement's existing Block Grid and its blocks (`get-data-type`), the elements and settings
    models to register (`get-document-type-by-id`), the types that have or will have the property,
    and the `Block Grid/` folder. An element that does not exist yet is made first with
    [`umbraco-add-element-type`](../../umbraco-add-element-type/SKILL.md).
-2. **Write the spec** ([spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md)):
+2. **Write the requirements doc** ([requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md)):
    the data type page from
    [block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md), with "Grid
    columns: 12." as the configuration sentence and one table row per block. Existing elements with
-   no spec page are plain text flagged `Exists`. Add an `Update` page, or a checklist item without
+   no requirements page are plain text flagged `Exists`. Add an `Update` page, or a checklist item without
    the MCP, for each type or composition that gains the property. If the read-back does not give
    every row the page needs, treat the type as you would without the MCP; never write a partial
    page or fill cells with placeholders such as "Unchanged". Lint with
-   [`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs).
-3. **Stop for approval** ([the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate)).
+   [`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs).
+3. **Stop for approval** ([the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate)).
    Call out any existing content affected and anything that is the user's word. Without the MCP,
    the walkthrough may be given now, headed as steps to follow after approval.
 4. **Apply** ([apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md) or

@@ -34,11 +34,11 @@ Data items and site settings are not routable, so search and sharing fields on t
 Element types never take page compositions; blocks are styled through settings compositions.
 
 When the user says "every page", read that as every **routable page type** and list them by name
-in the spec, so the user approves the exact list. Do not add types created later automatically.
+in the requirements doc, so the user approves the exact list. Do not add types created later automatically.
 
 ## What blocks a type from taking it
 
-Check each target before writing it into the spec.
+Check each target before writing it into the requirements doc.
 
 | Blocker | How to find it | What to do |
 |---|---|---|
@@ -47,7 +47,7 @@ Check each target before writing it into the spec.
 | **Tab sort disagreement.** The target already has a tab of the same name with a different sort | Compare container sorts on the read-back | Report it. The global sort is right; fixing the target's tab is a separate Update |
 
 If the connected tool list includes `get-document-type-available-compositions`, ask it which
-compositions a type can take before writing that type into the spec, and trust its answer over
+compositions a type can take before writing that type into the requirements doc, and trust its answer over
 your own comparison.
 
 ### Moving existing fields into a composition

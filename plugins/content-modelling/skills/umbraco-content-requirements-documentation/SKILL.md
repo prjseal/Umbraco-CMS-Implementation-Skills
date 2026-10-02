@@ -1,15 +1,16 @@
 ---
 name: umbraco-content-requirements-documentation
 description: >
-  Write an Umbraco schema change as a markdown spec, get it approved, then apply it and verify it.
-  Defines the spec page format for document types, compositions, element types, data types and
-  templates, the changeset that groups them, the status lifecycle, how to inspect the existing
-  schema, how to apply through the Umbraco Developer MCP or a manual backoffice walkthrough, and
-  how to verify the result. Ships a linter for the spec folder.
-  Use this whenever the user asks to "write a schema spec", "document this document type before
-  creating it", "spec out the content model", "apply the approved spec", "apply this changeset",
-  "lint the schema spec", "is the spec applied", or "check the site matches the spec", or when
-  another content-modelling skill reaches its write-spec, apply or verify step.
+  Write an Umbraco schema change as markdown content requirements documentation, get it approved,
+  then apply it and verify it. Defines the requirements page format for document types,
+  compositions, element types, data types and templates, the changeset that groups them, the status
+  lifecycle, how to inspect the existing schema, how to apply through the Umbraco Developer MCP or a
+  manual backoffice walkthrough, and how to verify the result. Ships a linter for the requirements
+  folder. Use this whenever the user asks to "write the content requirements", "document this
+  document type before creating it", "write up the content model requirements", "write a schema
+  spec", "apply the approved requirements", "apply this changeset", "lint the requirements docs",
+  "are the requirements applied", or "check the site matches the requirements", or when another
+  content-modelling skill reaches its write-requirements, apply or verify step.
   SKIP: non-Umbraco projects or Umbraco < 17; deciding what a type should be called or contain
   (use umbraco-content-model-conventions); uSync, Umbraco Deploy or package.xml output; editing
   content nodes rather than schema.
@@ -17,14 +18,14 @@ description: >
 
 # Content Requirements Documentation
 
-Schema changes are written down before they are made. A change is a set of markdown spec pages,
+Schema changes are written down before they are made. A change is a set of markdown requirements pages,
 one per artefact, grouped by a changeset. The user approves the changeset; only then is it
 applied, and only after reading the result back is it marked applied.
 
-**Write the spec, stop for approval, apply, verify.** Never create or change schema on a site from
-a spec whose status is still `proposed`.
+**Write the requirements doc, stop for approval, apply, verify.** Never create or change schema on a site from
+a requirements doc whose status is still `proposed`.
 
-The rules for *what* to put in a spec (names, folders, tabs, sorts) live in the sibling skill
+The rules for *what* to put in a requirements doc (names, folders, tabs, sorts) live in the sibling skill
 [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md). It must be
 installed alongside this one. If that link cannot be read, stop and say so; do not work from
 memory.
@@ -33,19 +34,19 @@ memory.
 
 | Step | What happens | Reference |
 |---|---|---|
-| 1. Inspect | Read the live schema so the spec fits what exists | [inspect-existing-schema.md](references/inspect-existing-schema.md) |
-| 2. Write | One page per artefact from the templates in `assets/`, plus a changeset | [spec-format.md](references/spec-format.md) |
-| 3. Lint | `node scripts/lint-spec.mjs <spec-root>` until it reports no errors | [spec-format.md](references/spec-format.md#linting) |
-| 4. Approve | Stop. The user reviews the changeset and says to go ahead | [spec-lifecycle.md](references/spec-lifecycle.md) |
+| 1. Inspect | Read the live schema so the requirements doc fits what exists | [inspect-existing-schema.md](references/inspect-existing-schema.md) |
+| 2. Write | One page per artefact from the templates in `assets/`, plus a changeset | [requirements-format.md](references/requirements-format.md) |
+| 3. Lint | `node scripts/lint-requirements.mjs <requirements-root>` until it reports no errors | [requirements-format.md](references/requirements-format.md#linting) |
+| 4. Approve | Stop. The user reviews the changeset and says to go ahead | [requirements-lifecycle.md](references/requirements-lifecycle.md) |
 | 5. Apply | Through the MCP if it is connected, otherwise a manual walkthrough | [apply-via-mcp.md](references/apply-via-mcp.md), [apply-manually.md](references/apply-manually.md) |
-| 6. Verify | Read every artefact back, compare with the spec, set the status lines | [verify.md](references/verify.md) |
+| 6. Verify | Read every artefact back, compare with the requirements doc, set the status lines | [verify.md](references/verify.md) |
 
 ### How to decide between MCP and manual
 
 This is one approach with two mechanisms, tried in order. Use the
 Umbraco Developer MCP when its tools are in the connected tool list. If it is not connected, or
-the site is not running, generate the manual walkthrough from the same spec; do not abandon the
-spec or invent another route. There is no uSync, Deploy or `package.xml` output.
+the site is not running, generate the manual walkthrough from the same requirements doc; do not abandon the
+requirements doc or invent another route. There is no uSync, Deploy or `package.xml` output.
 
 ## Version compatibility
 
@@ -58,19 +59,19 @@ between versions, so the connected tool list is the authority, not this skill.
 
 - One changeset per change a user would describe in one sentence. Its tick-list is what makes an
   interrupted apply resumable.
-- Reference what already exists instead of re-specifying it. A spec page is written for something
+- Reference what already exists instead of re-specifying it. A requirements page is written for something
   this change creates or alters.
 - Every create through the MCP is followed by a fix-up pass. The create tools cannot set sort
   orders, mandatory, property descriptions, templates or culture variation.
 - A status line is a claim about the site. `applied` is written only after the artefact has been
   read back, or the user confirms they did the manual steps.
 - Run the linter rather than checking conventions by eye. It is deterministic and it is the same
-  check CI runs on this skill's golden spec.
+  check CI runs on this skill's golden requirements.
 
 ## Validation
 
 Objective assertions live in [`evals/evals.json`](evals/evals.json); run them with
 `umbraco-skill-evaluator`. Coverage tier: **Documented**. The assets are markdown templates, not
-code, so there is no `dotnet test` example; the spec format is enforced by
-[`scripts/lint-spec.mjs`](scripts/lint-spec.mjs), which CI runs against
-`evals/files/golden-spec/` (must pass) and `evals/files/broken-spec/` (must fail).
+code, so there is no `dotnet test` example; the requirements doc format is enforced by
+[`scripts/lint-requirements.mjs`](scripts/lint-requirements.mjs), which CI runs against
+`evals/files/golden-requirements/` (must pass) and `evals/files/broken-requirements/` (must fail).

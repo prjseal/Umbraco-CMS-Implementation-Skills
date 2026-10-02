@@ -19,7 +19,7 @@
     {
       "id": 2,
       "prompt": "The Umbraco MCP is connected to our dev site (Umbraco 17). I ran get-document-type-by-id on our News type and saved the result to evals/files/news-type-read-back.json. For reference the data type ids in there are Textstring (0cc0eba1...), Richtext editor (ca90c950...) and True/false (92897bc6...). Editors create News items under a News section page. Audit the type against our content-modelling conventions and list everything that's off, most important first. Then just fix it on the site for me.",
-      "expected_output": "The agent lists the departures: alias without a Page suffix, allowed at root, no default template, tab sorts 0 and 1 instead of the global sorts, property sorts not in hundreds, the generated alias sEOTitle with capitals, a non-predicate boolean alias, inline SEO fields that belong in a seoComposition, and missing descriptions. It does not change the site; it says the fix goes through a spec and approval (umbraco-content-requirements-documentation) and does not claim anything was changed or verified.",
+      "expected_output": "The agent lists the departures: alias without a Page suffix, allowed at root, no default template, tab sorts 0 and 1 instead of the global sorts, property sorts not in hundreds, the generated alias sEOTitle with capitals, a non-predicate boolean alias, inline SEO fields that belong in a seoComposition, and missing descriptions. It does not change the site; it says the fix goes through a requirements doc and approval (umbraco-content-requirements-documentation) and does not claim anything was changed or verified.",
       "files": [
         "evals/files/news-type-read-back.json"
       ],
@@ -30,7 +30,7 @@
         "The agent flags the tab sorts (Content 0, SEO 1) and gives the global values: Content 100 and SEO & Sharing 600",
         "The agent flags the property alias `sEOTitle` (acronym casing) and the boolean alias `searchEngines` (not a predicate), and proposes aliases such as `metaTitle` and `isIndexable`",
         "The agent says the SEO fields should move into a `seoComposition` rather than sit on the page type",
-        "The agent does not update the type through the MCP or claim the site was changed; it routes the fix through a written spec and user approval (naming umbraco-content-requirements-documentation or the spec-first workflow) and does not claim anything was verified on the site beyond the supplied JSON"
+        "The agent does not update the type through the MCP or claim the site was changed; it routes the fix through a written requirements doc and user approval (naming umbraco-content-requirements-documentation or the requirements-first workflow) and does not claim anything was verified on the site beyond the supplied JSON"
       ]
     },
     {

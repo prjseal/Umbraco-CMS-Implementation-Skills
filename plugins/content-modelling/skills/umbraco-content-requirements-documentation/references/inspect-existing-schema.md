@@ -1,7 +1,7 @@
 # Inspect the existing schema
 
-Read the site before writing a spec. An empty project and a mature one need different answers,
-and a spec that names a data type or composition must say truthfully whether it `Exists`.
+Read the site before writing a requirements doc. An empty project and a mature one need different answers,
+and a requirements doc that names a data type or composition must say truthfully whether it `Exists`.
 
 ## What to establish
 
@@ -47,7 +47,7 @@ MCP configuration (`UMBRACO_INCLUDE_TOOL_COLLECTIONS`). Say which collection is 
 If the MCP is not connected or the site is not running, do not guess and do not describe the
 schema from memory. Either:
 
-- read an existing spec folder, if the project has one, and treat its `applied` pages as the
+- read an existing requirements folder, if the project has one, and treat its `applied` pages as the
   record of what exists; or
 - ask the user the questions in the table above, in one message.
 

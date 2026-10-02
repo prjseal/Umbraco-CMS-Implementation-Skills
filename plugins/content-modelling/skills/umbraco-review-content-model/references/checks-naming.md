@@ -2,7 +2,7 @@
 
 Rules: [naming.md](../../umbraco-content-model-conventions/references/naming.md),
 [property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md).
-On a spec folder the linter already reports alias casing and suffixes (`alias-casing`,
+On a requirements folder the linter already reports alias casing and suffixes (`alias-casing`,
 `alias-suffix`); carry its findings into the report instead of re-checking by eye.
 
 ## Types

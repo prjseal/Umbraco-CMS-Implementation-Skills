@@ -54,7 +54,7 @@ editor UI `Umb.PropertyEditorUi.DocumentPicker`, while the **multiple** one is
 
 ## The Value Type column
 
-The spec's Value Type is the type Models Builder gives the property. Take it from an existing
+The requirements doc's Value Type is the type Models Builder gives the property. Take it from an existing
 property on the site that uses the same data type, or from the generated model. For the common
 editors:
 

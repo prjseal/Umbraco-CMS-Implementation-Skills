@@ -1,14 +1,14 @@
 # Workflow
 
-Inspect, decide, write the spec, **stop for approval**, apply, verify. Four of those six steps
-are the spec skill's; this file adds only what a listing pair needs at each one. Each of the two
+Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
+are the requirements documentation skill's; this file adds only what a listing pair needs at each one. Each of the two
 pages is decided the way
 [`umbraco-add-page-type`](../../umbraco-add-page-type/SKILL.md) decides one page; read its
 [workflow](../../umbraco-add-page-type/references/workflow.md) for the page-level points (template
 stub, parent update, compositions that do not exist yet) rather than repeating them here.
 
-Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
+Before step 1, find or agree the requirements folder as
+[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
@@ -47,9 +47,9 @@ Without the MCP, ask these in one message, and treat every answer as the user's 
 The listing allows itself so a large section can be divided into sub-listings of the same kind
 (news by year, events by region) without a new type.
 
-## 3. Write the spec
+## 3. Write the requirements doc
 
-Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). A listing pair
+Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md). A listing pair
 is these pages:
 
 | Page | From | Location | Action |
@@ -69,7 +69,7 @@ Points specific to a listing pair:
 - Keep the `List view` row on the listing page and delete it on the item page. The linter requires
   it on any alias ending `ListingPage`.
 - The item's `Used by` names the listing; the listing's `Used by` names the parent and itself.
-- The parent follows the page-type rule: an existing spec page is edited, with the MCP a page is
+- The parent follows the page-type rule: an existing requirements page is edited, with the MCP a page is
   written from the read-back, without it the change is a checklist item and the summary says the
   parent is the user's word.
 
@@ -85,17 +85,17 @@ The changeset's checklist, in apply order:
 - [ ] 7. Create document type `<listingAlias>`, then fix-up (template, collection view)
 - [ ] 8. Set allowed children on `<listingAlias>`: `<itemAlias>`, `<listingAlias>`
 - [ ] 9. Set allowed children on `homePage`: add `<listingAlias>`, keeping the existing entries
-- [ ] 10. Verify every spec against the site and set each status line
+- [ ] 10. Verify every requirements doc against the site and set each status line
 ```
 
-Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
-errors. If Node.js is not available, say the spec was not linted.
+Then lint the folder with the requirements documentation skill's
+[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
+errors. If Node.js is not available, say the requirements doc was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
-Show the changeset's summary and spec list, and call out the **existing** parent that will change,
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
+Show the changeset's summary and requirements doc list, and call out the **existing** parent that will change,
 any data (authors, categories) left for a separate change, and anything that rests on the user's
 word. Then stop.
 

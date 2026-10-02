@@ -1,11 +1,11 @@
 # Workflow
 
-Inspect, decide, write the spec, **stop for approval**, apply, verify. Four of those six steps
-are the spec skill's; this file adds only what shared data needs at each one. Read the linked file
+Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
+are the requirements documentation skill's; this file adds only what shared data needs at each one. Read the linked file
 at each step rather than working from this summary.
 
-Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
+Before step 1, find or agree the requirements folder as
+[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
@@ -40,9 +40,9 @@ Without the MCP, ask these in one message, and treat every answer as the user's 
 | The picker | A multinode tree picker restricted to the folder and the item type, with the maximum the use needs | [taxonomy.md](taxonomy.md#the-shape-of-a-content-driven-taxonomy) |
 | Where the picker property goes | On the composition the consuming types share, or the one type that needs it | [taxonomy.md](taxonomy.md#where-the-picker-goes) |
 
-## 3. Write the spec
+## 3. Write the requirements doc
 
-Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). Shared data is
+Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md). Shared data is
 these pages:
 
 | Page | From | Location | Action |
@@ -60,7 +60,7 @@ Points specific to shared data:
 - The picker's Configuration names the start node as the data folder **content node** the user
   creates (by name), the allowed item type and the maximum. The start node is content, not
   schema: note in the summary that the folder node must exist before the picker is configured.
-- Types that gain the picker follow the usual rule: an existing spec page is edited and set back to
+- Types that gain the picker follow the usual rule: an existing requirements page is edited and set back to
   `proposed`; with the MCP a page is written from the read-back; without it the change is a
   checklist item and the summary says the type is the user's word. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged".
 
@@ -74,20 +74,20 @@ The changeset's checklist, in apply order:
 - [ ] 5. Create the `<Folder name>` content node at the content root             (content, by the user)
 - [ ] 6. Create data type folder `Content Picker` and data type `<Picker name>`
 - [ ] 7. Add property `<alias>` to `<type or composition alias>`, keeping everything else   (one per consumer)
-- [ ] 8. Verify every spec against the site and set each status line
+- [ ] 8. Verify every requirements doc against the site and set each status line
 ```
 
 Step 5 is content, not schema, and is carried out by the user in the Content section. It is listed
 so the checklist order is right, and the verification does not depend on it.
 
-Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
-errors. If Node.js is not available, say the spec was not linted.
+Then lint the folder with the requirements documentation skill's
+[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
+errors. If Node.js is not available, say the requirements doc was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
-Show the changeset's summary and spec list, and call out every existing type that gains a picker,
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
+Show the changeset's summary and requirements doc list, and call out every existing type that gains a picker,
 any values already stored elsewhere that would need migrating into items, and anything that rests
 on the user's word. Then stop.
 
@@ -114,7 +114,7 @@ also:
 
 Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For shared data, also
 confirm that the folder is allowed at root and allows the item, that neither type has a template,
-and that the picker's start node and allowed type are the ones in the spec.
+and that the picker's start node and allowed type are the ones in the requirements doc.
 
 Report, separately:
 

@@ -1,20 +1,20 @@
 # Apply manually in the backoffice
 
 Use this when the Umbraco Developer MCP is not connected, the site is not reachable, or the MCP
-rejected a value (see [apply-via-mcp.md](apply-via-mcp.md#values-the-mcp-rejects)). The spec is
+rejected a value (see [apply-via-mcp.md](apply-via-mcp.md#values-the-mcp-rejects)). The requirements doc is
 the same; only the hands change. You write the walkthrough, the user carries it out.
 
-Missing MCP tools are not a reason to skip the spec, to output uSync or package files, or to
+Missing MCP tools are not a reason to skip the requirements doc, to output uSync or package files, or to
 claim the schema exists.
 
 ## Write the walkthrough
 
 Generate one numbered list from the approved changeset, in the order of its checklist (the order
-in [apply-via-mcp.md](apply-via-mcp.md#order)). Every value comes from the spec pages; do not
+in [apply-via-mcp.md](apply-via-mcp.md#order)). Every value comes from the requirements pages; do not
 paraphrase an alias or a sort.
 
 Put it in the changeset under `## Apply log`, or hand it to the user in the conversation, so they
-can tick items off. Write each step so it can be followed without opening the spec.
+can tick items off. Write each step so it can be followed without opening the requirements doc.
 
 | Artefact | Where in the backoffice | What each step must state |
 |---|---|---|
@@ -36,7 +36,7 @@ Two things the backoffice will get wrong unless the step says so:
 
 - **The alias.** Umbraco generates one from the name and leaves acronyms in capitals. State the
   alias and tell the user to unlock the field and type it.
-- **Sort orders.** New tabs and properties are numbered 0, 1, 2. State every sort from the spec.
+- **Sort orders.** New tabs and properties are numbered 0, 1, 2. State every sort from the requirements doc.
 
 ## After the user has done it
 

@@ -3,7 +3,7 @@
 Rules: [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md),
 [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md),
 [templates.md](../../umbraco-content-model-conventions/references/templates.md).
-On a spec folder the linter reports `allowed-at-root`, `template-named-after-alias` and
+On a requirements folder the linter reports `allowed-at-root`, `template-named-after-alias` and
 `listing-collection-view`; carry those into the report.
 
 ## Tree

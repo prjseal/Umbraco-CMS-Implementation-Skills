@@ -23,7 +23,7 @@ listing type's `List view` row. The rule is in
 
 Start from the template
 [collection-view-data-type.md](../../umbraco-content-requirements-documentation/assets/collection-view-data-type.md).
-A spec page for this data type lives in `Data-Types/Collection-View/`, and the linter checks that a
+A requirements page for this data type lives in `Data-Types/Collection-View/`, and the linter checks that a
 listing page's `List view` row names one.
 
 ## Columns

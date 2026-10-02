@@ -1,4 +1,4 @@
-# Content model review: <SiteOrSpecName>
+# Content model review: <SiteOrRequirementsName>
 
 > Reviewed <yyyy-mm-dd> from <SourceDescription>. Nothing was changed.
 
@@ -32,5 +32,5 @@
 
 ## Next step
 
-Each fix is its own change: written as a spec with the named skill, approved, then applied. This
+Each fix is its own change: written as a requirements doc with the named skill, approved, then applied. This
 review changed nothing.

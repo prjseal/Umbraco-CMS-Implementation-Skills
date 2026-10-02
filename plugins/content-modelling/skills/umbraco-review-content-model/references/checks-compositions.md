@@ -1,7 +1,7 @@
 # Checks: compositions, elements and settings models
 
 Rules: [compositions.md](../../umbraco-content-model-conventions/references/compositions.md).
-On a spec folder the linter reports `composition-shape`, `element-shape` and
+On a requirements folder the linter reports `composition-shape`, `element-shape` and
 `settings-model-shape`; carry those into the report.
 
 ## Compositions

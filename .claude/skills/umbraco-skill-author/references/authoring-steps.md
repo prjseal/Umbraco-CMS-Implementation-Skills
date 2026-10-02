@@ -66,7 +66,7 @@ Don't paste doc links here that already live in a reference file. Push per-appro
 - Code templates with `<Placeholder>` tokens (`<Namespace>`, `<filterAlias>`, …).
 - Mark optional/removable lines with a comment.
 - The template code itself already follows the best-practices section.
-- Markdown templates (a spec page, a report) are assets too, but they are documents, not code: they
+- Markdown templates (a requirements page, a report) are assets too, but they are documents, not code: they
   carry `<Placeholder>` tokens and are never compiled. Name any optional row in the reference file
   that describes the format rather than with a comment, which would break a markdown table.
 
@@ -94,11 +94,11 @@ than leaving it ambiguous, so nobody assumes coverage that isn't there.
 
 **Documented-only skills.** A skill with no `assets/`, or with markdown assets only, ships no code, so
 there is nothing to compile and no `examples/` project. It is tier **Documented** throughout: say so in
-its `## Validation` section. The spec-driven content-modelling skills are the case this exists for.
-They write a markdown spec and apply it through the Umbraco Developer MCP or a manual walkthrough
-(one approach, two mechanisms), and they are validated by evals plus the Node spec linter,
-`plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-spec.mjs`, which CI runs
-against a golden spec that must pass and a broken fixture that must fail.
+its `## Validation` section. The requirements-driven content-modelling skills are the case this exists for.
+They write a markdown requirements doc and apply it through the Umbraco Developer MCP or a manual walkthrough
+(one approach, two mechanisms), and they are validated by evals plus the Node requirements linter,
+`plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-requirements.mjs`, which CI runs
+against a golden requirements that must pass and a broken fixture that must fail.
 
 ## Step 8 — Audit and hand off
 

@@ -45,7 +45,7 @@ setting.
 Changing a data type changes every property that uses it, on every type, with the content already
 stored in them.
 
-1. Read its references with `get-references-data-type` and list them in the spec's `Used by`.
+1. Read its references with `get-references-data-type` and list them in the requirements doc's `Used by`.
 2. If any user of the data type should **not** change, do not edit it. Create a variant and move
    only the properties that need the new behaviour.
 3. Tightening a constraint (a lower character limit, fewer allowed items) does not change stored

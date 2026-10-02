@@ -48,9 +48,9 @@ If the project already names these folders differently, keep the project's names
 Built-in data types stay where the installer put them, at the root of Data Types. A variant of a
 built-in is a project artefact and goes in its editor's folder.
 
-## The spec page
+## The requirements page
 
-The spec file name is the data type name with each run of other characters replaced by one hyphen:
+The requirements doc file name is the data type name with each run of other characters replaced by one hyphen:
 `Toggle (default on)` becomes `Toggle-default-on.md`, in `Data-Types/Toggle/`. The linter checks
 this. The folder is listed in Dependencies as a `data-type-container`, and its index page is
 written from [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md) if it does

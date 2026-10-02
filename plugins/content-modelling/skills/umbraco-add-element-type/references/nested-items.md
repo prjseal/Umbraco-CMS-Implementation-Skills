@@ -39,7 +39,7 @@ child sits beside its parent in `Elements/`, where alphabetical order keeps them
   `content`, not `accordionTitle` or `itemTitle`
   ([property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md)).
 
-## The Block List spec page
+## The Block List requirements page
 
 Write it from
 [block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md): property editor

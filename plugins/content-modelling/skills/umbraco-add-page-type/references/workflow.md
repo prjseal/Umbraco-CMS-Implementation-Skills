@@ -1,11 +1,11 @@
 # Workflow
 
-Inspect, decide, write the spec, **stop for approval**, apply, verify. Four of those six steps
-are the spec skill's; this file adds only what a page type needs at each one. Read the linked
+Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
+are the requirements documentation skill's; this file adds only what a page type needs at each one. Read the linked
 file at each step rather than working from this summary.
 
-Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
+Before step 1, find or agree the requirements folder as
+[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
@@ -51,7 +51,7 @@ restating it.
 ### Compositions that do not exist yet
 
 Creating a composition is not part of this skill. If the page needs one the site lacks (SEO
-fields, sharing fields), leave it out of this spec, say so in the changeset summary, and name
+fields, sharing fields), leave it out of this requirements doc, say so in the changeset summary, and name
 [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) as the follow-up that adds it and then applies it to this page. Do not
 list it as a `Missing` dependency: that blocks approval of a page that is useful without it.
 
@@ -60,10 +60,10 @@ list it as a `Missing` dependency: that blocks approval of a page that is useful
 Give the page a field only when no composition already supplies it. Put it on the `Content` tab
 (sort 100) with property sorts 100, 200, 300. Reuse an existing data type whenever its
 configuration fits. When a field genuinely needs a configuration no data type on the site has,
-the new data type joins the changeset as its own spec page, named and foldered by
+the new data type joins the changeset as its own requirements page, named and foldered by
 [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types); block
 editors are configured separately, by [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md). A page with no own properties
-writes the one line the spec format gives for that case.
+writes the one line the requirements doc format gives for that case.
 
 ### The root question
 
@@ -77,9 +77,9 @@ writes the one line the spec format gives for that case.
   listing and programmatic pages. Ask about moving anything else that is at root, as
   [page-kinds.md](page-kinds.md#root) says.
 
-## 3. Write the spec
+## 3. Write the requirements doc
 
-Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md). A page type
+Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md). A page type
 change is these pages:
 
 | Page | From | Location | Action |
@@ -95,12 +95,12 @@ Points specific to a page type:
 - Delete the `List view` row; it belongs to listing pages only.
 - A content page lists itself in its own Allowed children, as a link to its own page. It does not
   list itself in Dependencies.
-- Existing compositions, the master and built-in data types that have no spec page are written as
+- Existing compositions, the master and built-in data types that have no requirements page are written as
   plain text and flagged `Exists` in Dependencies.
 - The `Folder` breadcrumb links to the `Document-Types.md` index page. Write it from
   [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md) if the folder does not
   have one yet.
-- **The parent.** If it already has a spec page, edit its Allowed children, set it back to
+- **The parent.** If it already has a requirements page, edit its Allowed children, set it back to
   `proposed` and list it with the action `Update`. If it has none and the MCP is connected, write
   its page from the `get-document-type-by-id` read-back, complete, and list it as `Update`. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged".
   Without the MCP, do not reconstruct a page you cannot read: name the parent as plain text flagged
@@ -115,23 +115,23 @@ The changeset's checklist for a page type, in apply order:
 - [ ] 3. Create document type `<alias>`, then fix-up (sorts, mandatory, descriptions, template, culture)
 - [ ] 4. Set allowed children on `<alias>`: `<alias>`                (content page only)
 - [ ] 5. Set allowed children on `homePage`: add `<alias>`, keeping the existing entries
-- [ ] 6. Verify every spec against the site and set each status line
+- [ ] 6. Verify every requirements doc against the site and set each status line
 ```
 
 A new data type, if there is one, comes first, as
 [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#order) orders.
 
-Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
-errors. If Node.js is not available, say the spec was not linted.
+Then lint the folder with the requirements documentation skill's
+[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
+errors. If Node.js is not available, say the requirements doc was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
-Show the changeset's summary and spec list, and call out two things: the **existing** parent type
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
+Show the changeset's summary and requirements doc list, and call out two things: the **existing** parent type
 that will change, and anything that rests on the user's word rather than a read of the site. Then
 stop. A request to "just create it", however firm, is a request for the page type; it is not
-approval of a spec the user has not seen.
+approval of a requirements doc the user has not seen.
 
 Without the MCP, if the user asked for the backoffice steps, give the walkthrough in the same reply,
 headed as steps to follow once the changeset is approved. Writing it is not applying it, and the
@@ -157,7 +157,7 @@ type, also:
   markup, and a controller for a programmatic page, are implementation work outside this change.
   A new master uses `Layout = null;` and renders `@RenderBody()` inside a minimal HTML document.
 - **The create.** Look up the ids of the existing compositions and data types at apply time, by
-  name or alias; never take one from the spec. Leave `parentId` out, because a page sits at the
+  name or alias; never take one from the requirements doc. Leave `parentId` out, because a page sits at the
   tree root.
 - **The type's own allowed children.** A content page allows itself, which needs its own id, so
   it is set in the fix-up, not in the create.

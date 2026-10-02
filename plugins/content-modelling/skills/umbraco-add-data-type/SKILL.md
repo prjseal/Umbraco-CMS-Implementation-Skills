@@ -3,7 +3,7 @@ name: umbraco-add-data-type
 description: >
   Decide whether a property in Umbraco 17+ needs a new data type or can reuse one, pick the
   property editor, name it and file it in the Data Types tree the way an experienced Umbraco
-  developer would. The change is written as a markdown spec, approved, then applied through the
+  developer would. The change is written as a markdown requirements doc, approved, then applied through the
   Umbraco Developer MCP or a manual backoffice walkthrough, and read back.
   Use this whenever the user asks to "add a data type", "create a dropdown for", "limit this field
   to 160 characters", "make a toggle that defaults to on", "which property editor should I use",
@@ -18,13 +18,13 @@ description: >
 
 Decides the **data type behind a property**: reuse an existing one or create a new one, which
 property editor, what it is called, which folder it goes in and how it is configured. It works
-spec first: write the change down, stop for the user's approval, apply it, then read it back.
+requirements doc first: write the change down, stop for the user's approval, apply it, then read it back.
 
 Most of the time the answer is "reuse". This skill exists so the site does not collect a dozen
 near-identical text areas, and so a constraint such as a character limit lives in one place.
 
 The rules come from the sibling skill
-[`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the spec
+[`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the requirements doc
 format, inspect, apply and verify steps come from
 [`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md). **Both must be installed
 alongside this one.** If a link into either cannot be read, stop and say so; do not work from
@@ -42,9 +42,9 @@ memory.
 ### How to decide between MCP and manual
 
 There is one approach with two mechanisms, tried in order. Use the Umbraco Developer MCP when its
-tools are in the connected tool list and the site answers. Otherwise write the same spec and hand
+tools are in the connected tool list and the site answers. Otherwise write the same requirements doc and hand
 the user a manual backoffice walkthrough generated from it. Missing tools are never a reason to
-skip the spec, to output uSync or `package.xml` files, or to say the data type exists.
+skip the requirements doc, to output uSync or `package.xml` files, or to say the data type exists.
 
 ## Version compatibility
 
@@ -52,7 +52,7 @@ Targets **Umbraco 17+**. The property editor and editor UI aliases in
 [editor-selection.md](references/editor-selection.md) were read from the Umbraco 17.5.3
 `Umbraco.Cms.Core` and `Umbraco.Cms.StaticAssets` packages. Umbraco 17 added separate date-only,
 time-only, unspecified and time-zone-aware date editors. The MCP tools were checked against
-`@umbraco-cms/mcp-dev` 17.6.8 and 18.1.7 (see the spec skill); the connected tool list is the
+`@umbraco-cms/mcp-dev` 17.6.8 and 18.1.7 (see the requirements documentation skill); the connected tool list is the
 authority.
 
 ## Best practices
@@ -70,11 +70,11 @@ authority.
   Stop and say so; never do it to existing content silently.
 - **Built-in data types stay as installed.** Do not rename, move or reconfigure them.
 - **Approval is a separate turn.** A request to "just make the field required and 160 characters"
-  is a request for the data type, not approval of a spec the user has not seen.
+  is a request for the data type, not approval of a requirements doc the user has not seen.
 
 ## Validation
 
 Objective assertions live in [`evals/evals.json`](evals/evals.json); run them with
 `umbraco-skill-evaluator`. Coverage tier: **Documented**. This skill ships no code and no assets.
-The specs it writes are checked by the spec skill's linter, and an eval graded the guidance.
+The requirements docs it writes are checked by the linter in umbraco-content-requirements-documentation, and an eval graded the guidance.
 Nothing ran against a live site.

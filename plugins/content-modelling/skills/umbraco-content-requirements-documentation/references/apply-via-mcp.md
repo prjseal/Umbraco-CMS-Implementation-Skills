@@ -2,7 +2,7 @@
 
 Use this when the [Umbraco Developer MCP](https://docs.umbraco.com/umbraco-in-ai/mcp/cms-developer-mcp)
 is connected and the changeset is `approved`. If it is not connected, use
-[apply-manually.md](apply-manually.md) with the same spec.
+[apply-manually.md](apply-manually.md) with the same requirements doc.
 
 **Trust the connected tool list over this file.** Tool names and parameters change between
 versions. What follows was run against `@umbraco-cms/mcp-dev` 17.6.8 on Umbraco 17.5.3 and read
@@ -13,8 +13,8 @@ the tool list before giving up, and say which version you found.
 
 - The changeset status is `approved` and the linter reports no errors.
 - The tool collections `document-type`, `data-type` and `template` are enabled.
-- Re-read the site for anything the spec flags `Exists`. If it is gone, stop and tell the user.
-- Look up ids by name or alias at apply time. Never take an id from a spec or from memory.
+- Re-read the site for anything the requirements doc flags `Exists`. If it is gone, stop and tell the user.
+- Look up ids by name or alias at apply time. Never take an id from a requirements doc or from memory.
 
 ## Order
 
@@ -58,7 +58,7 @@ Each property passed to a create tool accepts only `name`, `alias`, `dataTypeId`
 Run it after **every** `create-document-type` and `create-element-type`.
 
 1. **Read**: `get-document-type-by-id` for the id the create returned.
-2. **Modify** that body, and only what the spec says:
+2. **Modify** that body, and only what the requirements doc says:
    - each entry in `containers`: set `sortOrder` to the Tab Sort or Group Sort;
    - each entry in `properties`: set `sortOrder`, `description` and `validation.mandatory`;
    - `defaultTemplate` to `{ "id": <template id> }` and `allowedTemplates` to a list holding it;
@@ -70,9 +70,9 @@ Run it after **every** `create-document-type` and `create-element-type`.
    The update replaces the type. A property or container left out of the body is **deleted**, so
    always send back everything that was read.
 4. **Verify**: `update-document-type` returns no body, which is not proof of success. Read the
-   type again and confirm the property count is unchanged and the values are those in the spec.
+   type again and confirm the property count is unchanged and the values are those in the requirements doc.
 
-Never build the update body from the spec alone. Always start from what was read.
+Never build the update body from the requirements doc alone. Always start from what was read.
 
 ## Values the MCP rejects
 
@@ -81,19 +81,19 @@ The server refuses any string containing `?`, `&`, a percent-encoded sequence su
 descriptions as well as to ids, on create and on update. A tab named `SEO & Sharing`, or a
 description ending in a question mark, cannot be written through the MCP.
 
-When a spec value is rejected:
+When a requirements doc value is rejected:
 
 1. Apply the artefact with the nearest accepted value (`SEO and Sharing`).
-2. Do **not** change the spec. The spec is what was approved.
+2. Do **not** change the requirements doc. The requirements doc is what was approved.
 3. Record the difference in the changeset's Apply log as a step for the user to finish in the
    backoffice, and tell them.
-4. Leave that spec page `approved`, not `applied`, until the site matches it.
+4. Leave that requirements page `approved`, not `applied`, until the site matches it.
 
 ## If a step fails
 
 Stop at the failed step. Leave it unticked, write the error in the Apply log and tell the user
 what exists so far. Do not delete what was created to "clean up" unless the user asks. The next
-attempt resumes from the first unticked item; see [spec-lifecycle.md](spec-lifecycle.md).
+attempt resumes from the first unticked item; see [requirements-lifecycle.md](requirements-lifecycle.md).
 
 ## Done
 

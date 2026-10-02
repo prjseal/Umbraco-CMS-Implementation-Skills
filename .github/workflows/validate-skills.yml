@@ -34,20 +34,20 @@ jobs:
       - name: Skill links resolve
         run: node scripts/check-skill-links.mjs
 
-      # Spec-driven content-modelling skills ship markdown, not code, so there is nothing for the
-      # dotnet test gate to compile. Their gate is the spec linter: the golden spec must pass, and
+      # Requirements-driven content-modelling skills ship markdown, not code, so there is nothing for the
+      # dotnet test gate to compile. Their gate is the requirements linter: the golden requirements must pass, and
       # the deliberately broken fixture must fail with exactly the rules it was written to break.
       # Exit 1 is a lint failure; anything else (2 = usage, or a crash) means the linter itself is
       # broken. The rule list is compared so a rule that silently stops firing is caught too.
-      - name: Spec linter passes the golden spec and fails the broken fixture
+      - name: Requirements linter passes the golden requirements and fails the broken fixture
         run: |
-          lint=plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-spec.mjs
+          lint=plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-requirements.mjs
           files=plugins/content-modelling/skills/umbraco-content-requirements-documentation/evals/files
-          node "$lint" "$files/golden-spec"
+          node "$lint" "$files/golden-requirements"
           status=0
-          node "$lint" "$files/broken-spec" > /dev/null || status=$?
+          node "$lint" "$files/broken-requirements" > /dev/null || status=$?
           test "$status" -eq 1
-          diff <(node "$lint" "$files/broken-spec" --rules) <(tr -d '\r' < "$files/broken-spec/expected-rules.txt")
+          diff <(node "$lint" "$files/broken-requirements" --rules) <(tr -d '\r' < "$files/broken-requirements/expected-rules.txt")
 
       - name: Restore
         run: dotnet restore Umbraco-CMS.Skills.sln

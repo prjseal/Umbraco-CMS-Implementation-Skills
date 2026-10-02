@@ -57,7 +57,7 @@ container.
 
 ## Applying sorts
 
-Sorts are part of the spec. The MCP create tools take sort from array order and cannot set it, so
+Sorts are part of the requirements doc. The MCP create tools take sort from array order and cannot set it, so
 sorts are written in the fix-up pass that `umbraco-content-requirements-documentation` describes. Do not assume a
 created type has the right sorts until you have read it back.
 

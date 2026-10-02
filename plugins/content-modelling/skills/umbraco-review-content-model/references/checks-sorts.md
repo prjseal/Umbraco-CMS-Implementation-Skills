@@ -1,7 +1,7 @@
 # Checks: tabs, groups and sorts
 
 Rules: [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md).
-On a spec folder the linter reports `tab-sorts`, `element-shape` and the `sort-hundreds` warning;
+On a requirements folder the linter reports `tab-sorts`, `element-shape` and the `sort-hundreds` warning;
 carry those into the report.
 
 On the live site, read each type's `containers` (name, type Tab or Group, `sortOrder`, parent)

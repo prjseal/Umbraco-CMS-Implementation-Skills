@@ -9,7 +9,7 @@ description: >
   document type", "where does this go in the document types tree", "what sort order should this
   tab have", "how should I structure compositions", "should this be allowed at root", or
   "does this type need a template", or when another content-modelling skill needs a rule.
-  SKIP: non-Umbraco projects; writing or applying a schema spec (use
+  SKIP: non-Umbraco projects; writing or applying a schema requirements doc (use
   umbraco-content-requirements-documentation); reviewing C# or Razor code (use umbraco-common-pitfalls).
 ---
 
@@ -21,13 +21,13 @@ and position alone. The rules were derived from a production Umbraco 17 schema; 
 conventions, not Umbraco requirements.
 
 This skill **creates nothing**. It answers "what is the rule?" and the reason behind it. Writing
-the spec and applying it to a site belong to the sibling skill
+the requirements doc and applying it to a site belong to the sibling skill
 [`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md).
 
 ## How to use this index
 
 - **Designing something new:** find the row for the decision you are making, open only that
-  reference file, and apply the rule before you write the spec.
+  reference file, and apply the rule before you write the requirements doc.
 - **Reviewing an existing model:** scan for the signatures in the *Look for* column, then open the
   files that match. Report what breaks a rule and why; do not fix anything unasked.
 - **Explaining a rule:** each reference file gives the reason and, where one exists, the rejected
@@ -73,7 +73,7 @@ Umbraco 17+.
 - Prefer consistency with the project over purity. One convention applied everywhere beats two
   good conventions mixed.
 - These rules are checkable. `umbraco-content-requirements-documentation` ships a linter that enforces the
-  mechanical ones on a written spec, so write the spec and run the linter instead of checking by
+  mechanical ones on a written requirements doc, so write the requirements doc and run the linter instead of checking by
   eye.
 - Stating a rule is not the same as verifying a site follows it. Only claim a live model conforms
   after reading it from the site.

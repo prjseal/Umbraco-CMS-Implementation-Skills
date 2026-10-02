@@ -5,7 +5,7 @@ and says nothing more, propose a **Content Page** instead of asking a list of qu
 deliberately small: the right name, place, compositions, template and parent, and two fields.
 Everything else is layered on later.
 
-It still goes through the whole [workflow](workflow.md): inspect, write the spec, stop for
+It still goes through the whole [workflow](workflow.md): inspect, write the requirements doc, stop for
 approval. The default only saves the decisions.
 
 ## The default
@@ -39,7 +39,7 @@ Adjust it to what the inspection found:
 ## Worked example
 
 A single-language site with a home page (`homePage`), a master template and an existing
-`seoComposition`. The spec folder is `docs/umbraco-schema/`. The home page has no spec page and
+`seoComposition`. The requirements folder is `docs/umbraco-schema/`. The home page has no requirements page and
 is read with the MCP, so its page is written from the read-back as an `Update`; that page is not
 shown here.
 
@@ -129,9 +129,9 @@ Adds a Content Page type and its template, so editors can create general pages u
 page and under each other. It takes the existing SEO Composition and has a page title and body
 text of its own. The Home Page is updated to allow it as a child.
 
-## Specs
+## Requirements pages
 
-| Order | Spec | Kind | Action |
+| Order | Requirements page | Kind | Action |
 |---|---|---|---|
 | 1 | [Content Page](../Templates/Master/ContentPage.md) | Template | Create |
 | 2 | [Content Page](../Document-Types/ContentPage.md) | Document type | Create |
@@ -143,7 +143,7 @@ text of its own. The Home Page is updated to allow it as a child.
 - [ ] 2. Create document type `contentPage`, then fix-up (sorts, descriptions, template)
 - [ ] 3. Set allowed children on `contentPage`: `contentPage`
 - [ ] 4. Set allowed children on `homePage`: add `contentPage`, keeping the existing entries
-- [ ] 5. Verify every spec against the site and set each status line
+- [ ] 5. Verify every requirements doc against the site and set each status line
 
 ## Apply log
 
@@ -151,7 +151,7 @@ text of its own. The Home Page is updated to allow it as a child.
 ```
 
 Without the MCP, `HomePage.md` is not written: the Used by line names Home Page as plain text,
-row 3 of Specs is dropped, and the summary says the home page was confirmed by the user, not read
+row 3 of Requirements docs is dropped, and the summary says the home page was confirmed by the user, not read
 from the site.
 
 **Related:** [workflow.md](workflow.md), [page-kinds.md](page-kinds.md).

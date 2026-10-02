@@ -3,7 +3,7 @@
 Rules: [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types),
 [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md#data-types).
 These checks need the configuration of each data type (`get-data-type`) and what uses it
-(`get-references-data-type`). A spec folder shows only the data types it specifies; say so.
+(`get-references-data-type`). A requirements folder shows only the data types it specifies; say so.
 
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|

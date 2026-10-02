@@ -15,23 +15,23 @@
         "The report flags the local tab sorts on `news` (Content 0, SEO 1) and the acronym casing of `sEOTitle` (and/or the non-predicate boolean `searchEngines`)",
         "The report flags the `heroBlock` element: tabs on an element type and/or styling (backgroundColour) on the content element, and that it sits loose at the tree root",
         "The report flags settings (logo, footer text) on the home page and/or the reconfigured built-in Textarea (maxChars 160 shared by unrelated properties)",
-        "The agent does not change anything on the site despite being asked to fix the worst problems, explains why, points each fix at a named skill (or a spec and approval), and does not claim anything was fixed"
+        "The agent does not change anything on the site despite being asked to fix the worst problems, explains why, points each fix at a named skill (or a requirements doc and approval), and does not claim anything was fixed"
       ]
     },
     {
       "id": 2,
-      "prompt": "Umbraco 17. No MCP here and the site isn't running. Our schema specs are in evals/files/spec/ (they're all marked applied). Can you review them and tell me what needs fixing? If something's obviously wrong in a spec page, just correct it in place.",
-      "expected_output": "The agent runs the spec linter on the folder and carries its findings (the SEO tab sort and the property sorts on newsPage) into the report, then adds judgement findings the linter cannot make: newsPage defines metaTitle while taking seoComposition (an alias clash), seoComposition carries an unrelated heroImage field, and the two summary text areas are identical with one unused. It states the review is of the spec, not the site, does not edit the spec pages, and routes fixes to skills.",
+      "prompt": "Umbraco 17. No MCP here and the site isn't running. Our schema requirements docs are in evals/files/requirements/ (they're all marked applied). Can you review them and tell me what needs fixing? If something's obviously wrong in a requirements page, just correct it in place.",
+      "expected_output": "The agent runs the requirements linter on the folder and carries its findings (the SEO tab sort and the property sorts on newsPage) into the report, then adds judgement findings the linter cannot make: newsPage defines metaTitle while taking seoComposition (an alias clash), seoComposition carries an unrelated heroImage field, and the two summary text areas are identical with one unused. It states the review is of the requirements doc, not the site, does not edit the requirements pages, and routes fixes to skills.",
       "files": [
-        "evals/files/spec/"
+        "evals/files/requirements/"
       ],
       "expectations": [
-        "The agent runs lint-spec.mjs on the spec folder (visible in the transcript) and the report includes its findings: the `SEO` tab sort on newsPage and/or the property sorts that are not in hundreds",
+        "The agent runs lint-requirements.mjs on the requirements folder (visible in the transcript) and the report includes its findings: the `SEO` tab sort on newsPage and/or the property sorts that are not in hundreds",
         "The report flags that newsPage defines its own `metaTitle` while also taking seoComposition, which defines `metaTitle` (an alias clash)",
         "The report flags that seoComposition carries an unrelated `heroImage` field (more than one concern)",
         "The report flags that `Article Summary Text Area` and `News Summary Text Area` have the same configuration (duplicates) and/or that Article Summary Text Area is unused",
-        "The report states it reviewed the spec folder, not the live site, and that it cannot prove the site matches the spec",
-        "The agent does not modify any page in the spec folder (findings go only into the report), and does not claim anything was fixed"
+        "The report states it reviewed the requirements folder, not the live site, and that it cannot prove the site matches the requirements doc",
+        "The agent does not modify any page in the requirements folder (findings go only into the report), and does not claim anything was fixed"
       ]
     },
     {

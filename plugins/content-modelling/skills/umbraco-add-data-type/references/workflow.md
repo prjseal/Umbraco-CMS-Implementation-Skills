@@ -1,11 +1,11 @@
 # Workflow
 
-Inspect, decide, write the spec, **stop for approval**, apply, verify. Four of those six steps
-are the spec skill's; this file adds only what a data type needs at each one. Read the linked file
+Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
+are the requirements documentation skill's; this file adds only what a data type needs at each one. Read the linked file
 at each step rather than working from this summary.
 
-Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
+Before step 1, find or agree the requirements folder as
+[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
@@ -36,9 +36,9 @@ something read from the site.
 If the answer is "reuse", there may be nothing to write: say which data type to use and why, and
 stop there unless a property is being changed.
 
-## 3. Write the spec
+## 3. Write the requirements doc
 
-Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md).
+Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md).
 
 | Page | From | Location | Action |
 |---|---|---|---|
@@ -55,7 +55,7 @@ Points specific to a data type:
   `Date`). Copy it from a data type of the same editor on the site; write `—` if you cannot read it.
 - **Used by** lists every property that will use the data type after this change. For an Update,
   it also lists every existing user, so the approver sees what else changes.
-- A type that gains the property follows the same rule as the other add-* skills: an existing spec
+- A type that gains the property follows the same rule as the other add-* skills: an existing requirements doc
   page is edited and set back to `proposed`; with the MCP, a page is written from the read-back;
   without it, the change is a checklist item and the summary says the type is the user's word. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged".
 
@@ -65,17 +65,17 @@ The changeset's checklist, in apply order:
 - [ ] 1. Create data type folder `<Editor kind>`                            (only if new)
 - [ ] 2. Create data type `<Name>` in `<Editor kind>`                        (or: Update data type `<Name>`)
 - [ ] 3. Set property `<alias>` on `<type alias>` to use `<Name>`            (only if a property changes)
-- [ ] 4. Verify every spec against the site and set each status line
+- [ ] 4. Verify every requirements doc against the site and set each status line
 ```
 
-Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
-errors. If Node.js is not available, say the spec was not linted.
+Then lint the folder with the requirements documentation skill's
+[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
+errors. If Node.js is not available, say the requirements doc was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
-Show the changeset's summary and spec list, and call out every existing property that the change
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
+Show the changeset's summary and requirements doc list, and call out every existing property that the change
 touches, any constraint that existing content may now break, and anything that rests on the user's
 word. Then stop.
 
@@ -93,7 +93,7 @@ For a data type, also:
   confirm it with `get-data-type-folder`.
 - **The create.** `create-data-type` takes `name`, `editorAlias`, `editorUiAlias`, `parentId` (the
   folder) and `values`. Build `values` by reading a data type of the same editor with
-  `get-data-type` and changing only the settings the spec names; do not guess the aliases.
+  `get-data-type` and changing only the settings the requirements doc names; do not guess the aliases.
 - **An update.** Read the data type, change only the named settings, write the whole configuration
   back with `update-data-type`, and read it again.
 - **A property change.** Read the type, point the property's `dataType` at the new id, send the
@@ -102,7 +102,7 @@ For a data type, also:
 ## 6. Verify and report
 
 Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For a data type, compare
-`name`, `editorAlias`, `editorUiAlias` and every configuration value in the spec, and check the
+`name`, `editorAlias`, `editorUiAlias` and every configuration value in the requirements doc, and check the
 folder with `get-data-type-ancestors`.
 
 Report, separately:

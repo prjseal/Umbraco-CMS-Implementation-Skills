@@ -6,18 +6,18 @@
 
 <WhatThisChangeAddsAndWhy>
 
-## Specs
+## Requirements pages
 
-| Order | Spec | Kind | Action |
+| Order | Requirements page | Kind | Action |
 |---|---|---|---|
-| <Order> | <SpecLink> | <Kind> | <CreateOrUpdate> |
+| <Order> | <RequirementsLink> | <Kind> | <CreateOrUpdate> |
 
 ## Apply checklist
 
 - [ ] <Order>. <CreateOrUpdate> <Kind> `<NameOrAlias>`
 - [ ] <Order>. Fix-up `<Alias>`: sorts, mandatory, descriptions, template, culture
 - [ ] <Order>. Set allowed children on `<Alias>`
-- [ ] <Order>. Verify every spec against the site and set each status line
+- [ ] <Order>. Verify every requirements doc against the site and set each status line
 
 ## Apply log
 

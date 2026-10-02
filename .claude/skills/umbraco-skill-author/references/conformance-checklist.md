@@ -29,7 +29,7 @@ fix anything that fails. A skill is ready only when every applicable item passes
 **assets/ (if present)**
 - [ ] Templates use `<Placeholder>` tokens with optional/removable lines marked
 - [ ] Template code follows the skill's own best-practices section
-- [ ] Markdown assets (spec page templates, report templates) are documents, not code. They still
+- [ ] Markdown assets (requirements page templates, report templates) are documents, not code. They still
   use `<Placeholder>` tokens, but an optional row or line is named in the reference file that
   describes the format, because a comment inside a markdown table breaks the table
 
@@ -61,9 +61,9 @@ fix anything that fails. A skill is ready only when every applicable item passes
     assumes runtime coverage that isn't there;
   - it is validated by `evals/evals.json`, with one MCP-connected and one MCP-absent prompt when the
     skill touches the backoffice;
-  - if it writes or applies schema specs, the specs it produces pass
-    `plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-spec.mjs`, which CI
-    runs against that skill's golden spec and broken fixture;
+  - if it writes or applies schema requirements docs, the requirements docs it produces pass
+    `plugins/content-modelling/skills/umbraco-content-requirements-documentation/scripts/lint-requirements.mjs`, which CI
+    runs against that skill's golden requirements and broken fixture;
   - Umbraco Developer MCP versus manual backoffice steps is one approach with two mechanisms, not an
     A/B pair, so it does not count towards the two-approach limit.
 - [ ] Variants *inside* an approach carry their own tier. The two-host split does not fix

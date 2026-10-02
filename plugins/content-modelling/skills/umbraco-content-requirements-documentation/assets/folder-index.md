@@ -1,5 +1,5 @@
 # <FolderName>
 
-> Folder index: lists the specs in this folder.
+> Folder index: lists the requirements docs in this folder.
 
-- [<SpecName>](<FolderName>/<SpecFile>.md)
+- [<RequirementsName>](<FolderName>/<RequirementsFile>.md)

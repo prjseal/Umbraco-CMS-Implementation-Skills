@@ -61,7 +61,7 @@ controller that renders it (route hijacking or a custom `RenderController`) is c
 an implementation task, not to this schema change. Say that the controller is still to be written
 when you report. Route hijacking finds its controller by the document type alias
 (`searchPage` is rendered by `SearchPageController`), so agree the alias with whoever writes the
-controller before the spec is approved. A programmatic page allows no children and takes compositions selectively; a
+controller before the requirements doc is approved. A programmatic page allows no children and takes compositions selectively; a
 search results page wants SEO fields but rarely a sharing image, and it may want indexing off.
 
 ### Listing

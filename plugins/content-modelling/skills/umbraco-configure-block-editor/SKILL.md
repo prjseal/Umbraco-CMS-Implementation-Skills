@@ -5,7 +5,7 @@ description: >
   for each placement where editors lay out content (approach A), or a Block List for each
   repeater of one kind of item (approach B). Covers which blocks each allows, their settings
   models, groups, column spans and limits, and adding a block to an existing placement. The change
-  is written as a markdown spec, approved, then applied through the Umbraco Developer MCP or a
+  is written as a markdown requirements doc, approved, then applied through the Umbraco Developer MCP or a
   manual backoffice walkthrough, and read back.
   Use this whenever the user asks to "add a block grid", "set up the main content area", "add this
   block to the page", "make the new block available in the grid", "configure the block list",
@@ -19,14 +19,14 @@ description: >
 # Configure Block Editor
 
 Configures **one block editor data type**: which blocks it offers, with which settings, where and
-how many, and the property that uses it. It works spec first: write the change down, stop for the
+how many, and the property that uses it. It works requirements doc first: write the change down, stop for the
 user's approval, apply it, then read it back.
 
 The blocks themselves (content elements, settings models, child items) are made by
 [`umbraco-add-element-type`](../umbraco-add-element-type/SKILL.md). This skill registers them.
 
 The rules come from the sibling skill
-[`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the spec
+[`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the requirements doc
 format, inspect, apply and verify steps come from
 [`umbraco-content-requirements-documentation`](../umbraco-content-requirements-documentation/SKILL.md). **Both must be installed
 alongside this one.** If a link into either cannot be read, stop and say so; do not work from
@@ -66,7 +66,7 @@ the MCP when it is connected and a manual walkthrough when it is not.
 Targets **Umbraco 17+**. The editor and editor UI aliases (`Umbraco.BlockGrid`,
 `Umb.PropertyEditorUi.BlockGrid`, `Umbraco.BlockList`, `Umb.PropertyEditorUi.BlockList`) were read
 from the Umbraco 17.5.3 packages. The MCP tools were checked against `@umbraco-cms/mcp-dev` 17.6.8
-and 18.1.7 (see the spec skill); the connected tool list is the authority.
+and 18.1.7 (see the requirements documentation skill); the connected tool list is the authority.
 
 ## Best practices
 
@@ -80,11 +80,11 @@ and 18.1.7 (see the spec skill); the connected tool list is the authority.
 - **Limits live in the data type.** "At least one item" and "no more than six" are the data
   type's amount, not the property's validation.
 - **Approval is a separate turn.** "Just add it to the grid" is a request for the change, not
-  approval of a spec the user has not seen.
+  approval of a requirements doc the user has not seen.
 
 ## Validation
 
 Objective assertions live in [`evals/evals.json`](evals/evals.json); run them with
 `umbraco-skill-evaluator`. Coverage tier: **Documented** for both approaches. This skill ships no
-code and no assets. The specs it writes are checked by the spec skill's linter, and an eval graded
+code and no assets. The requirements docs it writes are checked by the linter in umbraco-content-requirements-documentation, and an eval graded
 the guidance. Nothing ran against a live site.

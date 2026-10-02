@@ -1,11 +1,11 @@
 # Workflow
 
-Inspect, decide, write the spec, **stop for approval**, apply, verify. Four of those six steps
-are the spec skill's; this file adds only what the settings singleton needs at each one. Read the
+Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
+are the requirements documentation skill's; this file adds only what the settings singleton needs at each one. Read the
 linked file at each step rather than working from this summary.
 
-Before step 1, find or agree the spec folder as
-[spec-lifecycle.md](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#where-specs-live)
+Before step 1, find or agree the requirements folder as
+[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
 describes. Ask once; never again once it is recorded.
 
 ## 1. Inspect
@@ -45,9 +45,9 @@ that moving them to the new node loses their values unless they are migrated (a 
 specify the new node alongside, and record the removal from the home page as a later change once
 the values have moved. The same rule applies to any existing property moved between types.
 
-## 3. Write the spec
+## 3. Write the requirements doc
 
-Follow [spec-format.md](../../umbraco-content-requirements-documentation/references/spec-format.md).
+Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md).
 
 | Page | From | Location | Action |
 |---|---|---|---|
@@ -69,17 +69,17 @@ The changeset's checklist, in apply order:
 - [ ] 1. Create any new data types and repeater elements                          (only if needed)
 - [ ] 2. Create document type `siteSettings`, then fix-up (tab sorts 0-9, sorts, descriptions, allowed at root)
 - [ ] 3. Create the Site Settings content node at the content root                (content, by the user)
-- [ ] 4. Verify every spec against the site and set each status line
+- [ ] 4. Verify every requirements doc against the site and set each status line
 ```
 
-Then lint the folder with the spec skill's
-[`lint-spec.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-spec.mjs) until it reports no
-errors. If Node.js is not available, say the spec was not linted.
+Then lint the folder with the requirements documentation skill's
+[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
+errors. If Node.js is not available, say the requirements doc was not linted.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/spec-lifecycle.md#the-approval-gate).
-Show the changeset's summary and spec list, and call out any settings that currently live elsewhere
+Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
+Show the changeset's summary and requirements doc list, and call out any settings that currently live elsewhere
 and would need migrating, any script fields (editors can inject markup), and anything that rests on
 the user's word. Then stop.
 
@@ -103,7 +103,7 @@ settings, also:
 
 Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). Also confirm that the
 type is allowed at root, has no template and no allowed children, and that every tab sort matches
-the spec.
+the requirements doc.
 
 Report, separately:
 

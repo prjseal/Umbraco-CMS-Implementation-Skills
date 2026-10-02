@@ -40,7 +40,7 @@ property into a group within the same tab changes where it is shown, not the val
 
 `SEO & Sharing` contains an ampersand, which the MCP refuses; see
 [Values the MCP rejects](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#values-the-mcp-rejects)
-for what to do. The spec keeps the real name.
+for what to do. The requirements doc keeps the real name.
 
 ## Data types
 
@@ -49,7 +49,7 @@ its configuration fits. A field with a constraint the built-in cannot express, s
 160-character limit on a meta description or a toggle that defaults on, gets its own data type,
 named and foldered by [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types)
 (`Meta Description Text Area` in `Text Area/`, `Toggle (default on)` in `Toggle/`). That data type
-joins the changeset as its own spec page, ahead of the composition. The reuse-or-create decision
+joins the changeset as its own requirements page, ahead of the composition. The reuse-or-create decision
 in depth belongs to [umbraco-add-data-type](../../umbraco-add-data-type/SKILL.md).
 
 ## Descriptions
