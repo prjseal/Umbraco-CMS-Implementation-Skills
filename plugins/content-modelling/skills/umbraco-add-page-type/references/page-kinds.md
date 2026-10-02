@@ -11,19 +11,16 @@ alternative approaches: the workflow is the same for all of them.
 | **What it is** | The site itself | An everyday page an editor writes | A page whose output is produced by code | A page that lists one item type |
 | **Name signals** | Home | About, Contact, Content, Landing, Campaign | Search, Sitemap, Error, Not Found, Login | Blog, News, Events, Articles, "listing", anything plural |
 | **Example alias** | `homePage` | `contentPage`, `contactPage` | `searchPage`, `xmlSitemapPage` | `articleListingPage` |
-| **Allowed at root** | Yes | No | No | No |
-| **Allowed as a child of** | — | The home page and itself | The home page | The home page and content pages |
-| **Allows** | Content, listing and programmatic pages | Itself, plus listing pages | Nothing | Its item type, plus itself |
-| **Default template** | Yes, named after the alias | Yes | Yes, even though code drives it | Yes |
-| **Compositions** | Those every page takes | Those every page takes | Only what applies: SEO fields, usually no sharing image | Those every page takes |
-| **Icon** | `icon-home color-light-blue` | A noun that fits, `color-light-blue` | A noun that fits, `color-light-blue` | `icon-list color-light-blue` |
+| **Default template** | Yes | Yes | Yes, even though code drives it | Yes |
 | **This skill** | Adds it | Adds it | Adds it | **Hands off** to [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 
-The rules behind each row are in
-[allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md),
-[templates.md](../../umbraco-content-model-conventions/references/templates.md),
-[compositions.md](../../umbraco-content-model-conventions/references/compositions.md) and
-[icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md).
+What each kind is allowed at root, which parent allows it and what it allows in turn are in
+[allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md);
+its icon and colour in
+[icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md);
+which compositions it takes in
+[compositions.md](../../umbraco-content-model-conventions/references/compositions.md); the
+template rule in [templates.md](../../umbraco-content-model-conventions/references/templates.md).
 Check any icon name against the site before using it.
 
 ## Settling the kind
@@ -31,8 +28,9 @@ Check any icon name against the site before using it.
 1. If the name makes the kind obvious (`Home Page`, `Search Page`, `Contact Page`), use it
    without asking.
 2. If it is plural or says "listing", "feed" or "archive", it is a listing and a new item type
-   together. That is a listing pair: say so and hand off to [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) instead of
-   building half of it here.
+   together. That is a listing pair: say so and hand off to
+   [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) instead of building half
+   of it here.
 3. If the user says the page is rendered by a controller, a search index or an API, it is
    programmatic, whatever it is called.
 4. Otherwise ask one question and nothing else: "Is this a content page editors write, a
@@ -51,8 +49,9 @@ without the user's confirmation, because content may already sit at the root.
 ### Content
 
 The default kind, and the one [minimum-viable-page.md](minimum-viable-page.md) produces. It allows
-itself so editors can build their own hierarchy. Most content pages need few or no fields of their
-own; the page's body and title usually come from compositions or a block grid.
+itself, plus the site's listing page types, so editors can build their own hierarchy and put a
+listing inside a section. Most content pages need few or no fields of their own; the page's body
+and title usually come from compositions or a block grid.
 
 ### Programmatic
 
@@ -61,14 +60,15 @@ controller that renders it (route hijacking or a custom `RenderController`) is c
 an implementation task, not to this schema change. Say that the controller is still to be written
 when you report. Route hijacking finds its controller by the document type alias
 (`searchPage` is rendered by `SearchPageController`), so agree the alias with whoever writes the
-controller before the requirements doc is approved. A programmatic page allows no children and takes compositions selectively; a
-search results page wants SEO fields but rarely a sharing image, and it may want indexing off.
+controller before the requirements doc is approved. A programmatic page allows no children and
+takes compositions selectively; a search results page wants SEO fields but rarely a sharing image,
+and it may want indexing off.
 
 ### Listing
 
 Out of scope here. A listing is only useful with its item type, its own collection view data type
-and the allowed-children pairing between them, which [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) creates together.
-If the user insists on only the listing type, say that it will not be usable until the item type
-exists.
+and the allowed-children pairing between them, which
+[umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) creates together. If the user
+insists on only the listing type, say that it will not be usable until the item type exists.
 
 **Related:** [workflow.md](workflow.md), [minimum-viable-page.md](minimum-viable-page.md).

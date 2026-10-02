@@ -10,7 +10,7 @@ Work down this table and stop at the first row that fits.
 | Situation | Do | Name pattern | Example |
 |---|---|---|---|
 | A data type with the same editor and the same configuration exists | **Reuse it** | — | `Textstring` for a plain title |
-| A built-in default differs by one setting, and the variant will be useful elsewhere | Create a **generic variant** with a bracket qualifier | `<Editor> (<qualifier>)` | `Toggle (default on)`, `Textarea (3 rows)` |
+| A built-in default differs by one setting, and the variant will be useful elsewhere | Create a **generic variant** with a bracket qualifier | `<Editor> (<qualifier>)` | `Toggle (default on)`, `Text Area (3 rows)` |
 | The configuration exists for one purpose: a limit, a list of values, a media type filter | Create a **purpose-specific** data type | `<Subject> <Editor kind>` | `Meta Description Text Area`, `Alignment Dropdown` |
 | A block editor or a collection view | Not this skill | — | [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md), [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 
@@ -25,7 +25,9 @@ before deciding; the name is not proof of what it does.
 
 ## Constraints go in the data type
 
-A rule that should hold wherever the field appears belongs in the data type's configuration:
+A rule that should hold wherever the field appears belongs in the data type's configuration
+([naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types)). Where
+each kind of constraint lives:
 
 | Constraint | Where it lives |
 |---|---|
@@ -45,7 +47,8 @@ setting.
 Changing a data type changes every property that uses it, on every type, with the content already
 stored in them.
 
-1. Read its references with `get-references-data-type` and list them in the requirements doc's `Used by`.
+1. Read its references with `get-references-data-type` and list them in the requirements doc's
+   `Used by`.
 2. If any user of the data type should **not** change, do not edit it. Create a variant and move
    only the properties that need the new behaviour.
 3. Tightening a constraint (a lower character limit, fewer allowed items) does not change stored

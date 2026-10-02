@@ -4,8 +4,8 @@
 
 | Situation | Do |
 |---|---|
-| Two or more types need the same fields, or will soon | Make a composition |
-| One type needs the fields and nothing else will | Keep them on that type. Say why; the user can revisit when a second type appears |
+| Two or more types need the same fields, or will soon | Make a composition; see [when to make one](../../umbraco-content-model-conventions/references/compositions.md#when-to-make-one) |
+| One type needs the fields and nothing else will | Keep them on that type (the same rule). Say why; the user can revisit when a second type appears |
 | The site already has a composition for this concern | Reuse it, or extend it (an Update of that composition), never a second one |
 | The fields are block styling (background colour, anchor, spacing) | Not this skill: a settings composition for a block settings model belongs to [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) |
 | The request is for a composition that includes another composition | Refuse the nesting. Make the new concern its own flat composition and apply both side by side |
@@ -34,7 +34,8 @@ Data items and site settings are not routable, so search and sharing fields on t
 Element types never take page compositions; blocks are styled through settings compositions.
 
 When the user says "every page", read that as every **routable page type** and list them by name
-in the requirements doc, so the user approves the exact list. Do not add types created later automatically.
+in the requirements doc, so the user approves the exact list. Do not add types created later
+automatically.
 
 ## What blocks a type from taking it
 
@@ -47,8 +48,8 @@ Check each target before writing it into the requirements doc.
 | **Tab sort disagreement.** The target already has a tab of the same name with a different sort | Compare container sorts on the read-back | Report it. The global sort is right; fixing the target's tab is a separate Update |
 
 If the connected tool list includes `get-document-type-available-compositions`, ask it which
-compositions a type can take before writing that type into the requirements doc, and trust its answer over
-your own comparison.
+compositions a type can take before writing that type into the requirements doc, and trust its
+answer over your own comparison.
 
 ### Moving existing fields into a composition
 

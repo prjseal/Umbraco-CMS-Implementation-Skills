@@ -11,11 +11,11 @@ accordion              parent element in Elements/      title, items
                accordionItem     child element in Elements/   title, content
 ```
 
-| Part | Rule | Example |
+| Part | What it is | Example |
 |---|---|---|
-| Parent element | Plain noun, the block an editor picks | `accordion` |
+| Parent element | The block an editor picks | `accordion` |
 | Its repeating property | `items`, a Block List | `items` |
-| Child element | The parent's noun plus `Item`, or `Row` for table-like data | `accordionItem`, `pricingRow` |
+| Child element | One entry in the list, suffixed `...Item` or `...Row` | `accordionItem`, `pricingRow` |
 | Block List data type | The plural of the child, in `Block List/` | `Accordion Items` |
 | How many | Minimum and maximum in the Block List's amount setting | min 1, max unlimited |
 
@@ -26,15 +26,16 @@ child sits beside its parent in `Elements/`, where alphabetical order keeps them
 ## Rules
 
 - **Not numbered fields.** `panel1Title`, `panel2Title` limits the editor and cannot be reordered.
-- **Not a composition.** A composition shares fields between types; it does not repeat them.
+- **Not a composition**; see
+  [compositions.md](../../umbraco-content-model-conventions/references/compositions.md#blocks-settings-compositions-and-settings-models).
 - **A Block List, not a nested Block Grid.** Items are a list, not a layout.
-- **The constraint lives in the data type.** "At least one panel" is the Block List's minimum, so
-  every property using it behaves the same; do not rely on the parent property being mandatory.
-  Setting the parent property mandatory as well is fine.
+- **The constraint lives in the data type.** "At least one panel" is the Block List's minimum
+  ([naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types)); do not
+  rely on the parent property being mandatory. Setting it mandatory as well is fine.
 - **The child has no settings model** unless each item is styled on its own, which is rare. The
   parent's settings model styles the whole block.
-- **One Block List per repeater.** Two repeaters that allow different children get two data types,
-  even if they look alike.
+- **One Block List per repeater**, even when two look alike; see
+  [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types).
 - **Short generic aliases on both.** The parent has `title` and `items`, the child `title` and
   `content`, not `accordionTitle` or `itemTitle`
   ([property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md)).
@@ -42,11 +43,12 @@ child sits beside its parent in `Elements/`, where alphabetical order keeps them
 ## The Block List requirements page
 
 Write it from
-[block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md): property editor
-`Umbraco.BlockList`, the amount as the configuration sentence, and one row whose content element is
-the child and whose settings element is `—`. It is used by the parent element's `items` property.
-Configuring a Block List beyond this, such as a block that appears in several lists or has its own
-settings, is covered by [approach B of umbraco-configure-block-editor](../../umbraco-configure-block-editor/references/approach-b-block-list-repeater.md).
+[block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md):
+property editor `Umbraco.BlockList`, the amount as the configuration sentence, and one row whose
+content element is the child and whose settings element is `—`. It is used by the parent
+element's `items` property. Configuring a Block List beyond this, such as a block that appears in
+several lists or has its own settings, is covered by
+[approach B of umbraco-configure-block-editor](../../umbraco-configure-block-editor/references/approach-b-block-list-repeater.md).
 
 ## Order
 

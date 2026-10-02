@@ -1,5 +1,10 @@
 # Approach A: a Block Grid per placement
 
+Follow [the six steps](../../umbraco-content-requirements-documentation/references/change-workflow.md),
+starting with
+[the requirements folder](../../umbraco-content-requirements-documentation/references/change-workflow.md#before-step-1-the-requirements-folder).
+This file adds only what a Block Grid placement needs at each step.
+
 ## When to choose this approach
 
 Choose this when editors build an **area of a page** from several kinds of block: the main body of
@@ -30,7 +35,8 @@ the property's tab and sort from
 ### Rules
 
 - **One Block Grid per placement.** A sidebar that allows fewer blocks than the main area is its
-  own data type, even though the lists overlap.
+  own data type, even though the lists overlap; see
+  [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types).
 - **Register each block with its settings model** (the site's shared ones, or the block's bespoke
   one). A block registered without its settings element loses its style options in that placement.
 - **Column spans say where a block may sit.** A full-width block offers 12 only; a card-like block
@@ -52,43 +58,56 @@ see a new block in the catalogue. The requirements page for the data type become
 `get-references-data-type` for the properties using the grid and ask the user whether any page
 uses the block before planning its removal. Never remove a block that content uses.
 
-## Steps
+## 1. Inspect
 
-Follow the requirements documentation skill for each step, with the points below.
+Read the placement's existing Block Grid and its blocks (`get-data-type`), the elements and
+settings models to register (`get-document-type-by-id`), the types that have or will have the
+property, and the `Block Grid/` folder. An element that does not exist yet is made first with
+[`umbraco-add-element-type`](../../umbraco-add-element-type/SKILL.md).
 
-1. **Inspect** ([inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md)):
-   the placement's existing Block Grid and its blocks (`get-data-type`), the elements and settings
-   models to register (`get-document-type-by-id`), the types that have or will have the property,
-   and the `Block Grid/` folder. An element that does not exist yet is made first with
-   [`umbraco-add-element-type`](../../umbraco-add-element-type/SKILL.md).
-2. **Write the requirements doc** ([requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md)):
-   the data type page from
-   [block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md), with "Grid
-   columns: 12." as the configuration sentence and one table row per block. Existing elements with
-   no requirements page are plain text flagged `Exists`. Add an `Update` page, or a checklist item without
-   the MCP, for each type or composition that gains the property. If the read-back does not give
-   every row the page needs, treat the type as you would without the MCP; never write a partial
-   page or fill cells with placeholders such as "Unchanged". Lint with
-   [`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs).
-3. **Stop for approval** ([the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate)).
-   Call out any existing content affected and anything that is the user's word. Without the MCP,
-   the walkthrough may be given now, headed as steps to follow after approval.
-4. **Apply** ([apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md) or
-   [apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md)): elements
-   and settings models first, then the Block Grid, then the property on its type or composition.
-   Build the data type's `values` by reading an existing Block Grid on the site with `get-data-type`
-   and copying its shape (the `blocks` entries with `contentElementTypeKey`,
-   `settingsElementTypeKey`, `allowAtRoot`, `allowInAreas` and `columnSpanOptions`; `blockGroups`;
-   `gridColumns`; `validationLimit`). For an update, send the whole configuration back with
-   `update-data-type`. Look up every element id at apply time.
-5. **Verify** ([verify.md](../../umbraco-content-requirements-documentation/references/verify.md)): read the data
-   type back and compare every block row, settings element, span and limit; read each type that
-   gained the property and confirm its property count grew by one.
+## 2. Decide
 
-## Done
+Work through the Building blocks table above, in order.
 
-Tell the user what was created or changed, what was read back and matched, and what is left: the
-Razor partial for each new block, the grid layout stylesheet if the site uses one, and anything in
-the Apply log.
+## 3. Write the requirements doc
+
+The data type page comes from
+[block-data-type.md](../../umbraco-content-requirements-documentation/assets/block-data-type.md), at
+`Data-Types/Block-Grid/<Name-Slug>.md`, with "Grid columns: 12." as the configuration sentence and
+one table row per block. Existing elements with no requirements page are plain text flagged
+`Exists`. Each type or composition that gains the property, and a Block Grid that gains a block,
+is an **Update** page, written as
+[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#updating-a-type-that-already-exists)
+describes.
+
+## 4. Stop for approval
+
+Call out any existing content affected (a removed block, a tightened limit) and every existing
+type that gains the property, then stop; see
+[the approval gate](../../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
+If the user asked for the backoffice steps without the MCP, see
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md#asked-for-the-steps-before-approval).
+
+## 5. Apply
+
+For a Block Grid, also:
+
+- **Order.** Elements and settings models first, then the Block Grid, then the property on its
+  type or composition.
+- **The data type's `values`.** Build them by reading an existing Block Grid on the site with
+  `get-data-type` and copying its shape: the `blocks` entries with `contentElementTypeKey`,
+  `settingsElementTypeKey`, `allowAtRoot`, `allowInAreas` and `columnSpanOptions`; `blockGroups`;
+  `gridColumns`; `validationLimit`. Look up every element id at apply time.
+- **An update.** Send the whole configuration back with `update-data-type`, every existing block
+  entry included.
+
+## 6. Verify and report
+
+For a Block Grid, also read the data type back and compare every block row, settings element,
+span and limit; read each type that gained the property and confirm its property count grew by
+one.
+
+In the report, what is left is: the Razor partial for each new block, the grid layout stylesheet
+if the site uses one, and anything in the Apply log.
 
 **Alternative:** [approach B, a Block List per repeater](approach-b-block-list-repeater.md).

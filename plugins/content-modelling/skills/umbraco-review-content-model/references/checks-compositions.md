@@ -8,7 +8,7 @@ On a requirements folder the linter reports `composition-shape`, `element-shape`
 
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
-| A composition that composes another | A type used as a composition that has `compositions` of its own | High: hides where fields come from and cannot be taken apart | [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) |
+| A composition that composes another | A type used as a composition that has `compositions` of its own. Umbraco refuses this in the backoffice, so seeing it means imported or migrated schema | Low: rare; report it as data to clean up rather than a modelling defect | [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) |
 | Composition with behaviour | A composition with a template, allowed children or allowed at root | Medium | [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) |
 | More than one concern | A composition whose fields belong to different jobs (SEO fields and a hero image) | Medium | [umbraco-add-composition](../../umbraco-add-composition/SKILL.md): split it, which means migrating the values of the fields that move |
 | Used by one type only | `get-document-type-composition-references` returns one type, and no second is planned | Low | leave or fold back; folding back is a migration |

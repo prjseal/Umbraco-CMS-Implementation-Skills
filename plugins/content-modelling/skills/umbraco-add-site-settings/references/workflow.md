@@ -1,28 +1,20 @@
 # Workflow
 
-Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
-are the requirements documentation skill's; this file adds only what the settings singleton needs at each one. Read the
-linked file at each step rather than working from this summary.
-
-Before step 1, find or agree the requirements folder as
-[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
-describes. Ask once; never again once it is recorded.
+Follow
+[the six steps](../../umbraco-content-requirements-documentation/references/change-workflow.md).
+This file adds only what the settings singleton needs at each step.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md).
 For site settings, establish:
 
 | Question | Why it matters here |
 |---|---|
 | Is there already a `siteSettings` type, or settings on another type? | Extend the existing one; never create a second |
 | Does the home page carry settings fields (a settings tab, a settings composition)? | Moving them loses values unless migrated |
-| What is allowed at root? | Site settings joins the home page and data folders there |
+| What is allowed at root, and which node is sorted first there? | Site settings joins the home page and data folders at root; the home page must stay first |
 | Is it a multi-site install? | One settings node per site; how code finds the right one is agreed with the developer |
-| How many languages? | Settings such as footer text may need to vary by culture |
 | Which data types and elements exist for the fields (pickers, repeaters)? | Reuse before creating |
-
-Without the MCP, ask these in one message, and treat every answer as the user's word.
 
 ## 2. Decide
 
@@ -30,9 +22,9 @@ Without the MCP, ask these in one message, and treat every answer as the user's 
 |---|---|---|
 | Name and alias | Site Settings, `siteSettings`: the one root type without a `Page` suffix | [naming.md](../../umbraco-content-model-conventions/references/naming.md) |
 | Folder | The Document Types root, beside the pages | [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md) |
-| Icon | `icon-settings`, coloured like data (`color-green`) because editors meet it in the content tree beside data folders; follow the project if it colours it differently | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md) |
+| Icon | `icon-settings color-green`, the data colour | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md#colour-by-role) |
 | Description | What it holds ("Settings for the whole site: logo, navigation, footer and defaults.") | [descriptions.md](../../umbraco-content-model-conventions/references/descriptions.md) |
-| Allowed at root | Yes | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#site-settings) |
+| Allowed at root | Yes, sorted after the home page | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-at-root) |
 | Allowed children, templates, compositions | None | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#site-settings), [templates.md](../../umbraco-content-model-conventions/references/templates.md) |
 | Tabs and sorts | Its own tabs, 0 to 9 in reading order | [tab-layout.md](tab-layout.md) |
 | Fields | Area-prefixed aliases, pickers for links, repeaters for structured lists | [tab-layout.md](tab-layout.md#field-rules) |
@@ -47,68 +39,61 @@ the values have moved. The same rule applies to any existing property moved betw
 
 ## 3. Write the requirements doc
 
-Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md).
-
 | Page | From | Location | Action |
 |---|---|---|---|
-| Any new data type (pickers, a script text area) | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor kind>/` | Create |
-| Any repeater element and its Block List | via [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) | `Document-Types/Elements/`, `Data-Types/Block-List/` | Create |
-| The settings type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/SiteSettings.md` | Create |
+| Any new data type (pickers, a script text area) | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor-Kind>/<Name-Slug>.md` | Create |
+| Any repeater element and its Block List | via [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) | `Document-Types/Elements/<AliasPascalCase>.md`, `Data-Types/Block-List/<Name-Slug>.md` | Create |
+| The settings type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/SiteSettings.md` | Create, or Update when one exists |
 | The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to site settings:
 
 - Default template, Allowed templates, Allowed children and Compositions are all `—`, and the
-  `List view` row is deleted. The linter rejects a template on `siteSettings`.
+  `Collection` row is deleted. The linter rejects a template on `siteSettings`.
 - Every property row has a Tab Sort between 0 and 9, and property sorts in hundreds within each tab.
 - `Used by` is `—`: nothing allows it as a child.
+- An existing `siteSettings` type that gains tabs or fields is an Update, written as
+  [requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#updating-a-type-that-already-exists)
+  describes.
 
 The changeset's checklist, in apply order:
 
 ```
 - [ ] 1. Create any new data types and repeater elements                          (only if needed)
 - [ ] 2. Create document type `siteSettings`, then fix-up (tab sorts 0-9, sorts, descriptions, allowed at root)
-- [ ] 3. Create the Site Settings content node at the content root                (content, by the user)
+- [ ] 3. Create the Site Settings content node at the content root, sorted after the home page   (content, by the user)
 - [ ] 4. Verify every requirements doc against the site and set each status line
 ```
 
-Then lint the folder with the requirements documentation skill's
-[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
-errors. If Node.js is not available, say the requirements doc was not linted.
-
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
-Show the changeset's summary and requirements doc list, and call out any settings that currently live elsewhere
-and would need migrating, any script fields (editors can inject markup), and anything that rests on
-the user's word. Then stop.
-
-Without the MCP, if the user asked for the backoffice steps, give the walkthrough in the same reply,
-headed as steps to follow once the changeset is approved. Writing it is not applying it, and the
-status stays `proposed`.
+For site settings, call out: any settings that currently live elsewhere and would need migrating,
+any script fields (editors can inject markup), and that the new root node must sort after the
+home page. Then stop; see
+[the approval gate](../../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
+If the user asked for the backoffice steps and the MCP is not connected, see
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md#asked-for-the-steps-before-approval).
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
-including the fix-up pass after the create. Without it, follow
-[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For site
-settings, also:
+For site settings, also:
 
 - **The create** passes `allowedAsRoot: true` and no `parentId`.
 - **The fix-up** sets each tab's `sortOrder` to its 0 to 9 value; the create numbers them in order
   of first appearance, which is right only if the properties were passed in tab order.
-- **The content node** is created by the user in the Content section, at the root. Only one.
+- **The content node** is created by the user in the Content section, at the root. Only one, and
+  it must not become the first root node: the home page stays sorted first, or carries the domain
+  in Culture and Hostnames, because the first routable root owns `/`
+  ([root order](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-at-root)).
+  Tell the user this with the step, and ask them to check the sort order once the node exists.
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). Also confirm that the
-type is allowed at root, has no template and no allowed children, and that every tab sort matches
-the requirements doc.
+For site settings, also confirm that the type is allowed at root, has no template and no allowed
+children, and that every tab sort matches the requirements doc. Confirm the content root order
+too: the home page is sorted first and the settings node after it. The content tree is not read
+by the schema tools, so that is the user's confirmation, and the report says so.
 
-Report, separately:
-
-1. What was created, by name.
-2. What was **read back and matched**, and what was only confirmed by the user or not checked.
-3. What is left: creating the settings content node and filling it in, migrating any settings still
-   on the home page, the Razor or C# that reads the settings (found by type, not by assuming the
-   home page), permissions on the node, and anything in the Apply log.
+In the report's "what is left", name: creating the settings content node and filling it in,
+migrating any settings still on the home page, the Razor or C# that reads the settings (found by
+type, not by assuming the home page), and permissions on the node.

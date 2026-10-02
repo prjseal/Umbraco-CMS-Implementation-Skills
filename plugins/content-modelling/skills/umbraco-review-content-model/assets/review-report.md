@@ -32,5 +32,5 @@
 
 ## Next step
 
-Each fix is its own change: written as a requirements doc with the named skill, approved, then applied. This
-review changed nothing.
+Each fix is its own change: written as a requirements doc with the named skill, approved, then
+applied. This review changed nothing.

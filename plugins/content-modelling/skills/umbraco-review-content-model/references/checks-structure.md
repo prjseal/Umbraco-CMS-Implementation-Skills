@@ -1,9 +1,10 @@
 # Checks: structure
 
-Rules: [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md),
+Rules:
+[tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md),
 [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md),
-[templates.md](../../umbraco-content-model-conventions/references/templates.md).
-On a requirements folder the linter reports `allowed-at-root`, `template-named-after-alias` and
+[templates.md](../../umbraco-content-model-conventions/references/templates.md). On a requirements
+folder the linter reports `allowed-at-root`, `template-named-after-alias` and
 `listing-collection-view`; carry those into the report.
 
 ## Tree
@@ -31,7 +32,7 @@ On a requirements folder the linter reports `allowed-at-root`, `template-named-a
 
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
-| Routable type with no default template | A page type with no `defaultTemplate` | High: the page has a URL that renders nothing | [umbraco-add-page-type](../../umbraco-add-page-type/SKILL.md) |
+| Routable type with no default template | A page type with no `defaultTemplate`, and no controller in the code base that renders it | High: the page's URL falls through to the 404 handler. Medium when a route-hijacking controller renders it; say which | [umbraco-add-page-type](../../umbraco-add-page-type/SKILL.md) |
 | Template alias differs from the type alias | `defaultTemplate` resolves to another alias | Low | the owning skill |
 | Template on a non-routable type | A composition, element, data item or site settings with a template | Medium | the owning skill |
 | Several allowed templates | More than one allowed template with no stated alternate rendering | Low | the owning skill |
@@ -42,6 +43,6 @@ On a requirements folder the linter reports `allowed-at-root`, `template-named-a
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
 | Listing with no collection view | A listing type with no `collection` | Low | [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
-| Collection view shared by different listings | One collection view data type used by listings of different item types | Low | [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
+| Collection view shared by different listings | One collection view data type used by listings of different item types (listings of the same item type may share one) | Low | [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 
 **Related:** [checks-naming.md](checks-naming.md), [checks-compositions.md](checks-compositions.md).

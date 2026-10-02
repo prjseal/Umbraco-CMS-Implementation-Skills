@@ -1,68 +1,60 @@
 # Workflow
 
-Inspect, decide, write the requirements doc, **stop for approval**, apply, verify. Four of those six steps
-are the requirements documentation skill's; this file adds only what shared data needs at each one. Read the linked file
-at each step rather than working from this summary.
-
-Before step 1, find or agree the requirements folder as
-[requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#where-requirements-docs-live)
-describes. Ask once; never again once it is recorded.
+Follow
+[the six steps](../../umbraco-content-requirements-documentation/references/change-workflow.md).
+This file adds only what shared data needs at each step.
 
 ## 1. Inspect
 
-Follow [inspect-existing-schema.md](../../umbraco-content-requirements-documentation/references/inspect-existing-schema.md).
 For shared data, establish:
 
 | Question | Why it matters here |
 |---|---|
 | Is there already a folder or item type for this data? | Extend it instead of making a second |
 | Does a `Data/` folder exist in Document Types? | If not, it joins the change first |
-| What is allowed at root? | The data folder joins the home page and site settings there |
+| What is allowed at root, and which node sorts first there? | The data folder joins the home page and site settings at root, and must sort after the home page |
 | Are the values stored somewhere already (a text field on pages, tags)? | Moving existing values into items is a content migration |
 | Which page types will pick the items, and is there a composition they share? | Where the picker property goes |
 | Is there a `Content Picker/` data type folder, or existing pickers? | Reuse an identical picker; otherwise a new one |
-
-Without the MCP, ask these in one message, and treat every answer as the user's word.
 
 ## 2. Decide
 
 | Decision | For shared data | Rule |
 |---|---|---|
-| Names and aliases | Folder `<noun>Folder`; item the plain singular noun (`author`), or `<noun>Item` when the noun is not a real-world thing (`reusableContentItem`) | [naming.md](../../umbraco-content-model-conventions/references/naming.md) |
-| Folder in Document Types | `Data/`, both types | [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md) |
+| Names and aliases | Folder `<noun>Folder`; item the plain singular noun (`author`), or `<noun>Item` when the noun is not a real-world thing (`reusableContentItem`) | [naming.md](../../umbraco-content-model-conventions/references/naming.md#suffixes) |
+| Folder in Document Types | `Data/`, both types | [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md#document-types) |
 | Icons | Both `color-green`: `icon-folder color-green` for the folder, a noun for the item | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md) |
 | Descriptions | What it holds ("Holds the authors that articles can pick from.") | [descriptions.md](../../umbraco-content-model-conventions/references/descriptions.md) |
-| Allowed at root | Folder Yes, item No | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md) |
-| Allowed children | Folder: the item, and itself only if editors need sub-folders. Item: nothing | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md) |
+| Allowed at root | Folder Yes, item No; the folder node sorts after the home page and is not routable | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-at-root) |
+| Allowed children | Folder: the item, and itself only if editors need sub-folders. Item: nothing | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-children) |
 | Templates and compositions | None on either. No SEO, sharing or page details | [templates.md](../../umbraco-content-model-conventions/references/templates.md), [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
-| Item fields | What each item holds beyond its name, on the `Content` tab (100), sorts in hundreds. Links (a website, a map, a booking page) are a Multi URL Picker with a maximum of 1, never a Textstring holding a URL; pages are picked, not typed | [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md), [property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md), [editor-selection.md](../../umbraco-add-data-type/references/editor-selection.md#choices-that-come-up-often) |
+| Item fields | What each item holds beyond its name, on the `Content` tab. A link (a website, a map, a booking page) is a Multi URL Picker with a maximum of 1, never a Textstring holding a URL; a page is picked, not typed | [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md), [property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md), [editor-selection.md](../../umbraco-add-data-type/references/editor-selection.md#choices-that-come-up-often) |
 | Folder fields | Usually none | — |
 | The picker | A multinode tree picker restricted to the folder and the item type, with the maximum the use needs | [taxonomy.md](taxonomy.md#the-shape-of-a-content-driven-taxonomy) |
 | Where the picker property goes | On the composition the consuming types share, or the one type that needs it | [taxonomy.md](taxonomy.md#where-the-picker-goes) |
 
 ## 3. Write the requirements doc
 
-Follow [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md). Shared data is
-these pages:
+Shared data is these pages:
 
 | Page | From | Location | Action |
 |---|---|---|---|
-| The item type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/Data/<ItemAlias>.md` | Create |
-| The folder type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/Data/<FolderAlias>.md` | Create |
-| The picker data type | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/Content-Picker/<Name>.md` | Create |
+| The item type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/Data/<AliasPascalCase>.md` | Create |
+| The folder type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/Data/<AliasPascalCase>.md` | Create |
+| The picker data type | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/Content-Picker/<Name-Slug>.md` | Create |
 | Each type or composition that gains the picker | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) or [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | Where it lives | Update |
 | The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to shared data:
 
 - Both pages write `—` for Default template, Allowed templates and Compositions; the linter
-  rejects a template on a type in `Data/`. Delete the `List view` row.
+  rejects a template on a type in `Data/`. Delete the `Collection` row.
 - The picker's Configuration names the start node as the data folder **content node** the user
   creates (by name), the allowed item type and the maximum. The start node is content, not
   schema: note in the summary that the folder node must exist before the picker is configured.
-- Types that gain the picker follow the usual rule: an existing requirements page is edited and set back to
-  `proposed`; with the MCP a page is written from the read-back; without it the change is a
-  checklist item and the summary says the type is the user's word. If the read-back does not give every row the page needs, treat the type as you would without the MCP; never write a partial page or fill cells with placeholders such as "Unchanged".
+- Each type or composition that gains the picker is an Update page, written as
+  [requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#updating-a-type-that-already-exists)
+  describes.
 
 The changeset's checklist, in apply order:
 
@@ -71,7 +63,7 @@ The changeset's checklist, in apply order:
 - [ ] 2. Create document type `<itemAlias>` in `Data`, then fix-up
 - [ ] 3. Create document type `<folderAlias>` in `Data`, then fix-up (allowed at root)
 - [ ] 4. Set allowed children on `<folderAlias>`: `<itemAlias>`
-- [ ] 5. Create the `<Folder name>` content node at the content root             (content, by the user)
+- [ ] 5. Create the `<Folder name>` content node at the content root, sorted after the home page   (content, by the user)
 - [ ] 6. Create data type folder `Content Picker` and data type `<Picker name>`
 - [ ] 7. Add property `<alias>` to `<type or composition alias>`, keeping everything else   (one per consumer)
 - [ ] 8. Verify every requirements doc against the site and set each status line
@@ -80,27 +72,22 @@ The changeset's checklist, in apply order:
 Step 5 is content, not schema, and is carried out by the user in the Content section. It is listed
 so the checklist order is right, and the verification does not depend on it.
 
-Then lint the folder with the requirements documentation skill's
-[`lint-requirements.mjs`](../../umbraco-content-requirements-documentation/scripts/lint-requirements.mjs) until it reports no
-errors. If Node.js is not available, say the requirements doc was not linted.
+Step 6 is a justified exception to the default apply order in
+[apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#order),
+which creates data types first: the picker's start node is the folder's content node, which
+cannot exist until the folder type does, so the picker is created after it.
 
 ## 4. Stop for approval
 
-Follow [the approval gate](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#the-approval-gate).
-Show the changeset's summary and requirements doc list, and call out every existing type that gains a picker,
-any values already stored elsewhere that would need migrating into items, and anything that rests
-on the user's word. Then stop.
-
-Without the MCP, if the user asked for the backoffice steps, give the walkthrough in the same reply,
-headed as steps to follow once the changeset is approved. Writing it is not applying it, and the
-status stays `proposed`.
+Call out every existing type that gains a picker, and any values already stored elsewhere that
+would need migrating into items; then stop, as
+[the approval gate](../../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval)
+describes. If the user asked for the backoffice steps and the MCP is not connected, see
+[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md#asked-for-the-steps-before-approval).
 
 ## 5. Apply
 
-With the MCP, follow [apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md),
-including the fix-up pass after each create. Without it, follow
-[apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md). For shared data,
-also:
+For shared data, also:
 
 - **Both types in `Data/`.** `create-document-type` takes the `Data` folder's id as `parentId`;
   look it up at apply time.
@@ -112,13 +99,10 @@ also:
 
 ## 6. Verify and report
 
-Follow [verify.md](../../umbraco-content-requirements-documentation/references/verify.md). For shared data, also
-confirm that the folder is allowed at root and allows the item, that neither type has a template,
-and that the picker's start node and allowed type are the ones in the requirements doc.
+For shared data, also confirm that the folder is allowed at root and allows the item, that neither
+type has a template, and that the picker's start node and allowed type are the ones in the
+requirements doc. The schema tools cannot read content, so ask the user to confirm that the folder
+node sorts after the home page at the content root and has no URL of its own.
 
-Report, separately:
-
-1. What was created or changed, by name.
-2. What was **read back and matched**, and what was only confirmed by the user or not checked.
-3. What is left: creating the folder content node and its items, migrating any values stored
-   elsewhere, the Razor or C# that reads the picked items, and anything in the Apply log.
+In the report's third item (what is left), name the folder content node and its items, the
+migration of any values stored elsewhere, and the Razor or C# that reads the picked items.

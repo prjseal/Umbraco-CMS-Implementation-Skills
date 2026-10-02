@@ -43,7 +43,7 @@ get-language-items
 ]
 ```
 
-## get-document-types-by-id-array (the five types above)
+## get-document-type-batch (the five types above)
 
 | Name | Alias | allowedAsRoot | Compositions |
 |---|---|---|---|
@@ -58,8 +58,8 @@ get-language-items
 | Composition | Tab (sort) | Group (sort) | Properties (alias, sort) |
 |---|---|---|---|
 | Page Details Composition | Page Details (200) | — | `pageTitle` 100, `summary` 200 |
-| SEO Composition | SEO & Sharing (600) | SEO (0) | `metaTitle` 100, `metaDescription` 200, `isIndexable` 300 |
-| Open Graph Composition | SEO & Sharing (600) | Sharing (100) | `shareTitle` 100, `shareImage` 200 |
+| SEO Composition | SEO and Sharing (600) | SEO (0) | `metaTitle` 100, `metaDescription` 200, `isIndexable` 300 |
+| Open Graph Composition | SEO and Sharing (600) | Sharing (100) | `shareTitle` 100, `shareImage` 200 |
 
 ## get-document-type-by-id: Home Page (abbreviated)
 
