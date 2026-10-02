@@ -15,6 +15,7 @@
 | Description | A set of expandable panels, each with a title and content. |
 | Folder | [Document Types](../../Document-Types.md) / [Elements](../Elements.md) |
 | Allowed at root | No |
+| Vary by culture | No |
 | Allowed children | — |
 | Compositions | — |
 

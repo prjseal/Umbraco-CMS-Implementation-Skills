@@ -23,9 +23,9 @@
 
 | Tab | Tab Sort | Group | Group Sort | Name | Alias | Data Type | Editor | Value Type | Mandatory | Sort | Description |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| SEO & Sharing | 600 | — | — | Meta Title | `metaTitle` | Textstring | `Umbraco.TextBox` | `System.String` | No | 100 | The title shown in search results. |
-| SEO & Sharing | 600 | — | — | Meta Description | `metaDescription` | Textarea | `Umbraco.TextArea` | `System.String` | No | 200 | The summary shown in search results. |
-| SEO & Sharing | 600 | — | — | Hero Image | `heroImage` | Image Media Picker | `Umbraco.MediaPicker3` | `Umbraco.Cms.Core.Models.MediaWithCrops` | No | 300 | The large image at the top of the page. |
+| SEO and Sharing | 600 | — | — | Meta Title | `metaTitle` | Textstring | `Umbraco.TextBox` | `System.String` | No | 100 | The title shown in search results. |
+| SEO and Sharing | 600 | — | — | Meta Description | `metaDescription` | Textarea | `Umbraco.TextArea` | `System.String` | No | 200 | The summary shown in search results. |
+| SEO and Sharing | 600 | — | — | Hero Image | `heroImage` | Image Media Picker | `Umbraco.MediaPicker3` | `Umbraco.Cms.Core.Models.MediaWithCrops` | No | 300 | The large image at the top of the page. |
 
 ## Used by
 

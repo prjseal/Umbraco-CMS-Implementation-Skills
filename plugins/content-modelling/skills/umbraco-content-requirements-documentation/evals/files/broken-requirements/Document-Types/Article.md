@@ -14,6 +14,7 @@
 | Folder | Document Types |
 | Allowed at root | Yes |
 | Vary by culture | No |
+| Collection | — |
 | Default template | — |
 | Allowed templates | — |
 | Allowed children | — |
@@ -25,6 +26,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | Content | 1 | — | — | SEO Title | `SEOTitle` | Textstring | `Umbraco.TextBox` | `System.String` | yes | 150 | The title. |
 | Content | 1 | — | — | Body | `bodyText` | Richtext editor | `Umbraco.RichText` | `Umbraco.Cms.Core.Strings.IHtmlEncodedString` | No | 200 | The body of the article. |
+| Content | 1 | — | — | Name | `name` | Textstring | `Umbraco.TextBox` | `System.String` | No | 300 | Who wrote it? |
 
 ## Used by
 
@@ -34,5 +36,5 @@
 
 | Artifact | Type | Flags |
 |---|---|---|
-| Textstring | `data-type` | Todo |
+| Textstring | `datatype` | Todo |
 | [SEO Composition](Compositions/SeoComposition.md) | `document-type` | New in this changeset |

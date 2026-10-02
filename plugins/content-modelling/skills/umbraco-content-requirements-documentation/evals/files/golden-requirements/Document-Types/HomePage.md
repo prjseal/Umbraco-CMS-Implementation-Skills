@@ -1,6 +1,6 @@
 # Home Page
 
-> **Status:** approved
+> **Status:** applied 2026-10-01 via MCP
 
 ## Definition
 
@@ -17,7 +17,7 @@
 | Default template | [Home Page](../Templates/Master/HomePage.md) |
 | Allowed templates | [Home Page](../Templates/Master/HomePage.md) |
 | Allowed children | [Article Listing Page](ArticleListingPage.md) |
-| Compositions | [Page Details Composition](Compositions/PageDetailsComposition.md), [SEO Composition](Compositions/SeoComposition.md) |
+| Compositions | [Page Details Composition](Compositions/PageDetailsComposition.md), [SEO Composition](Compositions/SeoComposition.md), [Open Graph Composition](Compositions/OpenGraphComposition.md) |
 
 ## Properties
 
@@ -34,4 +34,5 @@ No own properties: everything is inherited from the compositions listed above.
 | [Article Listing Page](ArticleListingPage.md) | `document-type` | New in this changeset |
 | [Page Details Composition](Compositions/PageDetailsComposition.md) | `document-type` | New in this changeset |
 | [SEO Composition](Compositions/SeoComposition.md) | `document-type` | New in this changeset |
+| [Open Graph Composition](Compositions/OpenGraphComposition.md) | `document-type` | New in this changeset |
 | [Home Page](../Templates/Master/HomePage.md) | `template` | New in this changeset |

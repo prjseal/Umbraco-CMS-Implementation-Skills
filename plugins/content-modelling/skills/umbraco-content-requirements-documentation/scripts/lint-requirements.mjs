@@ -1,10 +1,14 @@
 #!/usr/bin/env node
-// lint-requirements.mjs <requirements-root>            lint a schema requirements folder; exit 0 clean, 1 lint errors, 2 usage
-// lint-requirements.mjs <requirements-root> --rules    print the sorted ids of the rules that reported an error; exit 0
+// lint-requirements.mjs <requirements-root>             lint a schema requirements folder; exit 0 clean, 1 lint errors, 2 usage
+// lint-requirements.mjs <requirements-root> --rules     print the sorted ids of the rules that reported an error; exit 0
+// lint-requirements.mjs <requirements-root> --warnings  print the sorted ids of the rules that reported a warning; exit 0
 //
 // Checks the mechanical half of the content-model conventions on a written requirements doc, so nobody has to
-// check them by eye: page layout, status lines, alias casing and suffix by folder, tab sorts,
-// element and composition shape, templates, links and leftover placeholders.
+// check them by eye: page layout, status lines, alias casing, suffix by folder and reserved aliases,
+// tab sorts, element and composition shape, templates, the Collection row, folder breadcrumbs,
+// dependency types and flags, changeset shape and status, links, leftover placeholders, and (as
+// warnings) property sorts not in hundreds, data type names and values the Umbraco Developer MCP
+// would refuse.
 //
 // The format it enforces is documented in ../references/requirements-format.md. No dependencies.
 
@@ -13,8 +17,16 @@ import path from 'node:path';
 
 const DASH = '—';
 const STATUS = /^> \*\*Status:\*\* (proposed|approved|applied \d{4}-\d{2}-\d{2} (?:via MCP|manually))$/;
-const PLACEHOLDER = /<[A-Z][A-Za-z0-9]*>/g;
+// Any <Token>, whatever its casing or spacing (<Alias>, <alias>, <Editor kind>, <yyyy-mm-dd>), outside
+// inline code, where angle brackets are legitimate (`IEnumerable<IPublishedContent>`).
+const PLACEHOLDER = /<[A-Za-z][A-Za-z0-9 -]*>/g;
 const CAMEL = /^[a-z][a-zA-Z0-9]*$/;
+// Property aliases that clash with IPublishedContent members; Umbraco refuses them.
+const RESERVED_ALIASES = new Set(['id', 'key', 'name', 'url', 'urlsegment', 'path', 'level', 'sortorder', 'templateid', 'contenttype', 'parent', 'children', 'writerid', 'creatorid', 'writername', 'creatorname', 'createdate', 'updatedate', 'cultures', 'itemtype', 'isdraft', 'ispublished', 'properties']);
+// The Umbraco Developer MCP's input sanitiser refuses these on every text field.
+const MCP_UNSAFE = /[?&]|%[0-9A-Fa-f]{2}|\.\.[\\/]/;
+const DEPENDENCY_TYPES = ['data-type', 'document-type', 'template', 'data-type-container', 'document-type-container'];
+const ACTIONS = ['Create', 'Update'];
 const PROPERTY_HEADER = ['Tab', 'Tab Sort', 'Group', 'Group Sort', 'Name', 'Alias', 'Data Type', 'Editor', 'Value Type', 'Mandatory', 'Sort', 'Description'];
 const FLAGS = ['Exists', 'New in this changeset', 'Missing'];
 
@@ -26,7 +38,7 @@ const TAB_SORTS = {
   'Section Navigation': 300,
   'Tags': 400,
   'Sidebar': 500,
-  'SEO & Sharing': 600,
+  'SEO and Sharing': 600,
   'Visibility': 900,
   'Admin': 3000,
 };
@@ -34,7 +46,7 @@ const SETTINGS_TAB_SORTS = { 'Style': 50, 'Settings': 100 };
 
 const DEFINITION_ROWS = {
   documentType: ['Name', 'Alias', 'Kind', 'Icon', 'Description', 'Folder', 'Allowed at root', 'Vary by culture', 'Default template', 'Allowed templates', 'Allowed children', 'Compositions'],
-  elementType: ['Name', 'Alias', 'Kind', 'Icon', 'Description', 'Folder', 'Allowed at root', 'Allowed children', 'Compositions'],
+  elementType: ['Name', 'Alias', 'Kind', 'Icon', 'Description', 'Folder', 'Allowed at root', 'Vary by culture', 'Allowed children', 'Compositions'],
   dataType: ['Name', 'Property editor', 'Editor UI', 'Database type', 'Folder'],
   template: ['Name', 'Alias', 'File', 'Master'],
 };
@@ -43,11 +55,12 @@ const HEADINGS = {
   elementType: ['Definition', 'Properties', 'Used by', 'Dependencies'],
   dataType: ['Definition', 'Configuration', 'Used by', 'Dependencies'],
   template: ['Definition', 'Used by', 'Dependencies'],
-  changeset: ['Summary', 'Requirements pages', 'Apply checklist'],
+  changeset: ['Summary', 'Requirements pages', 'Apply checklist', 'Apply log'],
 };
 
 const args = process.argv.slice(2);
 const rulesOnly = args.includes('--rules');
+const warningsOnly = args.includes('--warnings');
 const rootArg = args.find((a) => !a.startsWith('--'));
 if (!rootArg || !fs.existsSync(rootArg) || !fs.statSync(rootArg).isDirectory()) {
   console.error('usage: node lint-requirements.mjs <requirements-root> [--rules]');
@@ -155,9 +168,14 @@ function checkLinks(page) {
   });
 }
 
+const stripInlineCode = (text) => text.replace(/`[^`]*`/g, (code) => ' '.repeat(code.length));
+
 function checkPlaceholders(page) {
+  let fenced = false;
   page.lines.forEach((text, index) => {
-    const found = text.match(PLACEHOLDER);
+    if (text.trim().startsWith('```')) fenced = !fenced;
+    if (fenced) return;
+    const found = stripInlineCode(text).match(PLACEHOLDER);
     if (found) report('error', page.file, index + 1, 'no-placeholders', `leftover placeholder ${[...new Set(found)].join(', ')}`);
   });
 }
@@ -168,6 +186,8 @@ function checkLayout(page, kind) {
   if (statusLine < 0) report('error', page.file, 1, 'status-line', 'missing the "> **Status:** ..." line under the title');
   else if (!STATUS.test(page.lines[statusLine]))
     report('error', page.file, statusLine + 1, 'status-line', 'status must be proposed, approved, "applied <yyyy-mm-dd> via MCP" or "applied <yyyy-mm-dd> manually"');
+  else if (statusLine > 2) report('error', page.file, statusLine + 1, 'status-line', 'the status line sits directly under the title');
+  if (page.lines.filter((l) => l.startsWith('> **Status:**')).length > 1) report('error', page.file, statusLine + 1, 'status-line', 'a page has one status line');
   for (const heading of HEADINGS[kind]) {
     if (!page.sections[heading]) report('error', page.file, 1, 'required-headings', `missing the "## ${heading}" section`);
   }
@@ -184,6 +204,34 @@ function checkDefinition(page, kind, def) {
   }
   const title = (page.lines[0] ?? '').replace(/^# /, '').trim();
   if (def.get('Name') && def.get('Name') !== title) report('error', page.file, def.line('Name'), 'definition-rows', `Name "${def.get('Name')}" does not match the title "${title}"`);
+  for (const [key, value] of def.map) {
+    if (value.value === '') report('error', page.file, value.line, 'definition-rows', `"${key}" is blank; write — for a value that does not apply`);
+  }
+  const culture = def.get('Vary by culture');
+  if (culture !== undefined && !['Yes', 'No'].includes(culture)) report('error', page.file, def.line('Vary by culture'), 'definition-rows', 'Vary by culture must be Yes or No');
+  for (const key of ['Name', 'Description']) {
+    const value = def.get(key);
+    if (value && MCP_UNSAFE.test(stripInlineCode(value))) report('warning', page.file, def.line(key), 'mcp-unsafe-value', `${key} contains ?, &, a percent-encoded sequence or ../, which the Umbraco Developer MCP refuses; it will need a manual step`);
+  }
+  checkFolderBreadcrumb(page, def);
+}
+
+// The Folder row is a breadcrumb of links to folder index pages (the tree root's index first).
+function checkFolderBreadcrumb(page, def) {
+  const folder = def.get('Folder');
+  if (folder === undefined || isDash(folder)) return;
+  const line = def.line('Folder');
+  const found = links(folder);
+  if (found.length === 0) {
+    report('error', page.file, line, 'folder-breadcrumb', 'Folder is a breadcrumb of links to the folder index pages, not plain text');
+    return;
+  }
+  for (const { target } of found) {
+    const resolved = path.resolve(path.dirname(page.file), decodeURIComponent(target.split('#')[0]));
+    if (!fs.existsSync(resolved)) continue; // reported by link-resolves
+    const isIndex = fs.readFileSync(resolved, 'utf8').split(/\r?\n/).some((l) => l.startsWith('> Folder index'));
+    if (!isIndex) report('error', page.file, line, 'folder-breadcrumb', `${target} is not a folder index page (it has no "> Folder index" line)`);
+  }
 }
 
 function checkAlias(page, alias, line, what) {
@@ -200,8 +248,9 @@ function checkDependencies(page, status) {
     return names;
   }
   for (const row of t.rows) {
-    const [artifact, , flag] = row.cells;
+    const [artifact, type, flag] = row.cells;
     names.add(linkText(artifact));
+    if (!DEPENDENCY_TYPES.includes(unquote(type ?? ''))) report('error', page.file, row.line, 'dependency-type', `type "${type}" must be one of: ${DEPENDENCY_TYPES.join(', ')}`);
     if (!FLAGS.includes(flag)) {
       report('error', page.file, row.line, 'dependency-flags', `flag "${flag}" must be one of: ${FLAGS.join(', ')}`);
     } else if (flag === 'Missing') {
@@ -214,11 +263,13 @@ function checkDependencies(page, status) {
   return names;
 }
 
-function checkProperties(page, role, alias, dependencyNames) {
+function checkProperties(page, role, alias, dependencyNames, variesByCulture) {
   const section = page.sections['Properties'];
   if (!section) return;
   const t = table(section);
   const noOwn = section.lines.some((l) => l.text.startsWith('No own properties'));
+  const invariant = section.lines.find((l) => l.text.startsWith('Invariant:'));
+  if (invariant && variesByCulture !== 'Yes') report('error', page.file, invariant.line, 'property-rows', 'an "Invariant:" line belongs only on a type whose Vary by culture is Yes');
   if (role === 'settingsModel') {
     if (t) report('error', page.file, t.line, 'settings-model-shape', 'a settings model has no properties of its own; it is built only from settings compositions');
     return;
@@ -241,8 +292,12 @@ function checkProperties(page, role, alias, dependencyNames) {
     const [tab, tabSort, group, groupSort, , aliasCell, dataType, , , mandatory, sort] = row.cells;
     const propertyAlias = unquote(aliasCell);
     checkAlias(page, propertyAlias, row.line, 'property');
+    if (RESERVED_ALIASES.has(propertyAlias.toLowerCase())) report('error', page.file, row.line, 'alias-reserved', `"${propertyAlias}" is a member of IPublishedContent, so Umbraco refuses it as a property alias; prefix it with its area (pageName, publishDate)`);
     if (seen.has(propertyAlias)) report('error', page.file, row.line, 'property-rows', `duplicate property alias "${propertyAlias}"`);
     seen.add(propertyAlias);
+    for (const [label, cell] of [['tab', tab], ['group', group], ['name', row.cells[4]], ['description', row.cells[11]]]) {
+      if (MCP_UNSAFE.test(stripInlineCode(cell))) report('warning', page.file, row.line, 'mcp-unsafe-value', `the property ${label} contains ?, &, a percent-encoded sequence or ../, which the Umbraco Developer MCP refuses; it will need a manual step`);
+    }
     if (!['Yes', 'No'].includes(mandatory)) report('error', page.file, row.line, 'property-rows', `Mandatory must be Yes or No, found "${mandatory}"`);
     if (!/^\d+$/.test(sort)) report('error', page.file, row.line, 'property-rows', `Sort must be a whole number, found "${sort}"`);
     else if (Number(sort) % 100 !== 0) report('warning', page.file, row.line, 'sort-hundreds', `property sort ${sort} is not a multiple of 100`);
@@ -271,6 +326,11 @@ function checkProperties(page, role, alias, dependencyNames) {
       if (TAB_SORTS[tab] !== sortNumber) report('error', page.file, row.line, 'tab-sorts', `tab "${tab}" sorts ${TAB_SORTS[tab]} everywhere, found ${tabSort}`);
     } else if (sortNumber !== 0) {
       report('error', page.file, row.line, 'tab-sorts', `tab "${tab}" is not in the global table, so it is type-specific and sorts 0, found ${tabSort}`);
+    }
+  }
+  if (invariant) {
+    for (const code of invariant.text.matchAll(/`([^`]+)`/g)) {
+      if (!seen.has(code[1])) report('error', page.file, invariant.line, 'property-rows', `"${code[1]}" in the Invariant line is not a property of this type`);
     }
   }
 }
@@ -320,11 +380,13 @@ function checkContentType(page, kind, role, status) {
   if (role === 'page' && alias && alias !== 'siteSettings') checkPageTemplate(page, def, alias);
   if (atRoot === 'Yes' && alias && !(/HomePage$|^homePage$/.test(alias) || alias === 'siteSettings' || /Folder$/.test(alias)))
     report('error', page.file, def.line('Allowed at root'), 'allowed-at-root', `"${alias}" is allowed at root; only the home page, siteSettings and data folders are`);
-  if (role === 'page' && /ListingPage$/.test(alias) && isDash(value('List view') ?? DASH))
-    report('error', page.file, def.line('Alias'), 'listing-collection-view', 'a listing page has a "List view" row naming its own "<Type> Collection View" data type');
+  if (role === 'page' && /ListingPage$/.test(alias) && isDash(value('Collection') ?? DASH))
+    report('error', page.file, def.line('Alias'), 'listing-collection-view', 'a listing page has a "Collection" row naming its own "<Type> Collection View" data type');
+  if (value('Collection') !== undefined && !(role === 'page' && /ListingPage$/.test(alias)))
+    report('error', page.file, def.line('Collection'), 'collection-row', 'only a listing page has a Collection row; delete it everywhere else');
 
   const dependencyNames = checkDependencies(page, status);
-  checkProperties(page, role, alias, dependencyNames);
+  checkProperties(page, role, alias, dependencyNames, value('Vary by culture'));
 }
 
 function checkPageTemplate(page, def, alias) {
@@ -350,6 +412,8 @@ function checkDataType(page, status) {
   checkDefinition(page, 'dataType', def);
   const name = def.get('Name');
   if (name && path.basename(page.file) !== `${slug(name)}.md`) report('error', page.file, 1, 'file-name', `the file for data type "${name}" is named ${slug(name)}.md`);
+  if (name && /^(Copy of|Custom|New|Test|My)\b|\s\d+$|\b(copy|test)\b/i.test(name))
+    report('warning', page.file, def.line('Name'), 'data-type-name', `"${name}" does not follow a data type naming pattern (<Editor> (<qualifier>), <Subject> <Editor kind>, the plural of a Block List's child, <Placement> Block Grid, <Type> Collection View)`);
   checkDependencies(page, status);
 }
 
@@ -376,10 +440,15 @@ function checkChangeset(page, status) {
         report('error', page.file, row.line, 'changeset-shape', 'every row in Requirements docs links to a requirements page');
         continue;
       }
+      const action = row.cells[3] ?? '';
+      if (!ACTIONS.includes(action)) report('error', page.file, row.line, 'changeset-shape', `Action "${action}" must be Create or Update`);
       const target = path.resolve(path.dirname(page.file), decodeURIComponent(link.target));
       if (!fs.existsSync(target)) continue; // reported by link-resolves
-      if (status && status !== 'proposed' && statusOf(parse(target)) === 'proposed')
+      const pageStatus = statusOf(parse(target));
+      if (status && status !== 'proposed' && pageStatus === 'proposed')
         report('error', page.file, row.line, 'changeset-status', `the changeset is ${status} but "${link.text}" is still proposed`);
+      else if (status && status.startsWith('applied') && pageStatus && !pageStatus.startsWith('applied'))
+        report('error', page.file, row.line, 'changeset-status', `the changeset is applied but "${link.text}" is ${pageStatus}; a changeset is applied only when every page is`);
     }
   }
   const items = (page.sections['Apply checklist']?.lines ?? []).filter((l) => /^- \[[ x]\] /.test(l.text));
@@ -416,8 +485,9 @@ for (const file of files) {
 
 const errors = findings.filter((f) => f.severity === 'error');
 const warnings = findings.filter((f) => f.severity === 'warning');
-if (rulesOnly) {
-  console.log([...new Set(errors.map((f) => f.rule))].sort().join('\n'));
+if (rulesOnly || warningsOnly) {
+  const list = rulesOnly ? errors : warnings;
+  console.log([...new Set(list.map((f) => f.rule))].sort().join('\n'));
   process.exit(0);
 }
 for (const f of findings) console.log(`${f.file}:${f.line}: ${f.severity} [${f.rule}] ${f.message}`);

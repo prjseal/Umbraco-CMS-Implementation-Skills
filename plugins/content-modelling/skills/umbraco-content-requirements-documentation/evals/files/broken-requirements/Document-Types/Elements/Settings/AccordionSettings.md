@@ -15,6 +15,7 @@
 | Description | Style options for the Accordion block. |
 | Folder | Document Types / Elements / Settings |
 | Allowed at root | No |
+| Vary by culture | No |
 | Allowed children | — |
 | Compositions | — |
 

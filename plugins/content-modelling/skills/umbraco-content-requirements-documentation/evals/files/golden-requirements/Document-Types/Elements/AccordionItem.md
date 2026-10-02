@@ -15,6 +15,7 @@
 | Description | One expandable panel inside an Accordion, with its own title and content. |
 | Folder | [Document Types](../../Document-Types.md) / [Elements](../Elements.md) |
 | Allowed at root | No |
+| Vary by culture | No |
 | Allowed children | — |
 | Compositions | — |
 

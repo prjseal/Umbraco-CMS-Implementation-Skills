@@ -1,6 +1,6 @@
 # Main Content Block Grid
 
-> **Status:** approved
+> **Status:** applied 2026-10-01 via MCP
 
 ## Definition
 
@@ -18,7 +18,7 @@ Grid columns: 12.
 
 | Group | Content element | Settings element | At root | In areas | Column spans |
 |---|---|---|---|---|---|
-| — | [Accordion](../../Document-Types/Elements/Accordion.md) | — | Yes | No | — |
+| — | [Accordion](../../Document-Types/Elements/Accordion.md) | [Accordion Settings](../../Document-Types/Elements/Settings/AccordionSettings.md) | Yes | No | — |
 | — | [Rich Text](../../Document-Types/Elements/RichText.md) | — | Yes | No | — |
 
 ## Used by
@@ -34,3 +34,4 @@ Grid columns: 12.
 | [Block Grid](../Block-Grid.md) *(data-type-container)* | `data-type-container` | New in this changeset |
 | [Accordion](../../Document-Types/Elements/Accordion.md) | `document-type` | New in this changeset |
 | [Rich Text](../../Document-Types/Elements/RichText.md) | `document-type` | New in this changeset |
+| [Accordion Settings](../../Document-Types/Elements/Settings/AccordionSettings.md) | `document-type` | New in this changeset |

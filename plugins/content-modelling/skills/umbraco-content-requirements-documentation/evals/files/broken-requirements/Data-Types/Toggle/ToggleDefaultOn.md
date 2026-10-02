@@ -6,7 +6,7 @@ Toggle (default on)
 
 | Setting | Value |
 |---|---|
-| Name | Toggle (default on) |
+| Name | Custom Toggle 2 |
 | Property editor | `Umbraco.TrueFalse` |
 | Editor UI | `Umb.PropertyEditorUi.Toggle` |
 | Database type | `Integer` |
