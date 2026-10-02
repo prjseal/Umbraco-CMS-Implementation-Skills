@@ -23,8 +23,8 @@
 
 | Tab | Tab Sort | Group | Group Sort | Name | Alias | Data Type | Editor | Value Type | Mandatory | Sort | Description |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| SEO and Sharing | 600 | Sharing | 100 | Share Title | `shareTitle` | Textstring | `Umbraco.TextBox` | `System.String` | No | 100 | The title shown when the page is shared. Falls back to the meta title, then the page title. |
-| SEO and Sharing | 600 | Sharing | 100 | Share Image | `shareImage` | Image Media Picker | `Umbraco.MediaPicker3` | `Umbraco.Cms.Core.Models.MediaWithCrops` | No | 200 | The image shown when the page is shared. Falls back to the site's default share image. |
+| SEO | 600 | Sharing | 100 | Share Title | `shareTitle` | Textstring | `Umbraco.TextBox` | `System.String` | No | 100 | The title shown when the page is shared. Falls back to the meta title, then the page title. |
+| SEO | 600 | Sharing | 100 | Share Image | `shareImage` | Image Media Picker | `Umbraco.MediaPicker3` | `Umbraco.Cms.Core.Models.MediaWithCrops` | No | 200 | The image shown when the page is shared. Falls back to the site's default share image. |
 
 ## Used by
 

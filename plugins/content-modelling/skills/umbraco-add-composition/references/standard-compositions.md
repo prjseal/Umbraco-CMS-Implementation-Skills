@@ -15,8 +15,8 @@ compositions.
 | Concern | Name and alias | Tab (sort) | Group when the tab is shared | Typical fields: alias (data type) |
 |---|---|---|---|---|
 | Page title and summary | Page Details Composition, `pageDetailsComposition` | Page Details (200) | — | `pageTitle` (Textstring), `pageSummary` (Textarea) |
-| Search engines | SEO Composition, `seoComposition` | SEO and Sharing (600) | SEO (0) | `metaTitle` (Textstring), `metaDescription` (a purpose-built text area, or Textarea), `isIndexable` (a toggle that defaults on), `canonicalUrlOverride` (Textstring) |
-| Social sharing | Open Graph Composition, `openGraphComposition` | SEO and Sharing (600) | Sharing (100) | `shareTitle` (Textstring), `shareDescription` (Textarea), `shareImage` (Image Media Picker) |
+| Search engines | SEO Composition, `seoComposition` | SEO (600) | Search (0) | `metaTitle` (Textstring), `metaDescription` (a purpose-built text area, or Textarea), `isIndexable` (a toggle that defaults on), `canonicalUrlOverride` (Textstring) |
+| Social sharing | Open Graph Composition, `openGraphComposition` | SEO (600) | Sharing (100) | `shareTitle` (Textstring), `shareDescription` (Textarea), `shareImage` (Image Media Picker) |
 | Tags | Tags Composition, `tagsComposition` | Tags (400) | — | `tags` (Tags) |
 | Navigation and sitemap visibility | Visibility Composition, `visibilityComposition` | Visibility (900) | — | `umbracoNaviHide` (True/false), `hideFromSitemap` (True/false) |
 
@@ -29,10 +29,10 @@ and the aliases follow
 
 The group rule is in
 [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md#groups).
-Worked through for the shared `SEO and Sharing` tab:
+Worked through for the shared `SEO` tab:
 
-- `seoComposition` alone in `SEO and Sharing`: no group.
-- `openGraphComposition` joins it: `seoComposition`'s fields move into a group `SEO` (sort 0) and
+- `seoComposition` alone in `SEO`: no group.
+- `openGraphComposition` joins it: `seoComposition`'s fields move into a group `Search` (sort 0) and
   `openGraphComposition`'s go in a group `Sharing` (sort 100).
 
 So adding the second composition to a shared tab is also an **Update** of the first one. Moving a

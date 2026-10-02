@@ -10,7 +10,7 @@ and each property's `container` and `sortOrder` from `get-document-type-by-id`.
 
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
-| A global tab with a local sort | A tab named in the global table (Content, Page Details, SEO and Sharing, Visibility, ...) whose `sortOrder` is not its global value | Medium: tabs appear in different orders on different pages | the owning skill |
+| A global tab with a local sort | A tab named in the global table (Content, Page Details, SEO, Visibility, ...) whose `sortOrder` is not its global value | Medium: tabs appear in different orders on different pages | the owning skill |
 | The same tab with different sorts on two types or compositions | Compare the tab's `sortOrder` across every type that has it | Medium | the owning skill |
 | A type-specific tab not sorted 0 | A tab not in the global table with a sort other than 0 | Low | the owning skill |
 | Tabs numbered 0, 1, 2 | Every tab on a type numbered in creation order: usually a type created in the backoffice and never adjusted | Medium | the owning skill |

@@ -33,14 +33,15 @@ A tab has the same sort everywhere it appears. The name decides the sort, not th
 | Section Navigation | 300 |
 | Tags | 400 |
 | Sidebar | 500 |
-| SEO and Sharing | 600 |
+| SEO | 600 |
 | Visibility | 900 |
 | Admin | 3000 |
 
 The gaps are deliberate: a project can add a tab between two others without renumbering. Editor
 content comes first, configuration in the middle, and the tabs most editors never open come last.
-Tab and group names avoid `&`, `?` and `%` (`SEO and Sharing`, not `SEO & Sharing`): the Umbraco
-Developer MCP refuses any value containing them, so a name with one can never be applied cleanly.
+Tab and group names avoid `&`, `?` and `%` (`Terms and Conditions`, not `Terms & Conditions`): the
+Umbraco Developer MCP refuses any value containing them, so a name with one can never be applied
+cleanly.
 
 Settings compositions use their own two tabs: `Style` sorts 50 and `Settings` sorts 100.
 
@@ -50,9 +51,9 @@ The site settings singleton is the exception. Its tabs are its own, so they are 
 ## Groups
 
 When two compositions put fields in the same tab, each gives its fields a group so the editor can
-see which belong together, for example `SEO` and `Sharing` inside `SEO and Sharing`. Group sorts
-go up in hundreds from 0 (`SEO` 0, `Sharing` 100) and order the groups within that tab, leaving
-room for a third composition between them. A composition that owns its tab alone uses no group.
+see which belong together, for example `Search` and `Sharing` inside `SEO`. A group is not named
+after its tab. Group sorts go up in hundreds from 0 (`Search` 0, `Sharing` 100) and order the
+groups within that tab, leaving room for a third composition between them. A composition that owns its tab alone uses no group.
 
 ## Property sorts
 

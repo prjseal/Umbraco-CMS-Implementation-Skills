@@ -30,7 +30,7 @@ Adds an Authors data folder and the picker articles use to choose an author, a s
 - [x] 3. Create document type folder `Elements/Settings`, then element `accordionSettings`, move it into `Elements/Settings`, then fix-up (compositions)
 - [x] 4. Update data type `Main Content Block Grid`: register `accordionSettings` as the settings element of `accordion`
 - [x] 5. Create composition `openGraphComposition`, then fix-up (group Sharing 100, sorts, descriptions)
-- [x] 6. Update composition `seoComposition`: move its fields into group `SEO` (0), keeping every property
+- [x] 6. Update composition `seoComposition`: move its fields into group `Search` (0), keeping every property
 - [x] 7. Create document type folder `Data`, then document type `author` in `Data`, then fix-up
 - [x] 8. Create document type `authorFolder` in `Data`, then fix-up (allowed at root)
 - [x] 9. Set allowed children on `authorFolder`: `author`

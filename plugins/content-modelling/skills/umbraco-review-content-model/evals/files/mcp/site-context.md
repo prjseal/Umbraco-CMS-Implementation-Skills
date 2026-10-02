@@ -22,7 +22,7 @@ Document Types/
 | Type | Compositions | Allowed at root | Allowed children | Default template | Containers (sort) |
 |---|---|---|---|---|---|
 | Page Composition | seoComposition | No | — | — | tab Page Details (200) |
-| SEO Composition | — | No | — | — | tab SEO and Sharing (600) |
+| SEO Composition | — | No | — | — | tab SEO (600) |
 | Home Page | pageComposition | Yes | contentPage, news | homePage | tab Content (100), tab Settings (1) |
 | Content Page | pageComposition | No | contentPage | contentPage | tab Content (100) |
 | News | — | Yes | — | none | tab Content (0), tab SEO (1) |
@@ -33,7 +33,7 @@ Own properties:
 | Type | Property: alias (data type, container, sort) |
 |---|---|
 | Page Composition | `pageTitle` (Textstring, Page Details, 100) |
-| SEO Composition | `metaTitle` (Textstring, SEO and Sharing, 100), `metaDescription` (Textarea, SEO and Sharing, 200) |
+| SEO Composition | `metaTitle` (Textstring, SEO, 100), `metaDescription` (Textarea, SEO, 200) |
 | Home Page | `heroTitle` (Textstring, Content, 100), `logo` (Image Media Picker, Settings, 0), `footerText` (Textarea, Settings, 1) |
 | Content Page | `bodyText` (Richtext editor, Content, 100) |
 | News | `bodyText` (Richtext editor, Content, 0), `sEOTitle` (Textstring, SEO, 0), `searchEngines` (True/false, SEO, 1) |

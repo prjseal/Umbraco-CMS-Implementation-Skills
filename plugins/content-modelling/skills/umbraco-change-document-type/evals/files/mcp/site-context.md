@@ -68,7 +68,7 @@ get-language
 | Composition | Tab (sort) | Group (sort) | Properties (alias, sort) |
 |---|---|---|---|
 | Page Details Composition | Page Details (200) | — | `pageTitle` 100, `pageSummary` 200 |
-| SEO Composition | SEO and Sharing (600) | — | `metaTitle` 100, `metaDescription` 200, `isIndexable` 300 |
+| SEO Composition | SEO (600) | — | `metaTitle` 100, `metaDescription` 200, `isIndexable` 300 |
 
 ## get-document-type-by-id: Article Page
 

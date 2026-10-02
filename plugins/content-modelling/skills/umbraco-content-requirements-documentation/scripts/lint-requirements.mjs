@@ -38,7 +38,7 @@ const TAB_SORTS = {
   'Section Navigation': 300,
   'Tags': 400,
   'Sidebar': 500,
-  'SEO and Sharing': 600,
+  'SEO': 600,
   'Visibility': 900,
   'Admin': 3000,
 };

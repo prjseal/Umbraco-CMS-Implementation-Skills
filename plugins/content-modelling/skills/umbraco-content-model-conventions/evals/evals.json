@@ -4,12 +4,12 @@
     {
       "id": 1,
       "prompt": "I'm about to set up the blog on a new Umbraco 17 site. There's no MCP on this machine and the site isn't running, so this is just from my notes. Here's what I plan to create, can you sanity check the names and structure before I do it?\n\n- `BlogListing` (alias `blogListing`) allowed at root so editors can create it, lists `BlogPost` (alias `blogPost`)\n- A composition `HasSEO` (alias `hasSEO`) with a tab `SEO` (sort 1) holding `seoTitle` (sort 1), `seoDescription` (sort 2) and a toggle `indexing` (sort 3). I went with the Has prefix because I read it makes the Models Builder interfaces read nicely.\n- A composition `SocialComposition` that composes `HasSEO` and adds `ogImage`\n- Site-wide settings (footer links, social links) as a `Settings` tab on the `HomePage` type\n\nTell me what to rename or restructure, and why.",
-      "expected_output": "The agent renames to articleListingPage-style names with the Page suffix (blogListingPage and blogPage), renames the composition to seoComposition with the acronym collapsed and mentions the Has prefix as a considered but rejected alternative, moves the tab to SEO and Sharing at sort 600 with property sorts in hundreds and a predicate boolean alias, flattens the nested composition, takes the listing off the root and under the home page, and moves site settings to a separate siteSettings root singleton. It does not claim to have checked the site.",
+      "expected_output": "The agent renames to articleListingPage-style names with the Page suffix (blogListingPage and blogPage), renames the composition to seoComposition with the acronym collapsed and mentions the Has prefix as a considered but rejected alternative, moves the tab to SEO at sort 600 with property sorts in hundreds and a predicate boolean alias, flattens the nested composition, takes the listing off the root and under the home page, and moves site settings to a separate siteSettings root singleton. It does not claim to have checked the site.",
       "files": [],
       "expectations": [
         "The agent renames the routable types so both end in Page, with the listing ending in ListingPage (e.g. `blogListingPage` listing `blogPage` or `blogPostPage`)",
         "The agent renames the composition to `seoComposition` (suffix Composition, acronym collapsed, not `sEOComposition` or `SEOComposition`) and says the `Has` prefix is a legitimate technique that this convention deliberately does not use",
-        "The agent says the tab should use the global sort (SEO and Sharing at 600) rather than 1, and that property sorts go up in hundreds (100, 200, 300)",
+        "The agent says the tab should use the global sort (SEO at 600) rather than 1, and that property sorts go up in hundreds (100, 200, 300)",
         "The agent renames the boolean to a predicate alias such as `isIndexable` (or `hideFromSearchEngines`), not a noun like `indexing`",
         "The agent says a composition must not compose another composition and makes the social/open graph fields a separate flat composition applied alongside the SEO one",
         "The agent says the listing page should not be allowed at root and should instead be an allowed child of the home page, and that site-wide settings belong on a separate root `siteSettings` type rather than a tab on the home page",
@@ -27,7 +27,7 @@
         "The agent flags that the alias `news` lacks the `Page` suffix for a routable type and proposes an alias ending in Page (e.g. `newsPage` or `articlePage`)",
         "The agent flags `allowedAsRoot: true` as wrong for this type (only the home page, site settings and data folders are allowed at root)",
         "The agent flags that the type has no default template and says a routable page needs one named after its alias",
-        "The agent flags the tab sorts (Content 0, SEO 1) and gives the global values: Content 100 and SEO and Sharing 600",
+        "The agent flags the tab sorts (Content 0, SEO 1) and gives the global values: Content 100 and SEO 600",
         "The agent flags the property alias `sEOTitle` (acronym casing) and the boolean alias `searchEngines` (not a predicate), and proposes aliases such as `metaTitle` and `isIndexable`",
         "The agent says the SEO fields should move into a `seoComposition` rather than sit on the page type",
         "The agent does not update the type through the MCP or claim the site was changed; it routes the fix through a written requirements doc and user approval (naming umbraco-content-requirements-documentation or the requirements-first workflow) and does not claim anything was verified on the site beyond the supplied JSON"

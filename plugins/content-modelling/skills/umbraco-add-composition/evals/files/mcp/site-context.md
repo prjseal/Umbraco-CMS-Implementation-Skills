@@ -38,7 +38,7 @@ Document Types/
 
 | Type | Compositions | Own properties: alias (tab, sort) |
 |---|---|---|
-| SEO Composition | — | `metaTitle` (SEO and Sharing 600, no group, 100), `metaDescription` (SEO and Sharing 600, no group, 200), `isIndexable` (SEO and Sharing 600, no group, 300) |
+| SEO Composition | — | `metaTitle` (SEO 600, no group, 100), `metaDescription` (SEO 600, no group, 200), `isIndexable` (SEO 600, no group, 300) |
 | Home Page | seoComposition | — |
 | Content Page | seoComposition | `bodyText` (Content 100, 100) |
 | Article Listing Page | seoComposition | — |

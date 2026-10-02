@@ -19,7 +19,7 @@
     {
       "id": 2,
       "prompt": "The Umbraco Developer MCP is connected to our local Umbraco 17 site; evals/files/mcp/mcp-context.md has the connected tool list and the ids I've already looked up. The changeset in evals/files/golden-requirements/_changesets/2026-09-30-article-section.md is approved. Items 1 to 3 of its checklist are done. Apply item 4 for me, the SEO Composition (evals/files/golden-requirements/Document-Types/Compositions/SeoComposition.md): give me every MCP call in order with the exact JSON arguments, so I can see precisely what will be sent, and tell me what the requirements doc's status line should say when you're finished. A colleague told me to check what's allowed at root with get-document-type-allowed-at-root first, so include that.",
-      "expected_output": "The agent gives a create-document-type call with only name/alias/dataTypeId/tab per property, then the fix-up pass (get-document-type-by-id, update-document-type with the whole body, read back) setting tab sort 600, property sorts 100 to 400, descriptions and mandatory. It points out that get-document-type-allowed-at-root does not exist, that the MCP rejects the ampersand in 'SEO and Sharing', records that as a manual step without changing the requirements doc, and leaves the status approved until the site has been read back and matches.",
+      "expected_output": "The agent gives a create-document-type call with only name/alias/dataTypeId/tab per property, then the fix-up pass (get-document-type-by-id, update-document-type with the whole body, read back) setting tab sort 600, property sorts 100 to 400, descriptions and mandatory. It points out that get-document-type-allowed-at-root does not exist, and leaves the status approved until the site has been read back and matches.",
       "files": [
         "evals/files/mcp/mcp-context.md",
         "evals/files/golden-requirements/_changesets/2026-09-30-article-section.md",
@@ -30,8 +30,7 @@
         "The agent states that get-document-type-allowed-at-root is not in the connected tool list / does not exist and does not include a call to it",
         "After the create, the sequence includes get-document-type-by-id followed by update-document-type whose data is the whole body that was read (all four properties and the container kept), not a body built only from the changed fields",
         "The update sets the tab sortOrder to 600 and the property sortOrders to 100, 200, 300 and 400, and sets each property description from the requirements doc",
-        "The agent identifies that the tab name `SEO and Sharing` contains an ampersand the MCP rejects, applies a nearest accepted name, and records the rename as a manual step for the user instead of editing the approved requirements doc",
-        "The agent says the requirements doc status stays `approved` (not `applied ... via MCP`) until the type has been read back and matches the requirements doc, including the tab name",
+        "The agent says the requirements doc status stays `approved` (not `applied ... via MCP`) until the type has been read back and matches the requirements doc,",
         "The agent does not claim the calls were executed or that the composition now exists on the site unless it actually ran them and read the result back"
       ]
     },
