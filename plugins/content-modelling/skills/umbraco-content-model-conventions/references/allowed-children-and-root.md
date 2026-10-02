@@ -19,6 +19,12 @@ Only three kinds of type are allowed at root:
 Everything else is created under a parent. If a new page type has no parent yet, add it to the
 allowed children of the home page; do not allow it at root to make it creatable.
 
+**Root order matters.** With the default `HideTopLevelNodeFromPath` setting, the first root node
+in sort order owns `/`, and a second routable root changes every URL's shape. When site settings
+or a data folder joins the root, the home page must stay sorted first (or carry the domain in
+Culture and Hostnames), and the new root node must not be routable. Say so in the change, and
+check the order after the user creates the node.
+
 On an empty site with nothing allowed at root, do not quietly allow a content page at root. Say
 that a home page is missing and ask whether to create one.
 
@@ -42,7 +48,9 @@ parent too; include that parent in the change.
 ## Listings
 
 A listing page has its own collection view data type, named `<Type> Collection View`, so each
-listing can choose its columns and ordering without affecting the others.
+listing can choose its columns and ordering without affecting the others. The one exception: two
+listings of the **same** item type (two regional news listings) may share one, named after the
+item they list, because the same columns fit both.
 
 ## Site settings
 

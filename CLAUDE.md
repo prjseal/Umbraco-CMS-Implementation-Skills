@@ -93,13 +93,17 @@ serves correctly is a model-free `dotnet test` gate:
 `plugins/content-modelling/skills/` write a markdown requirements doc of a schema change, stop for approval, then
 apply it through the Umbraco Developer MCP (or a manual backoffice walkthrough) and verify it. Their
 `assets/` are markdown templates, not code, so they have no `examples/` project and are tier
-**Documented**: evals grade the guidance, and two Node checks run in CI instead of `dotnet test` —
-`scripts/check-skill-links.mjs` (every relative link under `plugins/` resolves, including links between
-sibling skills) and `umbraco-content-requirements-documentation/scripts/lint-requirements.mjs` against that skill's
-`evals/files/golden-requirements/` (must pass) and `evals/files/broken-requirements/` (must fail with the rules in its
-`expected-rules.txt`). `umbraco-content-model-conventions` holds the rules and
-`umbraco-content-requirements-documentation` holds the format, apply and verify steps; the other content-modelling
-skills link into those two rather than copying them. New scripts are Node (`.mjs`), not Python.
+**Documented**: evals grade the guidance, and three Node checks run in CI instead of `dotnet test` —
+`scripts/check-skill-links.mjs` (every relative link and `#anchor` under `plugins/` resolves, including
+links between sibling skills), `scripts/check-skill-frontmatter.mjs` (frontmatter keys, `name` matches
+the folder, `description` ≤ 1024 characters, every eval fixture exists) and
+`umbraco-content-requirements-documentation/scripts/lint-requirements.mjs` against that skill's
+`evals/files/golden-requirements/` (must pass) and `evals/files/broken-requirements/` (must fail with
+exactly the rules in its `expected-rules.txt` and `expected-warnings.txt`; the review skill's
+`evals/files/requirements/` is pinned the same way). `umbraco-content-model-conventions` holds the
+rules, `umbraco-content-requirements-documentation` holds the format, the six-step change workflow
+(`references/change-workflow.md`) and the apply and verify steps; the other content-modelling skills
+link into those two rather than copying them. New scripts are Node (`.mjs`), not Python.
 
 The `umbraco-reference-instance` authoring skill (in `.claude/skills/`) documents this gate and
 also offers a manual boot/`try` harness (`https://localhost:44372`, `admin@example.com` /

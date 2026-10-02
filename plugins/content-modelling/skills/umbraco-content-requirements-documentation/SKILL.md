@@ -1,16 +1,14 @@
 ---
 name: umbraco-content-requirements-documentation
 description: >
-  Write an Umbraco schema change as markdown content requirements documentation, get it approved,
-  then apply it and verify it. Defines the requirements page format for document types,
-  compositions, element types, data types and templates, the changeset that groups them, the status
-  lifecycle, how to inspect the existing schema, how to apply through the Umbraco Developer MCP or a
-  manual backoffice walkthrough, and how to verify the result. Ships a linter for the requirements
-  folder. Use this whenever the user asks to "write the content requirements", "document this
-  document type before creating it", "write up the content model requirements", "write a schema
-  spec", "apply the approved requirements", "apply this changeset", "lint the requirements docs",
-  "are the requirements applied", or "check the site matches the requirements", or when another
-  content-modelling skill reaches its write-requirements, apply or verify step.
+  Write an Umbraco 17+ schema change as markdown content requirements documentation, get it
+  approved, then apply it through the Umbraco Developer MCP or a manual backoffice walkthrough and
+  verify it. Owns the requirements page format, the changeset, the status lifecycle, the six-step
+  change workflow, and a linter for the requirements folder. Use this whenever the user asks to
+  "write the content requirements", "document this document type before creating it", "write up
+  the content model requirements", "apply the approved requirements", "apply this changeset",
+  "lint the requirements docs", or "check the site matches the requirements", or when another
+  content-modelling skill reaches its write, approve, apply or verify step.
   SKIP: non-Umbraco projects or Umbraco < 17; deciding what a type should be called or contain
   (use umbraco-content-model-conventions); uSync, Umbraco Deploy or package.xml output; editing
   content nodes rather than schema.
@@ -18,19 +16,22 @@ description: >
 
 # Content Requirements Documentation
 
-Schema changes are written down before they are made. A change is a set of markdown requirements pages,
-one per artefact, grouped by a changeset. The user approves the changeset; only then is it
+Schema changes are written down before they are made. A change is a set of markdown requirements
+pages, one per artefact, grouped by a changeset. The user approves the changeset; only then is it
 applied, and only after reading the result back is it marked applied.
 
-**Write the requirements doc, stop for approval, apply, verify.** Never create or change schema on a site from
-a requirements doc whose status is still `proposed`.
+**Write the requirements doc, stop for approval, apply, verify.** Never create or change schema on a
+site from a requirements doc whose status is still `proposed`.
 
-The rules for *what* to put in a requirements doc (names, folders, tabs, sorts) live in the sibling skill
-[`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md). It must be
-installed alongside this one. If that link cannot be read, stop and say so; do not work from
+The rules for *what* to put in a requirements doc (names, folders, tabs, sorts) live in the sibling
+skill [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md). It must
+be installed alongside this one. If that link cannot be read, stop and say so; do not work from
 memory.
 
 ## Steps
+
+The six steps every schema change follows, with what is shared between skills written once, are
+in [change-workflow.md](references/change-workflow.md). Each step's detail:
 
 | Step | What happens | Reference |
 |---|---|---|
@@ -43,10 +44,10 @@ memory.
 
 ### How to decide between MCP and manual
 
-This is one approach with two mechanisms, tried in order. Use the
-Umbraco Developer MCP when its tools are in the connected tool list. If it is not connected, or
-the site is not running, generate the manual walkthrough from the same requirements doc; do not abandon the
-requirements doc or invent another route. There is no uSync, Deploy or `package.xml` output.
+This is one approach with two mechanisms, tried in order. Use the Umbraco Developer MCP when its
+tools are in the connected tool list. If it is not connected, or the site is not running, generate
+the manual walkthrough from the same requirements doc; do not abandon the requirements doc or invent
+another route. There is no uSync, Deploy or `package.xml` output.
 
 ## Version compatibility
 
@@ -59,8 +60,8 @@ between versions, so the connected tool list is the authority, not this skill.
 
 - One changeset per change a user would describe in one sentence. Its tick-list is what makes an
   interrupted apply resumable.
-- Reference what already exists instead of re-specifying it. A requirements page is written for something
-  this change creates or alters.
+- Reference what already exists instead of re-specifying it. A requirements page is written for
+  something this change creates or alters.
 - Every create through the MCP is followed by a fix-up pass. The create tools cannot set sort
   orders, mandatory, property descriptions, templates or culture variation.
 - A status line is a claim about the site. `applied` is written only after the artefact has been

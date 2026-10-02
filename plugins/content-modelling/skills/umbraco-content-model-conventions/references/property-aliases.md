@@ -15,7 +15,17 @@ backoffice to find out what a field is called.
 | Page-level fields carry an area prefix | `pageTitle`, `metaTitle`, `shareTitle` | three fields all called `title` across compositions |
 | Block fields are short and generic | `title`, `items`, `link`, `image` | `accordionTitle`, `accordionItems` |
 | An override ends in `Override` | `canonicalUrlOverride` | `canonicalUrl` for an optional replacement |
-| Umbraco's reserved aliases are kept as they are | `umbracoNaviHide` | renaming it to `hideFromNavigation` |
+| Umbraco's conventional aliases are kept as they are | `umbracoNaviHide`, `umbracoUrlName`, `umbracoRedirect`, `umbracoInternalRedirectId`, `umbracoUrlAlias` | renaming `umbracoNaviHide` to `hideFromNavigation`, which `IsVisible()` would no longer read |
+| Never an alias Umbraco reserves | `pageName`, `pageUrl`, `publishDate` | `name`, `url`, `createDate` |
+
+## Reserved aliases
+
+Umbraco rejects a property alias that matches a member of `IPublishedContent`, because the
+generated model would have two members of one name. Avoid these, in any casing: `id`, `key`,
+`name`, `url`, `urlSegment`, `path`, `level`, `sortOrder`, `templateId`, `contentType`,
+`parent`, `children`, `writerId`, `creatorId`, `writerName`, `creatorName`, `createDate`,
+`updateDate`, `cultures`, `itemType`, `isDraft`, `isPublished`, `properties`. Prefix them with
+the area instead: `pageName`, `publishDate`. The requirements linter reports `alias-reserved`.
 
 ## Why the two halves differ
 

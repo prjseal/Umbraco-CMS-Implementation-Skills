@@ -11,7 +11,7 @@ page is found by its type name, with no lookup.
 
 | Rule | Reason |
 |---|---|
-| Every routable page has exactly one default template | Without one the page has a URL that returns nothing |
+| Every routable page has exactly one default template | Without one the page has a URL that falls through to the 404 handler unless a controller renders it, so the schema alone does not make the page work |
 | The template alias equals the document type alias, and the file is `<alias>.cshtml` | `articlePage` renders with `articlePage.cshtml` |
 | The template name equals the document type name | It is recognisable in the Templates tree |
 | Every page template sits under the site's master template | Layout is declared once |
@@ -26,8 +26,9 @@ page template's content must name the master.
 ## Order
 
 Templates are created after data types and elements and before the page types that use them, with
-the master first. The default template is attached to the document type in the fix-up pass; the
-MCP create tool for document types does not accept a template. `umbraco-content-requirements-documentation`
-describes the order and the fix-up pass.
+the master first. The default template is attached to the document type in the fix-up pass; the MCP
+create tool for document types does not accept a template.
+`umbraco-content-requirements-documentation` describes the order and the fix-up pass.
 
-**Related:** [Allowed children and root](allowed-children-and-root.md), [Names, aliases and suffixes](naming.md).
+**Related:** [Allowed children and root](allowed-children-and-root.md), [Names, aliases and
+suffixes](naming.md).
