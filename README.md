@@ -11,6 +11,38 @@ A Claude Code plugin marketplace with skills for Umbraco **content modelling** a
 | `umbraco-cms-content-modelling-skills` | Document types, element types, data types, compositions, content structure |
 | `umbraco-cms-implementation-skills` | Site build-out, templates, views, controllers, delivery |
 
+### Content modelling skills
+
+Every content-modelling skill works **requirements-first**: it reads the site, writes the change as
+a markdown requirements doc, stops for your approval, applies it through the
+[Umbraco Developer MCP](https://docs.umbraco.com/umbraco-in-ai/mcp/cms-developer-mcp) (or hands you a
+backoffice walkthrough), then reads the result back. Two hub skills hold the shared rules and
+workflow; the others link into them.
+
+| Skill | What it does |
+|-------|--------------|
+| `umbraco-content-model-conventions` | The rule book: names, aliases, tree, tabs and sorts, compositions, icons, allowed children, templates |
+| `umbraco-content-requirements-documentation` | The requirements doc format, the six-step change workflow, apply via MCP or manually, verify, and the requirements linter |
+| `umbraco-add-page-type` | One routable page type and its template, hung under the right parent |
+| `umbraco-add-listing-page` | A listing page, its item type, the collection view and both templates |
+| `umbraco-add-composition` | One single-concern composition (SEO, sharing, page details) applied to the right types |
+| `umbraco-add-element-type` | One block: the element, its settings model, and a repeater's item children |
+| `umbraco-configure-block-editor` | A Block Grid per placement or a Block List per repeater, and the property that uses it |
+| `umbraco-add-data-type` | Reuse or create a data type, pick the editor, name and file it |
+| `umbraco-add-data-folder` | Shared non-routable content (authors, categories) and the picker pages use |
+| `umbraco-add-site-settings` | The `siteSettings` singleton at the content root |
+| `umbraco-change-document-type` | Change a type that already exists, saying which changes lose content |
+| `umbraco-review-content-model` | Audit a model against the conventions and report, ranked by severity; changes nothing |
+
+### Implementation skills
+
+| Skill | What it does |
+|-------|--------------|
+| `umbraco-sitemap` | XML sitemap: a Document Type + Razor approach, or a cached API controller |
+| `umbraco-custom-error-pages` | Custom 404 and 500 pages, multi-site aware |
+| `umbraco-custom-maintenance-page` | The page shown while upgrade migrations run |
+| `umbraco-common-pitfalls` | Anti-patterns and performance traps in Umbraco code |
+
 ## Quick Start
 
 Add the marketplace:
@@ -138,6 +170,12 @@ runtime counterpart to the LLM-based `umbraco-skill-evaluator`.
 Only the project scaffolding is committed — the runtime SQLite DB and build output are
 `.gitignore`d, and Clean re-installs on first boot.
 
+Content-modelling skills ship markdown rather than code, so their CI gate is three Node scripts
+instead of `dotnet test`: `scripts/check-skill-links.mjs` (every relative link and anchor under
+`plugins/` resolves), `scripts/check-skill-frontmatter.mjs` (skill frontmatter and eval fixtures are
+valid) and the requirements linter in `umbraco-content-requirements-documentation` run against its
+golden and broken fixtures. All three run from the repo root with `node <script>`.
+
 **How it was scaffolded** (via the [Package Script Writer CLI](https://github.com/prjseal/Package-Script-Writer-CLI), the same tool the backoffice skills use — regenerate with this if you ever need to rebuild it from scratch):
 
 ```bash
@@ -210,6 +248,8 @@ Umbraco-CMS-Implementation-Skills/
 ├── TestHost.Shared/                     # boot/wait/preconditions code linked into both test hosts
 ├── Umbraco-CMS.Skills.sln
 ├── scripts/generate-examples.py         # projects assets/ into each example at build time
+├── scripts/check-skill-links.mjs        # CI: every relative link and anchor under plugins/ resolves
+├── scripts/check-skill-frontmatter.mjs  # CI: SKILL.md frontmatter valid, eval fixtures exist
 └── .claude/
     └── skills/                          # Repo-authoring skills (evaluator, reference-instance)
 ```
