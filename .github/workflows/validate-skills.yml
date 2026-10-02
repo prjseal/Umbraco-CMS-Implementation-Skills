@@ -28,6 +28,27 @@ jobs:
       - name: Placeholders declared for every asset
         run: python3 scripts/generate-examples.py --lint
 
+      # Skills link into their own references/ and into sibling skills. A link that doesn't resolve
+      # is a reference the agent can't read, and it fails silently at run time, so fail the build
+      # here instead. (Node is preinstalled on the runner; neither script has dependencies.)
+      - name: Skill links resolve
+        run: node scripts/check-skill-links.mjs
+
+      # Spec-driven content-modelling skills ship markdown, not code, so there is nothing for the
+      # dotnet test gate to compile. Their gate is the spec linter: the golden spec must pass, and
+      # the deliberately broken fixture must fail with exactly the rules it was written to break.
+      # Exit 1 is a lint failure; anything else (2 = usage, or a crash) means the linter itself is
+      # broken. The rule list is compared so a rule that silently stops firing is caught too.
+      - name: Spec linter passes the golden spec and fails the broken fixture
+        run: |
+          lint=plugins/content-modelling/skills/umbraco-content-model-spec/scripts/lint-spec.mjs
+          files=plugins/content-modelling/skills/umbraco-content-model-spec/evals/files
+          node "$lint" "$files/golden-spec"
+          status=0
+          node "$lint" "$files/broken-spec" > /dev/null || status=$?
+          test "$status" -eq 1
+          diff <(node "$lint" "$files/broken-spec" --rules) <(tr -d '\r' < "$files/broken-spec/expected-rules.txt")
+
       - name: Restore
         run: dotnet restore Umbraco-CMS.Skills.sln
 

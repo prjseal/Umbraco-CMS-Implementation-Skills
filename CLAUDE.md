@@ -89,6 +89,18 @@ serves correctly is a model-free `dotnet test` gate:
   VSTest implementation detail. Fixtures route by file name: `*Tests.cs` to the Clean assembly,
   `*BlankTests.cs` to the blank one. Runs in CI (`.github/workflows/validate-skills.yml`).
 
+**Spec-driven content-modelling skills are validated differently.** The skills under
+`plugins/content-modelling/skills/` write a markdown spec of a schema change, stop for approval, then
+apply it through the Umbraco Developer MCP (or a manual backoffice walkthrough) and verify it. Their
+`assets/` are markdown templates, not code, so they have no `examples/` project and are tier
+**Documented**: evals grade the guidance, and two Node checks run in CI instead of `dotnet test` —
+`scripts/check-skill-links.mjs` (every relative link under `plugins/` resolves, including links between
+sibling skills) and `umbraco-content-model-spec/scripts/lint-spec.mjs` against that skill's
+`evals/files/golden-spec/` (must pass) and `evals/files/broken-spec/` (must fail with the rules in its
+`expected-rules.txt`). `umbraco-content-model-conventions` holds the rules and
+`umbraco-content-model-spec` holds the format, apply and verify steps; the other content-modelling
+skills link into those two rather than copying them. New scripts are Node (`.mjs`), not Python.
+
 The `umbraco-reference-instance` authoring skill (in `.claude/skills/`) documents this gate and
 also offers a manual boot/`try` harness (`https://localhost:44372`, `admin@example.com` /
 `1234567890`) for interactive poking and backoffice-dependent steps. It complements

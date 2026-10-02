@@ -14,7 +14,7 @@
       "name": "umbraco-cms-content-modelling-skills",
       "source": "./plugins/content-modelling",
       "description": "Umbraco content modelling skills covering document types, element types, data types, compositions, and content structure",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "development",
       "author": {
         "name": "Phil Whittaker",
