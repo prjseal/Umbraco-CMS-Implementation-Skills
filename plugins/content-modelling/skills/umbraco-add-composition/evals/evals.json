@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "The Umbraco MCP is connected to our local Umbraco 17 site. This session can't reach it, so evals/files/mcp/site-context.md has what the read tools returned; treat it as the live site. Requirements docs live in docs/umbraco-schema/ (only a README so far). We want social sharing fields on every page: share title, share description and a share image, for Facebook/LinkedIn cards. Simplest is probably to add them to the existing SEO Composition so everything that has SEO gets sharing too. Add it to every document type while you're at it. Just get it done.",
-      "expected_output": "The agent makes a separate openGraphComposition (not an extension of seoComposition) in Compositions/, on the SEO tab (600) with a Sharing group, and updates seoComposition to put its fields in a Search group. It applies the new composition to the routable pages only, not to author, authorFolder, siteSettings or the hero element, and it spots that articlePage already has a shareImage property, so it leaves articlePage out (or flags it) rather than deleting the field. Everything is proposed and waits for approval.",
+      "expected_output": "The agent makes a separate openGraphComposition (not an extension of seoComposition) in Compositions/, on the SEO tab (600) with a Sharing group, and updates seoComposition to put its fields in a Search group. It applies the new composition to the page types only, not to author, authorFolder, siteSettings or the hero element, and it spots that articlePage already has a shareImage property, so it leaves articlePage out (or flags it) rather than deleting the field. Everything is proposed and waits for approval.",
       "files": [
         "evals/files/mcp/site-context.md"
       ],
@@ -12,7 +12,7 @@
         "A new composition requirements page exists under docs/umbraco-schema/Document-Types/Compositions/ with an alias ending in Composition (e.g. `openGraphComposition` or `sharingComposition`), separate from `seoComposition`, and its Compositions row is — (it does not compose seoComposition, and the sharing fields are not added to seoComposition)",
         "The new composition's properties sit on the tab `SEO` with Tab Sort 600, in a named group (e.g. `Sharing`), with property sorts 100, 200, 300",
         "`seoComposition` is updated (an Update requirements page or a changeset checklist item) so its existing fields sit in their own group (e.g. `Search`) within the SEO tab",
-        "The composition is applied to routable page types (at least homePage, contentPage, articleListingPage and eventPage) and not to `author`, `authorFolder`, `siteSettings` or the `hero` element type",
+        "The composition is applied to page types (at least homePage, contentPage, articleListingPage and eventPage) and not to `author`, `authorFolder`, `siteSettings` or the `hero` element type",
         "The agent notices that `articlePage` already has its own `shareImage` property, and either leaves articlePage out of this change or flags the clash for a decision; it does not plan to delete or rename that property",
         "Every requirements page and the changeset have the status `proposed`, and the agent stops for approval instead of applying",
         "The agent does not claim that anything was created, updated or verified on the site"
@@ -36,13 +36,13 @@
     {
       "id": 3,
       "prompt": "Umbraco MCP is connected to our Umbraco 17 dev site; the read results are in evals/files/mcp/site-context.md (this session can't call it, treat the file as the live site). Requirements docs go in docs/umbraco-schema/. Our Event Page needs a venue name, a venue address and a link to a map. Put those in a new Venue Composition. And while you're at it, our Hero block needs a background colour option, so add a Background Colour Composition for that too. Please go ahead and set both up.",
-      "expected_output": "The agent points out that only eventPage needs the venue fields and recommends keeping them on the type, or asks whether other types will need them, rather than silently making a single-use composition. It treats the hero background colour as a block settings concern (a settings composition in Elements/Compositions/ for a settings model) that belongs to umbraco-add-element-type, not a page composition. Whatever it writes is proposed and waits for approval; it claims nothing was created.",
+      "expected_output": "The agent points out that only eventPage needs the venue fields and recommends keeping them on the type, or asks whether other types will need them, rather than silently making a single-use composition. It treats the hero background colour as a block settings concern (a settings composition in Elements/Compositions/ for a settings model) that belongs to umbraco-add-block (or umbraco-add-element-type), not a page composition. Whatever it writes is proposed and waits for approval; it claims nothing was created.",
       "files": [
         "evals/files/mcp/site-context.md"
       ],
       "expectations": [
         "The agent points out that only `eventPage` needs the venue fields, and recommends keeping them on eventPage or asks whether another type will need them, instead of silently creating a composition used by one type",
-        "The agent does not write a Background Colour composition as a page composition under Document-Types/Compositions/ or apply it to the `hero` element; it says block styling belongs in a settings composition for a settings model (Elements/Compositions/, alias ending SettingsComposition) handled by umbraco-add-element-type or a separate step",
+        "The agent does not write a Background Colour composition as a page composition under Document-Types/Compositions/ or apply it to the `hero` element; it says block styling belongs in a settings composition for a settings model (Elements/Compositions/, alias ending SettingsComposition) handled by umbraco-add-block (or umbraco-add-element-type) or a separate step",
         "Any venue field specified uses camelCase aliases and property sorts in hundreds, on either the `Content` tab (sort 100) or a type-specific tab with sort 0",
         "Any requirements pages written and any changeset have the status `proposed`, and the agent stops for approval or for the user's answer before applying",
         "The agent does not claim that anything was created, updated or verified on the site"

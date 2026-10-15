@@ -10,9 +10,9 @@ description: >
   Use this whenever the user asks to "add a block grid", "set up the main content area", "add this
   block to the page", "make the new block available in the grid", "configure the block list",
   "which blocks can editors use here", "add a sidebar with blocks", or "set column spans".
-  SKIP: non-Umbraco projects or Umbraco < 17; creating the element types (use
-  umbraco-add-element-type); other data types (use umbraco-add-data-type); a listing's
-  collection view (use umbraco-add-listing-page); Block Grid stylesheets and block Razor partials.
+  SKIP: non-Umbraco projects or Umbraco < 17; creating blocks or element types (use
+  umbraco-add-block); other data types (use umbraco-add-data-type); a listing's collection view
+  (use umbraco-add-listing-page); Block Grid stylesheets and block Razor partials.
 ---
 
 # Configure Block Editor
@@ -22,7 +22,7 @@ how many, and the property that uses it. It works requirements-first: write the 
 for the user's approval, apply it, then read it back.
 
 The blocks themselves (content elements, settings models, child items) are made by
-[`umbraco-add-element-type`](../umbraco-add-element-type/SKILL.md). This skill registers them.
+[`umbraco-add-block`](../umbraco-add-block/SKILL.md). This skill registers them.
 
 The rules come from [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md),
 and the requirements doc format and the six-step workflow from
@@ -62,6 +62,13 @@ Not a third approach: both approaches use the Umbraco Developer MCP when it is c
 otherwise a manual walkthrough from the same requirements doc; see
 [change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#5-apply).
 
+## Used by another skill
+
+When another skill, such as [`umbraco-add-page`](../umbraco-add-page/SKILL.md) or
+[`umbraco-add-block`](../umbraco-add-block/SKILL.md), calls this one, run inspect, decide and write
+only, and hand back the requirements pages and checklist rows. The calling skill owns the
+changeset, the single approval and the apply order, so do not stop for approval separately.
+
 ## Version compatibility
 
 Targets **Umbraco 17+**. The editor and editor UI aliases (`Umbraco.BlockGrid`,
@@ -74,8 +81,9 @@ the connected tool list is the authority.
 
 - **Two places that allow different blocks get two data types**, so changing one never changes
   the other; see [naming.md](../umbraco-content-model-conventions/references/naming.md#data-types).
-- **Register blocks with their settings models.** A block's styling is chosen where it is
-  registered; register the content element and its settings element together.
+- **Register blocks with their settings models, when they have one.** A block's styling is chosen
+  where it is registered; register the content element and its settings element together. Settings
+  are optional: a block with no style options is registered with settings `—`.
 - **Changing a block editor changes existing content's options.** Adding a block is safe.
   Removing one, or tightening a limit, affects pages that already use it: read what uses the data
   type first, and never remove a block that content still uses.

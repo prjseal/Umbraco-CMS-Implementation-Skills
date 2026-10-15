@@ -13,10 +13,13 @@ The rules behind it are in
 | Settings model | What a block's settings are, assembled from settings compositions; no own properties | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md#blocks-settings-compositions-and-settings-models) |
 | Content element | The block itself, in one `Content` group | [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md#which-container-to-use) |
 
+Each layer is an element role; its folder, suffix and container are in
+[element-roles.md](../../umbraco-add-element-type/references/element-roles.md).
+
 The settings model is attached to the content element where the block is registered in a Block
-Grid or Block List, not on the element itself. That registration belongs to
-[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md); this skill only
-makes the settings model exist and says which block it is for.
+Grid or Block List, not on the element itself. This skill registers it there when the user names
+an existing block area ([workflow.md](workflow.md#registering-in-a-named-block-area)); otherwise
+it makes the settings model exist and says which block it is for.
 
 ## Which settings model a block uses
 

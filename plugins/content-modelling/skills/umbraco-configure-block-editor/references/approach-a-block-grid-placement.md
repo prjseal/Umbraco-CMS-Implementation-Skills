@@ -63,7 +63,7 @@ uses the block before planning its removal. Never remove a block that content us
 Read the placement's existing Block Grid and its blocks (`get-data-type`), the elements and
 settings models to register (`get-document-type-by-id`), the types that have or will have the
 property, and the `Block Grid/` folder. An element that does not exist yet is made first with
-[`umbraco-add-element-type`](../../umbraco-add-element-type/SKILL.md).
+[`umbraco-add-block`](../../umbraco-add-block/SKILL.md).
 
 ## 2. Decide
 

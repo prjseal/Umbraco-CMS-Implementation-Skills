@@ -1,6 +1,6 @@
 # Page kinds
 
-Every routable page is one of four kinds. The kind decides the parent, the allowed children, the
+Every page is one of four kinds. The kind decides the parent, the allowed children, the
 compositions and the icon, so settle it before anything else. The kinds are a lookup, not
 alternative approaches: the workflow is the same for all of them.
 
@@ -55,14 +55,14 @@ and title usually come from compositions or a block grid.
 
 ### Programmatic
 
-Still routable, so still a template: without one the page has a URL that returns nothing. The
+Still a page, so still a template: without one its URL has nothing to render it. The
 controller that renders it (route hijacking or a custom `RenderController`) is code and belongs to
 an implementation task, not to this schema change. Say that the controller is still to be written
 when you report. Route hijacking finds its controller by the document type alias
 (`searchPage` is rendered by `SearchPageController`), so agree the alias with whoever writes the
 controller before the requirements doc is approved. A programmatic page allows no children and
-takes compositions selectively; a search results page wants SEO fields but rarely a sharing image,
-and it may want indexing off.
+takes compositions selectively beyond SEO, which every page takes; a search results page rarely
+wants a sharing image, and it may want indexing off.
 
 ### Listing
 

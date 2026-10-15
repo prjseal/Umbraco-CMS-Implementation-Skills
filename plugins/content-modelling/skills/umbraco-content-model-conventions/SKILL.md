@@ -37,11 +37,25 @@ requirements doc and applying it to a site belong to the sibling skill
 - **An existing project disagrees with a rule:** the project's established convention wins for
   that project. Say which rule it departs from, follow the project, and stay consistent.
 
+## Terms
+
+| Term | Means |
+|---|---|
+| Page | A document type visitors are meant to land on: it has a template and the SEO composition, and a parent that allows it |
+| Document type | The schema of something stored in the content tree, with no template. Its nodes may still have URLs, for example through the Delivery API |
+| Element type | The schema of content that lives inside something else: a content element, a repeater item, a settings model or a settings composition. An element type on its own is not a block |
+| Composition | A type that only adds properties to other types; it has no template, children or root setting |
+| Block | A content element registered in a block area, optionally with a settings element that styles it; a repeater adds its item element and Block List. Settings are optional |
+| Settings model | The element in `Elements/Settings/` that holds a block's settings, built from settings compositions |
+| Block area | One block editor property on a page, such as `mainContent`, and the Block Grid or Block List data type behind it |
+
+Whether something is a page or a plain document type depends on intent: will visitors land on it?
+
 ## Names
 
 | Convention | Look for | Reference |
 |---|---|---|
-| Document type names, aliases and suffixes | A routable type with no `Page` suffix, `SEO` written as an acronym in an alias | [naming.md](references/naming.md) |
+| Document type names, aliases and suffixes | A page type with no `Page` suffix, `SEO` written as an acronym in an alias | [naming.md](references/naming.md) |
 | Property aliases | `seoTitle`, `showBanner`, `heroTitle` on a block, unsuffixed overrides | [property-aliases.md](references/property-aliases.md) |
 | Descriptions | Empty descriptions, a composition not described as "Adds ..." | [descriptions.md](references/descriptions.md) |
 | Icons and colours | The default icon on everything, colour used at random | [icons-and-colours.md](references/icons-and-colours.md) |
@@ -59,7 +73,7 @@ requirements doc and applying it to a site belong to the sibling skill
 | Convention | Look for | Reference |
 |---|---|---|
 | Allowed children and allow-at-root | Several page types allowed at root, a listing that allows everything | [allowed-children-and-root.md](references/allowed-children-and-root.md) |
-| Templates | A routable type with no template, a template on a composition or element | [templates.md](references/templates.md) |
+| Templates | A page type with no template, a template on a composition or element | [templates.md](references/templates.md) |
 
 ## Out of scope
 

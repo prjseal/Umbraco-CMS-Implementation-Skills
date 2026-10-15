@@ -7,7 +7,7 @@
 | Two or more types need the same fields, or will soon | Make a composition; see [when to make one](../../umbraco-content-model-conventions/references/compositions.md#when-to-make-one) |
 | One type needs the fields and nothing else will | Keep them on that type (the same rule). Say why; the user can revisit when a second type appears |
 | The site already has a composition for this concern | Reuse it, or extend it (an Update of that composition), never a second one |
-| The fields are block styling (background colour, anchor, spacing) | Not this skill: a settings composition for a block settings model belongs to [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) |
+| The fields are block styling (background colour, anchor, spacing) | Not this skill: a settings composition for a block settings model belongs to [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md), or [umbraco-add-block](../../umbraco-add-block/SKILL.md) when it comes with a block |
 | The request is for a composition that includes another composition | Refuse the nesting. Make the new concern its own flat composition and apply both side by side |
 
 The rules behind these are in
@@ -15,7 +15,7 @@ The rules behind these are in
 
 ## Which types take it
 
-Apply a composition selectively, by what each type is. Read every candidate type from the site
+Apply a composition selectively, by what each type is, except SEO: every page takes it. Read every candidate type from the site
 first; the table is the default, the project can differ.
 
 | Type | Page details | SEO | Sharing | Tags | Visibility |
@@ -30,12 +30,13 @@ first; the table is the default, the project can differ.
 | Element type or settings model | Never | Never | Never | Never | Never |
 | Another composition | Never | Never | Never | Never | Never |
 
-Data items and site settings are not routable, so search and sharing fields on them are never read.
+Data items and site settings are not pages (they have no template), so search and sharing fields
+on them are never read.
 Element types never take page compositions; blocks are styled through settings compositions.
 
-When the user says "every page", read that as every **routable page type** and list them by name
-in the requirements doc, so the user approves the exact list. Do not add types created later
-automatically.
+When the user says "every page", read that as every **page type** (every type with a template)
+and list them by name in the requirements doc, so the user approves the exact list. Do not add
+types created later automatically.
 
 ## What blocks a type from taking it
 

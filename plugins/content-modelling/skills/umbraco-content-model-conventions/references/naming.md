@@ -1,7 +1,7 @@
 # Names, aliases and suffixes
 
 **Applies to:** every document type, element type, composition and data container.
-**Look for:** a routable type with no `Page` suffix, a composition with no `Composition` suffix,
+**Look for:** a page type (one with a template) with no `Page` suffix, a composition with no `Composition` suffix,
 an acronym left in capitals inside an alias (`SEOComposition`, `xMLSitemapPage`).
 **Why:** on a project with forty or more types, the suffix is the fastest way to tell what a thing
 is. "Everything ending in `Composition` is a composition" is learned in thirty seconds.
@@ -18,7 +18,7 @@ is. "Everything ending in `Composition` is a composition" is learned in thirty s
 
 | Kind | Suffix | Example alias |
 |---|---|---|
-| Routable page | `...Page` | `articlePage`, `homePage` |
+| Page (has a template) | `...Page` | `articlePage`, `homePage` |
 | Listing page and its item | `...ListingPage`, item `...Page` | `articleListingPage` lists `articlePage` |
 | Composition for document types | `...Composition` | `seoComposition` |
 | Composition for block settings | `...SettingsComposition` | `backgroundColourSettingsComposition` |
@@ -33,7 +33,7 @@ is. "Everything ending in `Composition` is a composition" is learned in thirty s
 not the default suffix for elements.
 
 The site settings singleton is `siteSettings`; it is the one root type without a `Page` suffix,
-because it is not routable.
+because it is not a page: it has no template.
 
 ## Data types
 

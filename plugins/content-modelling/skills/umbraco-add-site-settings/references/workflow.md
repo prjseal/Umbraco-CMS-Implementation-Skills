@@ -42,7 +42,7 @@ the values have moved. The same rule applies to any existing property moved betw
 | Page | From | Location | Action |
 |---|---|---|---|
 | Any new data type (pickers, a script text area) | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor-Kind>/<Name-Slug>.md` | Create |
-| Any repeater element and its Block List | via [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) | `Document-Types/Elements/<AliasPascalCase>.md`, `Data-Types/Block-List/<Name-Slug>.md` | Create |
+| Any repeater element and its Block List | via [umbraco-add-block](../../umbraco-add-block/SKILL.md) | `Document-Types/Elements/<AliasPascalCase>.md`, `Data-Types/Block-List/<Name-Slug>.md` | Create |
 | The settings type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/SiteSettings.md` | Create, or Update when one exists |
 | The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
@@ -83,7 +83,7 @@ For site settings, also:
   of first appearance, which is right only if the properties were passed in tab order.
 - **The content node** is created by the user in the Content section, at the root. Only one, and
   it must not become the first root node: the home page stays sorted first, or carries the domain
-  in Culture and Hostnames, because the first routable root owns `/`
+  in Culture and Hostnames, because the first root node in sort order owns `/`
   ([root order](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-at-root)).
   Tell the user this with the step, and ask them to check the sort order once the node exists.
 

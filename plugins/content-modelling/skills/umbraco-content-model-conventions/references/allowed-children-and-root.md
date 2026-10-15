@@ -20,9 +20,9 @@ Everything else is created under a parent. If a new page type has no parent yet,
 allowed children of the home page; do not allow it at root to make it creatable.
 
 **Root order matters.** With the default `HideTopLevelNodeFromPath` setting, the first root node
-in sort order owns `/`, and a second routable root changes every URL's shape. When site settings
+in sort order owns `/`, and a second page at the root changes every URL's shape. When site settings
 or a data folder joins the root, the home page must stay sorted first (or carry the domain in
-Culture and Hostnames), and the new root node must not be routable. Say so in the change, and
+Culture and Hostnames), and the new root node must not be a page (no template). Say so in the change, and
 check the order after the user creates the node.
 
 On an empty site with nothing allowed at root, do not quietly allow a content page at root. Say

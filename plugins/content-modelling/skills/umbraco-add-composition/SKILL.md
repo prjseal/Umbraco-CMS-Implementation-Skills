@@ -11,8 +11,8 @@ description: >
   this composition".
   SKIP: non-Umbraco projects or Umbraco < 17; adding or removing fields on one existing type (use
   umbraco-change-document-type); settings compositions for block settings models (use
-  umbraco-add-element-type); adding a page type (use umbraco-add-page-type); questions about
-  naming only (use umbraco-content-model-conventions).
+  umbraco-add-element-type, or umbraco-add-block for a whole block); adding a page (use
+  umbraco-add-page); questions about naming only (use umbraco-content-model-conventions).
 ---
 
 # Add Composition
@@ -47,6 +47,13 @@ both must be installed alongside this one. If a link into either cannot be read,
 One approach, two mechanisms: the Umbraco Developer MCP when it is connected, otherwise a manual
 walkthrough generated from the same requirements doc; see
 [change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#5-apply).
+
+## Used by another skill
+
+When another skill, such as [`umbraco-add-page`](../umbraco-add-page/SKILL.md) adding a missing SEO
+composition, calls this one, run steps 1 to 4 only (inspect, decide, write) and hand back the
+requirements pages and checklist rows. The calling skill owns the changeset, the single approval
+and the apply order, so do not stop for approval separately.
 
 ## Version compatibility
 

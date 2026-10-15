@@ -17,7 +17,7 @@ stop for approval. The default only saves the decisions.
 | Folder | The Document Types root |
 | Icon | `icon-document color-light-blue` |
 | Description | A general page of text, for anything that is not an article or a listing. |
-| Compositions | Every page composition the site already has, such as `seoComposition` |
+| Compositions | The SEO composition, plus every other page composition the site already has |
 | Own properties | `pageTitle` (Textstring) and `bodyText` (Richtext editor) on the `Content` tab |
 | Template | Content Page, `contentPage.cshtml`, under the master |
 | Allowed at root | No |
@@ -34,7 +34,7 @@ Adjust it to what the inspection found:
 | A body block grid data type (for example `Main Content Block Grid`) | Use it as `mainContent` instead of `bodyText` |
 | No home page | Ask whether to add one in the same change ([the root question](workflow.md#the-root-question)) |
 | No master template | Add a Master template to the change, first |
-| No compositions at all | Leave Compositions empty and name the SEO composition as a follow-up for [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) |
+| No SEO composition | Add it to the same change, as [SEO is mandatory](workflow.md#seo-is-mandatory) says; other compositions stay out |
 | A `contentPage` already | Nothing to add; say so and offer to extend it |
 
 ## Worked example

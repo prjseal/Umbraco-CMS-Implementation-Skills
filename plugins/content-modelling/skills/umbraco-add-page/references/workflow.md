@@ -2,11 +2,14 @@
 
 Follow
 [the six steps](../../umbraco-content-requirements-documentation/references/change-workflow.md).
-This file adds only what a page type needs at each step.
+This file adds only what a page needs at each step. The page's schema is decided by
+[umbraco-add-document-type](../../umbraco-add-document-type/SKILL.md) with the role *page*; any
+other part the page needs is routed to its peer skill by
+[combined-changeset.md](combined-changeset.md).
 
 ## 1. Inspect
 
-For a page type, these are the answers you need before deciding anything:
+For a page, these are the answers you need before deciding anything:
 
 | Question | Why it matters here |
 |---|---|
@@ -14,6 +17,8 @@ For a page type, these are the answers you need before deciding anything:
 | Is there a home page, and what is allowed at root? | Decides the parent, and whether the root question below must be asked |
 | What does the home page allow now? | The parent update keeps every existing entry |
 | Which compositions exist, and which fields does each give? | A page takes existing compositions and does not repeat their fields |
+| Is there an SEO composition? | Every page takes it; if there is none, it joins this change ([SEO is mandatory](#seo-is-mandatory)) |
+| Does the page need blocks or a block area, and do they exist? | Missing ones join this change through their peer skills ([combined-changeset.md](combined-changeset.md)) |
 | Is there a master template, and what is its alias? | The new template goes under it; if there is none, one joins the change |
 | Which data types exist for the page's own fields? | Reuse `Textstring`, `Richtext editor` or a project type before anything new |
 
@@ -22,37 +27,47 @@ For a page type, these are the answers you need before deciding anything:
 Work through this table in order. Each row names the rule to open; apply it rather than
 restating it.
 
-| Decision | For a page type | Rule |
+| Decision | For a page | Rule |
 |---|---|---|
 | Kind | Root, Content or Programmatic. Listing is handed off | [page-kinds.md](page-kinds.md) |
-| Name and alias | Title Case name ending `Page`, camelCase alias ending `Page`. The user's noun is kept; the suffix is not optional | [naming.md](../../umbraco-content-model-conventions/references/naming.md) |
-| Folder | The Document Types root, never a folder | [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md) |
-| Icon | A noun that fits, page colour | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md) |
-| Description | What the page is for | [descriptions.md](../../umbraco-content-model-conventions/references/descriptions.md) |
-| Compositions | Existing ones only, chosen per kind | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
-| Own properties | Only what no composition gives, on the `Content` tab | [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md), [property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md) |
+| Schema | Name and alias (Title Case name ending `Page`, camelCase alias ending `Page`; the user's noun is kept), folder (the Document Types root), icon, description, own properties, vary by culture | [umbraco-add-document-type](../../umbraco-add-document-type/references/workflow.md#2-decide), role *page* |
+| Compositions | The SEO composition always; others chosen per kind | [SEO is mandatory](#seo-is-mandatory), [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
+| Blocks and block area | Only when the page has a block area; each missing part through its peer | [combined-changeset.md](combined-changeset.md) |
 | Template | Named after the type, under the master | [templates.md](../../umbraco-content-model-conventions/references/templates.md) |
 | Allowed at root | `No`, unless the new type is the home page | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-at-root) |
 | Parent and allowed children | Per kind; the parent is updated in the same change | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-children) |
-| Vary by culture | `No` on a single-language site; otherwise ask | — |
 
-### Compositions that do not exist yet
+### SEO is mandatory
 
-Creating a composition is not part of this skill. If the page needs one the site lacks (SEO
-fields, sharing fields), leave it out of this requirements doc, say so in the changeset summary,
-and name [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) as the follow-up that
-adds it and then applies it to this page. Do not list it as a `Missing` dependency: that blocks
-approval of a page that is useful without it.
+Every page takes the site's SEO composition, programmatic pages included: a search results page
+still needs a meta title and description.
+
+- **The site has one** (`seoComposition` or the project's equivalent): the page lists it in its
+  Compositions row, flagged `Exists`.
+- **The site has none:** the SEO composition joins this changeset, under
+  [umbraco-add-composition](../../umbraco-add-composition/SKILL.md)'s rules: the SEO row of
+  [standard-compositions.md](../../umbraco-add-composition/references/standard-compositions.md#the-table),
+  its [data types](../../umbraco-add-composition/references/standard-compositions.md#data-types)
+  (`Toggle (default on)` for `isIndexable`, only if the site lacks one), and a `Compositions`
+  folder and index page if they are missing. The page lists it flagged `New in this changeset`,
+  never `Missing`. Say in the summary that the composition is new and shared.
+- **Other pages on the site lack SEO:** list them in the changeset summary and offer to apply the
+  composition to them as Update pages. Do not include them unless the user says so; the clash
+  check in [when-to-apply.md](../../umbraco-add-composition/references/when-to-apply.md#what-blocks-a-type-from-taking-it)
+  applies to each.
+
+Sharing and page-details compositions stay selective, as
+[when-to-apply.md](../../umbraco-add-composition/references/when-to-apply.md) says. If the page
+would want one the site lacks, leave it out, name it in the summary as a follow-up for
+umbraco-add-composition, and do not flag it `Missing`: that would block approval of a page that is
+useful without it.
 
 ### Own properties
 
-Give the page a field only when no composition already supplies it, and reuse an existing data
-type whenever its configuration fits. When a field genuinely needs a configuration no data type on
-the site has, the new data type joins the changeset as its own requirements page, named and
-foldered by [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types);
-block editors are configured separately, by
-[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md). A page with no own
-properties writes the one line the requirements doc format gives for that case.
+The page's own fields follow
+[umbraco-add-document-type](../../umbraco-add-document-type/references/workflow.md#own-properties):
+only what no composition gives, on the `Content` tab, reusing data types. A page with a block area
+holds it as one property (usually `mainContent`) whose data type is that area's Block Grid.
 
 ### The root question
 
@@ -68,10 +83,12 @@ properties writes the one line the requirements doc format gives for that case.
 
 ## 3. Write the requirements doc
 
-A page type change is these pages:
+The core page is these pages; anything else the page needs (a new SEO composition, blocks, a
+block area) adds its pages as [combined-changeset.md](combined-changeset.md) lists:
 
 | Page | From | Location | Action |
 |---|---|---|---|
+| The SEO composition, only if the site has none | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/SeoComposition.md` | Create |
 | Any new data type for an own field | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor-Kind>/<Name-Slug>.md` | Create |
 | The master template, only if the site has none | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/Master.md` | Create |
 | Its template | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/<MasterPascalCase>/<AliasPascalCase>.md` | Create |
@@ -79,16 +96,17 @@ A page type change is these pages:
 | The parent, with the new type added to Allowed children | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/HomePage.md` | Update |
 | The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
-Points specific to a page type:
+Points specific to a page:
 
 - Delete the `Collection` row; it belongs to listing pages only.
+- The Compositions row always includes the SEO composition.
 - A content page lists itself in its own Allowed children, as a link to its own page. It does not
   list itself in Dependencies.
 - **The parent** is an existing type the change edits. Its page is written as
   [requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#updating-a-type-that-already-exists)
   describes.
 
-The changeset's checklist for a page type, in apply order:
+The changeset's checklist for the core page, in apply order:
 
 ```
 - [ ] 1. Create template `master`                                   (only if new)
@@ -99,21 +117,21 @@ The changeset's checklist for a page type, in apply order:
 - [ ] 6. Verify every requirements doc against the site and set each status line
 ```
 
-A new data type, if there is one, comes first, as
-[apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#order)
-orders.
+A new data type, a new SEO composition, blocks and a block area come before row 1, in the order
+[combined-changeset.md](combined-changeset.md#apply-order) gives.
 
 ## 4. Stop for approval
 
-For a page type, call out the **existing** parent type that will change: it has content on it.
-Then stop; see
+For a page, call out the **existing** parent type that will change: it has content on it. Call out
+too any existing Block Grid that gains a block, and any new shared artefact (an SEO composition, a
+settings model) that other types will reuse. Then stop; see
 [the approval gate](../../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
 If the user asked for the backoffice steps and the MCP is not connected, see
 [apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md#asked-for-the-steps-before-approval).
 
 ## 5. Apply
 
-For a page type, also:
+For a page, also:
 
 - **Template content.** Create the page template with only what makes it a page under the master:
 
@@ -137,8 +155,10 @@ For a page type, also:
 
 ## 6. Verify and report
 
-For a page type, also confirm on the read-back that the default and allowed templates point at the
-new template, that the template is a child of the master, and that the parent lists the new type.
+For a page, also confirm on the read-back that the default and allowed templates point at the
+new template, that the template is a child of the master, that the SEO composition is applied,
+and that the parent lists the new type.
 
-In the report, what is left (item 3) names: compositions or data types deferred to other skills,
-the template's markup, and for a programmatic page the controller that renders it.
+In the report, what is left (item 3) names: optional compositions deferred to other skills, other
+pages that still lack SEO, the template's markup, block partial views, and for a programmatic page
+the controller that renders it.

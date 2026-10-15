@@ -1,22 +1,23 @@
 # Templates
 
 **Applies to:** the default template and allowed templates of every document type.
-**Look for:** a routable type with no template, a template whose alias differs from its type, a
+**Look for:** a page type with no template, a template whose alias differs from its type, a
 template on a composition, element, data item or site settings, several allowed templates on one
 type.
-**Why:** a type is routable because it has a template. Matching the alias means the view for any
-page is found by its type name, with no lookup.
+**Why:** a template is what makes a document type a page. Any node can have a URL, but nothing
+renders it without a template. Matching the alias means the view for any page is found by its
+type name, with no lookup.
 
 ## Rules
 
 | Rule | Reason |
 |---|---|
-| Every routable page has exactly one default template | Without one the page has a URL that falls through to the 404 handler unless a controller renders it, so the schema alone does not make the page work |
+| Every page has exactly one default template | Without one the page has a URL that falls through to the 404 handler unless a controller renders it, so the schema alone does not make the page work |
 | The template alias equals the document type alias, and the file is `<alias>.cshtml` | `articlePage` renders with `articlePage.cshtml` |
 | The template name equals the document type name | It is recognisable in the Templates tree |
 | Every page template sits under the site's master template | Layout is declared once |
 | Programmatic pages get a template too | A search or sitemap page still needs a view; the controller that drives it is code, not schema |
-| Nothing else gets a template | Compositions, elements, settings models, data folders, data items and site settings are not routable |
+| Nothing else gets a template | Compositions, elements, settings models, data folders, data items and site settings are not pages. Their nodes may still have URLs (the Delivery API serves them), but no view renders them |
 | One allowed template, the default | Add a second only for a genuine alternate rendering of the same content, such as a print view |
 
 If the site has no master template yet, create it first and then create page templates beneath

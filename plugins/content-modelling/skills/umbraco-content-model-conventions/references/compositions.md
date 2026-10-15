@@ -14,7 +14,7 @@ and carries no behaviour of its own.
 | One concern each | `seoComposition` and `openGraphComposition` are two compositions even if they share a tab. A page can then take one without the other |
 | Flat: a composition never composes another | Umbraco enforces most of this itself: a type that has compositions cannot be used as one, and a type in use as a composition cannot be given one. The rule still matters for the requirements doc, so a nested composition is never written down and then refused at apply time |
 | No template, no allowed children, not allowed at root | Those are behaviour, and behaviour belongs to the page type |
-| Applied selectively | Add a composition to the types that need it. A programmatic page may need SEO fields and no sharing image |
+| Every page takes the SEO composition; others are applied selectively | Search fields are needed on every page a visitor can land on. Add any other composition only to the types that need it: a programmatic page may need SEO fields and no sharing image |
 | Lives in `Compositions/` and ends in `Composition` | See [naming.md](naming.md) and [tree-organisation.md](tree-organisation.md) |
 | Uses the global tab sorts | See [tabs-groups-sorts.md](tabs-groups-sorts.md) |
 | Described as "Adds ..." | See [descriptions.md](descriptions.md) |
@@ -31,6 +31,10 @@ fields used by exactly one type stays on that type until a second type needs it.
 
 Blocks follow the same idea one level down.
 
+- **An element is not a block.** A block is a content element registered in a Block Grid or
+  Block List. Settings models, settings compositions and repeater items are elements too, but they
+  are parts of a block, never blocks themselves.
+- **Settings are optional.** A block with no style options is registered with no settings element.
 - A **settings model** is a separate element type (`<block>Settings`, in `Elements/Settings/`).
   A block's content element never carries its own styling fields.
 - A settings model has **no properties of its own**. It is built only from settings compositions

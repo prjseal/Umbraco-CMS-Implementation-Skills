@@ -19,7 +19,9 @@ accordion              parent element in Elements/      title, items
 | Block List data type | The plural of the child, in `Block List/` | `Accordion Items` |
 | How many | Minimum and maximum in the Block List's amount setting | min 1, max unlimited |
 
-The names follow [naming.md](../../umbraco-content-model-conventions/references/naming.md); the
+The parent is a content element and the child a repeater item; each follows its role in
+[element-roles.md](../../umbraco-add-element-type/references/element-roles.md). The names follow
+[naming.md](../../umbraco-content-model-conventions/references/naming.md); the
 child sits beside its parent in `Elements/`, where alphabetical order keeps them together
 ([tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md)).
 

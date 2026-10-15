@@ -9,7 +9,8 @@ On a requirements folder the linter already reports alias casing and suffixes (`
 
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
-| Routable type without the `Page` suffix | A type with a template (or at the tree root) whose alias does not end `Page`, other than `siteSettings` | Medium | a rename, specified with the skill that owns the type |
+| Page without the `Page` suffix | A type with a template (or at the tree root) whose alias does not end `Page`, other than `siteSettings` | Medium | a rename, specified with the skill that owns the type |
+| `...Page` alias on a type with no template | A document type whose alias ends `Page` and that has no default template: it is not a page | Low | [umbraco-add-page](../../umbraco-add-page/SKILL.md) if visitors land on it, otherwise a rename with [umbraco-add-document-type](../../umbraco-add-document-type/SKILL.md) |
 | Listing not named after its item | A type with a collection and allowed children whose alias is not `<noun>ListingPage` listing `<noun>Page` | Medium | [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 | Composition without the `Composition` suffix | A type used as a composition (`get-document-type-composition-references` returns users) or in `Compositions/` | Medium | [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) |
 | Element with a page or composition suffix, or `...Block` without a clash | An element type alias ending `Page`, `Composition`, `Folder`, or `Block` where the plain noun is free | Low | [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) |
@@ -27,7 +28,7 @@ On a requirements folder the linter already reports alias casing and suffixes (`
 | Page field without an area prefix | `title` on a page or page composition | Low | the owning skill |
 | Block field with the block's name in it | `accordionTitle` on `accordion` | Low | [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) |
 | Override without the suffix | An optional replacement of a computed value not ending `Override` | Low | the owning skill |
-| Numbered fields | `item1Title`, `item2Title`: a repeater modelled as fields | Medium | [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) (repeater) |
+| Numbered fields | `item1Title`, `item2Title`: a repeater modelled as fields | Medium | [umbraco-add-block](../../umbraco-add-block/SKILL.md) (repeater) |
 
 ## Data type names
 

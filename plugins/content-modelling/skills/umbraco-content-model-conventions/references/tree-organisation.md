@@ -1,7 +1,7 @@
 # Tree organisation
 
 **Applies to:** the Document Types tree and the Data Types tree in Settings.
-**Look for:** routable pages inside folders, compositions or elements loose at the root, data
+**Look for:** pages (types with a template) inside folders, compositions or elements loose at the root, data
 types all in one flat list, items in creation order.
 **Why:** a fresh install gives one flat node. Left alone it becomes pages, elements, compositions
 and data items mixed together, and nobody can find anything.
@@ -11,7 +11,7 @@ and data items mixed together, and nobody can find anything.
 ```
 Document Types/
     Compositions/           compositions applied to pages (seoComposition)
-    Data/                   non-routable containers and items (authorFolder, author)
+    Data/                   containers and items that are not pages (authorFolder, author)
     Elements/
         Compositions/       settings compositions used only by settings models
         Settings/           block settings models (accordionSettings)
@@ -21,7 +21,7 @@ Document Types/
 
 | Rule | Reason |
 |---|---|
-| Routable pages sit at the tree root, never in a folder | Pages are the main deliverable; they should be findable without drilling down |
+| Pages sit at the tree root, never in a folder | Pages are the main deliverable; they should be findable without drilling down |
 | Exactly three top-level folders: `Compositions`, `Data`, `Elements` | Each non-page kind has one obvious home |
 | `Elements` holds its own `Compositions` and `Settings` folders | Settings compositions and models belong to blocks, not pages |
 | Folders sort above loose types | The tree reads the same way at every level |

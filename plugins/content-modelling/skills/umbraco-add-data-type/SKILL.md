@@ -48,6 +48,13 @@ both must be installed alongside this one. If a link into either cannot be read,
 MCP when connected, otherwise a manual walkthrough from the same requirements doc; see
 [change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#5-apply).
 
+## Used by another skill
+
+When another skill, such as [`umbraco-add-page`](../umbraco-add-page/SKILL.md) or
+[`umbraco-add-block`](../umbraco-add-block/SKILL.md), calls this one, run steps 1 to 4 only
+(inspect, decide, write) and hand back the requirements pages and checklist rows. The calling skill
+owns the changeset, the single approval and the apply order, so do not stop for approval separately.
+
 ## Version compatibility
 
 Targets **Umbraco 17+**. The property editor and editor UI aliases in

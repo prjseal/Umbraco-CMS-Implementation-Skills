@@ -10,8 +10,8 @@ the sibling `golden-requirements` folder.
 
 | Page | What is wrong |
 |---|---|
-| `Document-Types/Article.md` | Status is not a valid value; routable alias has no `Page` suffix; allowed at root; no default template; a `Collection` row on a page that is not a listing; Folder written as plain text instead of a breadcrumb; `Content` tab sorted 1; property alias with an acronym in capitals; the reserved alias `name`; Mandatory not Yes or No; a data type missing from Dependencies; a dependency type that is not in the vocabulary; an invalid flag; a dead link; a leftover placeholder; a sort that is not a multiple of 100 (warning); a description ending in `?`, which the MCP refuses (warning) |
-| `Document-Types/ArticleListingPage.md` | Listing with no Collection row; approved with a `Missing` dependency |
+| `Document-Types/Article.md` | Status is not a valid value; page alias (a type at the tree root) has no `Page` suffix; allowed at root; no default template; a `Collection` row on a page that is not a listing; Folder written as plain text instead of a breadcrumb; `Content` tab sorted 1; property alias with an acronym in capitals; the reserved alias `name`; Mandatory not Yes or No; a data type missing from Dependencies; a dependency type that is not in the vocabulary; an invalid flag; a dead link; a leftover placeholder; a sort that is not a multiple of 100 (warning); a description ending in `?`, which the MCP refuses (warning) |
+| `Document-Types/ArticleListingPage.md` | Listing with no Collection row; approved with a `Missing` dependency; a page with no SEO composition (warning) |
 | `Document-Types/Compositions/SeoComposition.md` | No Icon row; no Used by section; composes another composition, has a template and allowed children |
 | `Document-Types/Elements/Accordion.md` | Element with a tab and a group that is not `Content` |
 | `Document-Types/Elements/AccordionItem.md` | Properties table without the twelve-column header |
