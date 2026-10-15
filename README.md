@@ -40,10 +40,11 @@ workflow; the others link into them.
 
 | Skill | What it does |
 |-------|--------------|
-| `umbraco-sitemap` | XML sitemap: a Document Type + Razor approach, or a cached API controller |
-| `umbraco-custom-error-pages` | Custom 404 and 500 pages, multi-site aware |
-| `umbraco-custom-maintenance-page` | The page shown while upgrade migrations run |
-| `umbraco-common-pitfalls` | Anti-patterns and performance traps in Umbraco code |
+| `umbraco-sitemap` | Adds an XML sitemap, as a cached controller or a Razor template with a Document Type |
+| `umbraco-custom-error-pages` | Custom 404 and 500 pages, via a last-chance content finder or the `Error404Collection` config |
+| `umbraco-custom-maintenance-page` | Customises the page visitors see while Umbraco runs upgrade migrations |
+| `umbraco-common-pitfalls` | Reference guide to anti-patterns, performance traps and common mistakes |
+| `umbraco-templating` | Templates, partial views, view components, route hijacking and surface-controller forms, with runtime-tested code |
 
 ## Quick Start
 
@@ -219,8 +220,12 @@ dotnet build Umbraco-CMS.Skills.sln
 dotnet test Umbraco-CMS.Skills.TestHost/Umbraco-CMS.Skills.TestHost.csproj --no-build
 dotnet test Umbraco-CMS.Skills.TestHost.Blank/Umbraco-CMS.Skills.TestHost.Blank.csproj --no-build
 
-python3 scripts/generate-examples.py --lint   # every placeholder an asset carries is declared
+node scripts/generate-examples.mjs --lint   # every placeholder an asset carries is declared
 ```
+
+Building needs the **.NET SDK and `node`** — nothing else, and nothing to `npm install`. The
+build shells out to `node` to project each skill's `assets/` into `obj/`, and the repo's scripts
+use only the Node standard library.
 
 This runs in CI (`.github/workflows/validate-skills.yml`). For interactive poking or
 backoffice-dependent steps, the `umbraco-reference-instance` authoring skill (in
@@ -249,7 +254,7 @@ Umbraco-CMS-Implementation-Skills/
 ├── Umbraco-CMS.Skills.TestHost.Blank/   # dotnet test: boots instance 2 (own process)
 ├── TestHost.Shared/                     # boot/wait/preconditions code linked into both test hosts
 ├── Umbraco-CMS.Skills.sln
-├── scripts/generate-examples.py         # projects assets/ into each example at build time
+├── scripts/generate-examples.mjs        # projects assets/ into each example at build time
 ├── scripts/check-skill-links.mjs        # CI: every relative link and anchor under plugins/ resolves
 ├── scripts/check-skill-frontmatter.mjs  # CI: SKILL.md frontmatter valid, eval fixtures exist
 └── .claude/
@@ -263,8 +268,8 @@ containing a `SKILL.md`.
 
 [AGENTS.md](AGENTS.md) is the entry point for anyone working on this repo — human or
 agent, whichever editor you use. It covers the skill-authoring rules, what keeps a
-skill portable across agents, and the validation gates. `CLAUDE.md` imports it and adds
-only the Claude Code-specific parts.
+skill portable across agents, and the validation gates. There is no separate
+`CLAUDE.md` — agents read `AGENTS.md` directly.
 
 Two authoring skills (in `.claude/skills/`, not published) help maintain the
 marketplace:

@@ -11,10 +11,12 @@ fix anything that fails. A skill is ready only when every applicable item passes
 **Description (triggering)**
 - [ ] `description` has concrete **trigger phrases** (real user wordings, not just "use for X")
 - [ ] `description` has explicit **SKIP** conditions
+- [ ] `description` is at most 1024 characters (`validate-skills.mjs` fails above that)
 - [ ] Doesn't collide with an existing skill's triggers (or the overlap is intentional and noted)
 
 **SKILL.md body**
 - [ ] Thin/routing — doesn't inline detail or `if/else` branching that belongs in references/assets
+- [ ] Tells the agent to open the reference and start from its asset **before writing code**
 - [ ] Decision table + "how to decide" present when there's more than one approach
 - [ ] Version compatibility stated
 - [ ] Best-practices section is domain guidance specific to this skill, not restated code. A rule a hub
@@ -27,10 +29,13 @@ fix anything that fails. A skill is ready only when every applicable item passes
 - [ ] One file per approach, each with "when to choose" + cross-link to the alternative
 - [ ] All fetch-me doc links use the `.md` version (or link a sibling skill instead of raw docs)
 - [ ] Says "fetch the docs first" wherever the code isn't verbatim in `assets/`
+- [ ] Every docs snippet a build or the gate disproved is in a *Docs corrections* table
 
 **assets/ (if present)**
 - [ ] Templates use `<Placeholder>` tokens with optional/removable lines marked
 - [ ] Template code follows the skill's own best-practices section
+- [ ] Views use `@inherits UmbracoViewPage<T>` (never a bare `@model`) and wrap generic calls in `@(...)`
+- [ ] Assets that install to a nested path carry their install path in a first-line comment
 - [ ] Markdown assets (requirements page templates, report templates) are documents, not code. They still
   use `<Placeholder>` tokens, but an optional row or line is named in the reference file that
   describes the format, because a comment inside a markdown table breaks the table
@@ -41,6 +46,9 @@ fix anything that fails. A skill is ready only when every applicable item passes
 **evals/**
 - [ ] `evals/evals.json` present with realistic, multi-step prompts (one per meaningful scenario)
 - [ ] `expectations[]` are objective/checkable, including a build-honesty expectation
+  (for views: `dotnet build -p:RazorCompileOnBuild=true` under ModelsMode `Nothing`/`SourceCode*`,
+  a page request under `InMemoryAuto`)
+- [ ] Expectations accept every valid fix, not one implementation, and check the feature is wired in
 
 **Approaches (count is NOT the constraint — coverage is)**
 - [ ] **At most two approaches per skill.** This is load-bearing, not editorial: one host exists per
@@ -56,6 +64,7 @@ fix anything that fails. A skill is ready only when every applicable item passes
   exception is a **Documented-only** skill, below.
 - [ ] **Documented** is only legal when the approach ships no code at all. "Committed but ungated" is
   not a tier. Markdown in `assets/` is not code: a skill whose assets are all `.md` ships no code.
+- [ ] Complementary building blocks sharing one example are counted as one approach, not several.
 - [ ] **Documented-only skills.** A skill that ships no code (no `assets/`, or markdown assets only)
   is tier **Documented** throughout, with no Asserted approach and no `examples/`. That is legal only
   when all of these hold:
@@ -92,7 +101,7 @@ fix anything that fails. A skill is ready only when every applicable item passes
 
 **Runtime gate (skip only if the skill ships no code in `assets/`: nothing, or markdown only — and say so)**
 - [ ] `.generate.json` maps **every** placeholder the assets carry. Enforced by
-  `scripts/generate-examples.py --lint`, because a missed one survives substitution as a literal
+  `scripts/generate-examples.mjs --lint`, because a missed one survives substitution as a literal
   string, still compiles, and silently never matches.
 - [ ] Nothing generated is committed — examples are projected from `assets/` into `obj/` at build
   time, so there is no second copy that can drift.
@@ -105,9 +114,12 @@ fix anything that fails. A skill is ready only when every applicable item passes
 - [ ] The test was **proven able to fail** — broken deliberately, seen red, reverted.
 
 **Before shipping**
+- [ ] `node scripts/validate-skills.mjs --check-index` passes (run `--write-index` first)
 - [ ] `node scripts/check-skill-links.mjs` passes — every relative link, including links into a
   sibling skill, resolves, and every `#anchor` names a heading
 - [ ] `node scripts/check-skill-frontmatter.mjs` passes — `name` matches the folder, only `name` and
   `description` keys, description at most 1024 characters (the Agent Skills limit; Claude Code allows
   1536), and every file an eval names exists
+- [ ] README skills table for the skill's plugin has the skill's row
+- [ ] No `.claude/.cc-writes` leftovers under `plugins/*/skills/`
 - [ ] Eval'd against a baseline with `umbraco-skill-evaluator`

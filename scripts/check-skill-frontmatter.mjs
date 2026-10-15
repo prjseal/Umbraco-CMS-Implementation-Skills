@@ -8,7 +8,8 @@
 // Checked: the frontmatter parses and holds only `name` and `description`; `name` equals the folder
 // name; `description` is at most 1024 characters (the Agent Skills limit; Claude Code allows 1536);
 // `evals/evals.json`, when present, parses, its `skill_name` matches, and every path in an eval's
-// `files` exists and is a file, not a directory.
+// `files` exists. A path ending in `/` names a fixture directory and must be one; any other path
+// must be a file.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -78,7 +79,9 @@ for (const file of skills) {
     for (const rel of item.files ?? []) {
       const target = path.join(dir, rel);
       if (!fs.existsSync(target)) problems.push(`${where}: eval ${item.id} names a file that does not exist: ${rel}`);
-      else if (!fs.statSync(target).isFile()) problems.push(`${where}: eval ${item.id} names a directory, not a file: ${rel}`);
+      else if (rel.endsWith('/')) {
+        if (!fs.statSync(target).isDirectory()) problems.push(`${where}: eval ${item.id} names a file with a trailing slash, not a directory: ${rel}`);
+      } else if (!fs.statSync(target).isFile()) problems.push(`${where}: eval ${item.id} names a directory without a trailing slash: ${rel}`);
     }
   }
 }
