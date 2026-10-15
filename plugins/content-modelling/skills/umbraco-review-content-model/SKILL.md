@@ -76,7 +76,7 @@ Write the report from [review-report.md](assets/review-report.md).
 
 | Severity | Meaning | Examples |
 |---|---|---|
-| High | Breaks behaviour or risks content | A routable type with no template and no controller; clashing aliases across compositions; a block editor shared by placements where a block cannot render |
+| High | Breaks behaviour or risks content | A page type with no template and no controller; clashing aliases across compositions; a block editor shared by placements where a block cannot render |
 | Medium | Makes the model harder to use or extend | Wrong suffix or acronym casing on a page or composition alias; pages allowed at root; tabs with local sorts; constraints in property validation |
 | Low | Consistency and polish | Missing descriptions; default icons; element and settings suffixes; property sorts not in hundreds |
 

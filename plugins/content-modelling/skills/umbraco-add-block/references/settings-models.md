@@ -1,7 +1,8 @@
 # Settings models and settings compositions
 
-A block has two halves in Umbraco: the **content** an editor writes and the **settings** that
-control how it looks. Each half is its own element type. This file decides the settings half.
+A block has up to two halves in Umbraco: the **content** an editor writes and the **settings**
+that control how it looks. Each half is its own element type. The settings half is optional: a
+block with no style options has none. This file decides whether a block has one, and which.
 The rules behind it are in
 [compositions.md](../../umbraco-content-model-conventions/references/compositions.md#blocks-settings-compositions-and-settings-models).
 
@@ -15,14 +16,20 @@ The rules behind it are in
 
 The settings model is attached to the content element where the block is registered in a Block
 Grid or Block List, not on the element itself. That registration belongs to
-[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md); this skill only
-makes the settings model exist and says which block it is for.
+[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md); this skill makes
+the settings model exist, says which block it is for, and registers the pair only in an existing
+area the user names ([workflow.md](workflow.md#registering-in-a-named-block-area)).
+
+Each settings model and settings composition is one element type, decided by
+[umbraco-add-element-type](../../umbraco-add-element-type/references/element-roles.md) in the role
+settings model or settings composition. A settings composition wanted on its own, with no block
+behind the request, is that skill's job; from here it is one part the block needs.
 
 ## Which settings model a block uses
 
 | The block needs | Use |
 |---|---|
-| No style options at all | No settings model |
+| No style options at all | No settings model; the block is registered with settings `—`. Do not add one "in case" |
 | The usual options, and the block has no title | The site's shared settings model for untitled blocks |
 | The usual options, and the block has a title | The site's shared settings model for titled blocks |
 | An option the shared models do not offer | A bespoke `<block>Settings`, composed of the shared settings compositions plus a new one for the extra option |

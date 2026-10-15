@@ -3,9 +3,11 @@
 Follow
 [the six steps](../../umbraco-content-requirements-documentation/references/change-workflow.md).
 This file adds only what a listing pair needs at each step. Each of the two pages is decided the
-way [`umbraco-add-page-type`](../../umbraco-add-page-type/SKILL.md) decides one page; read its
-[workflow](../../umbraco-add-page-type/references/workflow.md) for the page-level points (template
-stub, parent update, compositions that do not exist yet) rather than repeating them here.
+way [`umbraco-add-page`](../../umbraco-add-page/SKILL.md) decides one page, called once per page;
+read its [workflow](../../umbraco-add-page/references/workflow.md) for the page-level points
+(template stub, parent update, SEO is mandatory) rather than repeating them here. The schema rows
+of each page come from [`umbraco-add-document-type`](../../umbraco-add-document-type/references/workflow.md#2-decide)
+with the role page.
 
 ## 1. Inspect
 
@@ -25,10 +27,8 @@ For a listing pair, establish:
 | Decision | For a listing pair | Rule |
 |---|---|---|
 | Names and aliases | `<Noun> Listing Page` / `<noun>ListingPage` lists `<Noun> Page` / `<noun>Page`; singular noun in both | [naming.md](../../umbraco-content-model-conventions/references/naming.md#suffixes) |
-| Folder | Both at the Document Types root | [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md) |
-| Icons | Listing `icon-list`; item a noun that fits; both the page colour | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md) |
-| Descriptions | Listing: what it lists. Item: what it is | [descriptions.md](../../umbraco-content-model-conventions/references/descriptions.md) |
-| Compositions | The site's page compositions on both | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
+| Schema of each page: folder, icon, description, tabs, culture | Decided by `add-document-type` with the role page: both at the Document Types root; listing `icon-list`, item a noun that fits, both the page colour; listing described by what it lists, item by what it is | [add-document-type workflow](../../umbraco-add-document-type/references/workflow.md#2-decide) |
+| Compositions | The SEO composition on both, always; the site's other page compositions by kind | [SEO is mandatory](../../umbraco-add-page/references/workflow.md#seo-is-mandatory), [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
 | Listing's own fields | Usually none; an intro or featured items at most, on the `Content` tab | [tabs-groups-sorts.md](../../umbraco-content-model-conventions/references/tabs-groups-sorts.md) |
 | Item's own fields | What each item holds: a date to order by, the body; `Content` tab | [property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md) |
 | Templates | One each, named after the alias, under the master | [templates.md](../../umbraco-content-model-conventions/references/templates.md) |
@@ -46,6 +46,7 @@ A listing pair is these pages:
 | Page | From | Location | Action |
 |---|---|---|---|
 | Any new data type for an item field | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor-Kind>/<Name-Slug>.md` | Create |
+| The SEO composition, only if the site has none | [composition.md](../../umbraco-content-requirements-documentation/assets/composition.md) | `Document-Types/Compositions/SeoComposition.md` | Create |
 | The collection view | [collection-view-data-type.md](../../umbraco-content-requirements-documentation/assets/collection-view-data-type.md) | `Data-Types/Collection-View/<Name-Slug>.md` | Create |
 | The master template, only if the site has none | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/Master.md` | Create |
 | The item's template | [template.md](../../umbraco-content-requirements-documentation/assets/template.md) | `Templates/<MasterPascalCase>/<ItemAliasPascalCase>.md` | Create |
@@ -68,15 +69,16 @@ The changeset's checklist, in apply order:
 
 ```
 - [ ] 1. Create any new data type for an item field                              (only if needed)
-- [ ] 2. Create data type folder `Collection View` and data type `<Listing name> Collection View`
-- [ ] 3. Create template `master`                                               (only if new)
-- [ ] 4. Create template `<itemAlias>` under `master`
-- [ ] 5. Create template `<listingAlias>` under `master`
-- [ ] 6. Create document type `<itemAlias>`, then fix-up (sorts, mandatory, descriptions, template)
-- [ ] 7. Create document type `<listingAlias>`, then fix-up (template, collection view)
-- [ ] 8. Set allowed children on `<listingAlias>`: `<itemAlias>`, `<listingAlias>`
-- [ ] 9. Set allowed children on `homePage`: add `<listingAlias>`, keeping the existing entries
-- [ ] 10. Verify every requirements doc against the site and set each status line
+- [ ] 2. Create composition `seoComposition`, then fix-up                             (only if new)
+- [ ] 3. Create data type folder `Collection View` and data type `<Listing name> Collection View`
+- [ ] 4. Create template `master`                                               (only if new)
+- [ ] 5. Create template `<itemAlias>` under `master`
+- [ ] 6. Create template `<listingAlias>` under `master`
+- [ ] 7. Create document type `<itemAlias>`, then fix-up (sorts, mandatory, descriptions, template)
+- [ ] 8. Create document type `<listingAlias>`, then fix-up (template, collection view)
+- [ ] 9. Set allowed children on `<listingAlias>`: `<itemAlias>`, `<listingAlias>`
+- [ ] 10. Set allowed children on `homePage`: add `<listingAlias>`, keeping the existing entries
+- [ ] 11. Verify every requirements doc against the site and set each status line
 ```
 
 ## 4. Stop for approval
@@ -100,7 +102,7 @@ For a listing pair, also:
 - **The listing's fix-up** sets `collection` to `{ "id": <collection view id> }` along with the
   template, and, in the allowed-children step, `allowedDocumentTypes` to the item and itself.
 - **The parent** is updated last by read-modify-write, keeping every existing allowed child; see the
-  page-type [workflow](../../umbraco-add-page-type/references/workflow.md#5-apply).
+  page [workflow](../../umbraco-add-page/references/workflow.md#5-apply).
 
 ## 6. Verify and report
 

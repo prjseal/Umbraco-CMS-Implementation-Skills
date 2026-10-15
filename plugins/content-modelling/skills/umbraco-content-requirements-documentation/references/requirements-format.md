@@ -18,7 +18,7 @@ docs/umbraco-schema/
         Toggle/Toggle-default-on.md
     Document-Types.md
     Document-Types/
-        ArticlePage.md                routable pages at the root, as in the backoffice
+        ArticlePage.md                pages (types with a template) at the root, as in the backoffice
         Compositions/SeoComposition.md
         Data/AuthorFolder.md
         Elements/Accordion.md
@@ -149,12 +149,14 @@ nothing else. It exits 0 when there are no errors, 1 when there are, and prints 
 finding with the file, line and rule. It checks: required headings and Definition rows, the
 twelve-column header, the status line, alias casing, suffix by folder and reserved aliases, tab
 sorts against the global table, element and composition shape, a template named after the alias
-for every routable page, the `Collection` row only on a listing, the `Folder` breadcrumb, the
-dependency types and flags, the changeset's actions and that an applied changeset has every page
-applied and every step ticked, that links resolve, and that no `<placeholder>` is left, whatever
-its casing. Three things are warnings rather than errors: a property sort that is not a multiple
-of 100, a data type name that follows no pattern, and a name, tab, group or description containing
-`?`, `&`, a percent-encoded sequence or `../`, which the Umbraco Developer MCP refuses.
+for every page (a type with a template), the `Collection` row only on a listing, the `Folder`
+breadcrumb, the dependency types and flags, the changeset's actions and that an applied changeset
+has every page applied and every step ticked, that links resolve, and that no `<placeholder>` is
+left, whatever its casing. Four things are warnings rather than errors: a property sort that is
+not a multiple of 100, a data type name that follows no pattern, a page whose Compositions row has
+no SEO composition (`page-seo`; every page takes it, but a page every changeset lists only as an
+Update is left alone), and a name, tab, group or description containing `?`, `&`, a
+percent-encoded sequence or `../`, which the Umbraco Developer MCP refuses.
 
 If Node.js is not available, say the requirements doc was not linted. Do not report it as
 lint-clean.

@@ -39,6 +39,7 @@ the property's tab and sort from
   [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types).
 - **Register each block with its settings model** (the site's shared ones, or the block's bespoke
   one). A block registered without its settings element loses its style options in that placement.
+  A block with no settings model is registered with settings `—`.
 - **Column spans say where a block may sit.** A full-width block offers 12 only; a card-like block
   offers 12, 6 and 4. Leave spans empty only for blocks that take any width.
 - **Layout blocks are opt-in.** Add areas only when editors need to put blocks side by side. A
@@ -62,7 +63,8 @@ uses the block before planning its removal. Never remove a block that content us
 
 Read the placement's existing Block Grid and its blocks (`get-data-type`), the elements and
 settings models to register (`get-document-type-by-id`), the types that have or will have the
-property, and the `Block Grid/` folder. An element that does not exist yet is made first with
+property, and the `Block Grid/` folder. A block that does not exist yet is made first with
+[`umbraco-add-block`](../../umbraco-add-block/SKILL.md), or a single element with
 [`umbraco-add-element-type`](../../umbraco-add-element-type/SKILL.md).
 
 ## 2. Decide

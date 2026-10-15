@@ -4,13 +4,14 @@ Recorded from `@umbraco-cms/mcp-dev` 17.6.8 connected to a local Umbraco 17.5.3 
 `document-type`, `data-type`, `template` and `language` collections enabled. Treat it as what the
 connected server reports. Nothing has been written to the site.
 
-## Connected document-type and data-type tools (abbreviated)
+## Connected tools (abbreviated)
 
 `get-all-document-types`, `get-document-type-by-id`, `get-document-types-by-id-array`,
 `get-document-type-tree-search`, `get-document-type-ancestors`, `create-document-type`,
 `create-element-type`, `update-document-type`, `move-document-type`, `create-document-type-folder`,
 `get-document-type-folder`, `get-icons`, `get-all-data-types`, `find-data-type`, `get-data-type`,
-`create-data-type`, `create-data-type-folder`, `get-data-type-folder`, `get-references-data-type`.
+`create-data-type`, `update-data-type`, `create-data-type-folder`, `get-data-type-folder`,
+`get-references-data-type`, `get-language`.
 
 ## Document Types tree (with aliases read from get-document-type-by-id)
 

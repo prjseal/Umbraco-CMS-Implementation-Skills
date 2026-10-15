@@ -9,10 +9,10 @@ description: >
   walkthrough, and read back.
   Use this whenever the user asks to "add a block grid", "set up the main content area", "add this
   block to the page", "make the new block available in the grid", "configure the block list",
-  "which blocks can editors use here", "add a sidebar with blocks", or "set column spans".
-  SKIP: non-Umbraco projects or Umbraco < 17; creating the element types (use
-  umbraco-add-element-type); other data types (use umbraco-add-data-type); a listing's
-  collection view (use umbraco-add-listing-page); Block Grid stylesheets and block Razor partials.
+  "which blocks can editors use here", or "set column spans".
+  SKIP: non-Umbraco projects or Umbraco < 17; creating blocks or elements (use umbraco-add-block
+  or umbraco-add-element-type); other data types (use umbraco-add-data-type); a listing's
+  collection view (use umbraco-add-listing-page); Block Grid stylesheets and Razor partials.
 ---
 
 # Configure Block Editor
@@ -21,8 +21,11 @@ Configures **one block editor data type**: which blocks it offers, with which se
 how many, and the property that uses it. It works requirements-first: write the change down, stop
 for the user's approval, apply it, then read it back.
 
-The blocks themselves (content elements, settings models, child items) are made by
-[`umbraco-add-element-type`](../umbraco-add-element-type/SKILL.md). This skill registers them.
+The blocks themselves (content elements, with a settings model when they have style options, and
+child items) are made by
+[`umbraco-add-block`](../umbraco-add-block/SKILL.md), and a single element by
+[`umbraco-add-element-type`](../umbraco-add-element-type/SKILL.md). This skill registers them in a
+block area; see [the terms](../umbraco-content-model-conventions/SKILL.md#terms).
 
 The rules come from [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md),
 and the requirements doc format and the six-step workflow from
@@ -62,6 +65,30 @@ Not a third approach: both approaches use the Umbraco Developer MCP when it is c
 otherwise a manual walkthrough from the same requirements doc; see
 [change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#5-apply).
 
+## Used by another skill
+
+Two skills call this one, both for approach A:
+
+- [`umbraco-add-page`](../umbraco-add-page/SKILL.md), for the block area a new page has: the
+  Block Grid for that placement, created if the site has none, or an Update that keeps every
+  existing entry if it has one, and the `mainContent` (or sidebar) property on the page.
+- [`umbraco-add-block`](../umbraco-add-block/SKILL.md), to place one new block in an existing
+  block area the user names: an Update of that Block Grid adding one entry with the block's
+  settings model (or `—` when it has none), keeping every existing entry.
+
+When called from another skill:
+
+- **Inspect, decide and write only.** Run steps 1 to 3 of
+  [approach A](references/approach-a-block-grid-placement.md): read the placement's grid and its
+  blocks, decide the registration (settings element, root or areas, column spans) and write the
+  data type page as Create or Update.
+- **Hand back** the page, its dependency flags and its checklist row, which the caller places
+  after the elements it registers and before the page that uses it
+  ([combined-changeset.md](../umbraco-add-page/references/combined-changeset.md)).
+- **Do not stop for approval and do not apply.** The caller owns the changeset, the single
+  approval gate and the apply; the apply and verify notes in approach A still apply to the grid
+  it wrote. Removing a block or tightening a limit is never part of a call from another skill.
+
 ## Version compatibility
 
 Targets **Umbraco 17+**. The editor and editor UI aliases (`Umbraco.BlockGrid`,
@@ -74,8 +101,9 @@ the connected tool list is the authority.
 
 - **Two places that allow different blocks get two data types**, so changing one never changes
   the other; see [naming.md](../umbraco-content-model-conventions/references/naming.md#data-types).
-- **Register blocks with their settings models.** A block's styling is chosen where it is
-  registered; register the content element and its settings element together.
+- **Register blocks with their settings models, when they have one.** A block's styling is chosen
+  where it is registered; register the content element and its settings element together.
+  Settings are optional: a block with no style options is registered with settings `—`.
 - **Changing a block editor changes existing content's options.** Adding a block is safe.
   Removing one, or tightening a limit, affects pages that already use it: read what uses the data
   type first, and never remove a block that content still uses.
