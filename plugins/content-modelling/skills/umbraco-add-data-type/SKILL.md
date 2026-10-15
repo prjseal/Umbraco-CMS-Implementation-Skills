@@ -48,6 +48,26 @@ both must be installed alongside this one. If a link into either cannot be read,
 MCP when connected, otherwise a manual walkthrough from the same requirements doc; see
 [change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#5-apply).
 
+## Used by another skill
+
+[`umbraco-add-page`](../umbraco-add-page/SKILL.md) calls this skill for a page field nothing on
+the site fits, [`umbraco-add-block`](../umbraco-add-block/SKILL.md) and
+[`umbraco-add-element-type`](../umbraco-add-element-type/SKILL.md) for a block field (a colour
+palette, a dropdown of sizes), and [`umbraco-add-composition`](../umbraco-add-composition/SKILL.md)
+for a composition field such as a toggle that defaults on. When called from another skill:
+
+- **Inspect, decide and write only.** Run steps 1 to 3 of [workflow.md](references/workflow.md):
+  read the candidate data types' configurations, decide reuse or create
+  ([reuse-or-create.md](references/reuse-or-create.md)) and, for a new one, write its page and
+  the editor-kind folder index if the folder is new.
+- **Hand back** the decision (reuse, by name, or the new page), its dependency flags and the
+  checklist row, which the caller places first in its apply order
+  ([combined-changeset.md](../umbraco-add-page/references/combined-changeset.md)).
+- **Do not stop for approval and do not apply.** The caller owns the changeset, the single
+  approval gate and the apply; the apply and verify notes in this skill's workflow still apply to
+  the data type it wrote. Reconfiguring an existing data type is never part of a call from
+  another skill.
+
 ## Version compatibility
 
 Targets **Umbraco 17+**. The property editor and editor UI aliases in

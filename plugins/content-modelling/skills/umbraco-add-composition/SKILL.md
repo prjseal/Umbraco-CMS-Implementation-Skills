@@ -11,8 +11,8 @@ description: >
   this composition".
   SKIP: non-Umbraco projects or Umbraco < 17; adding or removing fields on one existing type (use
   umbraco-change-document-type); settings compositions for block settings models (use
-  umbraco-add-element-type); adding a page type (use umbraco-add-page-type); questions about
-  naming only (use umbraco-content-model-conventions).
+  umbraco-add-block, or umbraco-add-element-type for one on its own); adding a page (use
+  umbraco-add-page); questions about naming only (use umbraco-content-model-conventions).
 ---
 
 # Add Composition
@@ -48,6 +48,30 @@ One approach, two mechanisms: the Umbraco Developer MCP when it is connected, ot
 walkthrough generated from the same requirements doc; see
 [change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#5-apply).
 
+## Used by another skill
+
+[`umbraco-add-page`](../umbraco-add-page/SKILL.md) calls this skill when a site has no SEO
+composition yet: every page takes SEO, so the first page brings the composition with it
+([SEO is mandatory](../umbraco-add-page/references/workflow.md#seo-is-mandatory)).
+[`umbraco-add-listing-page`](../umbraco-add-listing-page/SKILL.md) does the same for its two
+pages. When called from another skill:
+
+- **Inspect, decide and write only.** Run steps 1 to 3 of [workflow.md](references/workflow.md):
+  confirm no SEO composition exists, decide it from the standard fields in
+  [standard-compositions.md](references/standard-compositions.md) (`metaTitle`,
+  `metaDescription`, `isIndexable`, `canonicalUrlOverride` on the `SEO` tab, 600), and write its
+  page, the `Compositions` folder index if the folder is new, and the `Toggle (default on)` data
+  type page if the site has no toggle that defaults on.
+- **Targets are the caller's.** The new page takes the composition; the caller writes it into
+  that page's Compositions row, flagged `New in this changeset`. Existing pages without SEO are
+  listed for the caller to offer as optional Updates, not written as targets.
+- **Hand back** the pages, their dependency flags and the checklist rows (data type, folder,
+  composition create and fix-up) for the caller's apply order
+  ([combined-changeset.md](../umbraco-add-page/references/combined-changeset.md)).
+- **Do not stop for approval and do not apply.** The caller owns the changeset and the single
+  approval gate; the apply and verify notes in this skill's workflow still apply to the
+  composition it wrote.
+
 ## Version compatibility
 
 Targets **Umbraco 17+**. MCP tool names were checked as described in
@@ -58,6 +82,10 @@ the connected tool list is the authority.
 
 - **One concern, flat, fields only.** The composition rules are in
   [compositions.md](../umbraco-content-model-conventions/references/compositions.md#rules).
+- **Every page takes the SEO composition.** For SEO, "every page" means every type with a
+  template, and a page added later takes it as it is created
+  ([SEO is mandatory](../umbraco-add-page/references/workflow.md#seo-is-mandatory)). Sharing and
+  page details stay selective; see [when-to-apply.md](references/when-to-apply.md#which-types-take-it).
 - **Applying is editing existing types.** Every target is an existing type, often with content,
   changed by a full-body replace. Read it, modify it, write it, and compare the property count.
 - **A clashing alias blocks the composition.** A type that already has a property with one of the

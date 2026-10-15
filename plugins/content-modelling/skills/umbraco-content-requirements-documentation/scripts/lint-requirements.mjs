@@ -7,8 +7,8 @@
 // check them by eye: page layout, status lines, alias casing, suffix by folder and reserved aliases,
 // tab sorts, element and composition shape, templates, the Collection row, folder breadcrumbs,
 // dependency types and flags, changeset shape and status, links, leftover placeholders, and (as
-// warnings) property sorts not in hundreds, data type names and values the Umbraco Developer MCP
-// would refuse.
+// warnings) property sorts not in hundreds, data type names, a page with no SEO composition and
+// values the Umbraco Developer MCP would refuse.
 //
 // The format it enforces is documented in ../references/requirements-format.md. No dependencies.
 
@@ -336,9 +336,9 @@ function checkProperties(page, role, alias, dependencyNames, variesByCulture) {
 }
 
 const SUFFIX_RULES = {
-  page: (alias) => (/Page$/.test(alias) || alias === 'siteSettings' ? null : 'a routable page alias ends in "Page" (the only exception at the tree root is siteSettings)'),
+  page: (alias) => (/Page$/.test(alias) || alias === 'siteSettings' ? null : 'a page alias ends in "Page" (the only exception at the tree root is siteSettings)'),
   composition: (alias) => (/Composition$/.test(alias) ? null : 'an alias in Compositions/ ends in "Composition"'),
-  data: (alias) => (/(Page|Composition)$/.test(alias) ? 'a type in Data/ is not routable and not a composition; use "...Folder", "...Item" or a plain noun' : null),
+  data: (alias) => (/(Page|Composition)$/.test(alias) ? 'a type in Data/ is not a page and not a composition; use "...Folder", "...Item" or a plain noun' : null),
   element: (alias) => (/(Page|Composition|Settings|Folder)$/.test(alias) ? 'a block element alias is a plain noun, or ends in "Item", "Row" or "Block"' : null),
   settingsComposition: (alias) => (/SettingsComposition$/.test(alias) ? null : 'an alias in Elements/Compositions/ ends in "SettingsComposition"'),
   settingsModel: (alias) => (/Settings$/.test(alias) ? null : 'an alias in Elements/Settings/ ends in "Settings"'),
@@ -375,9 +375,13 @@ function checkContentType(page, kind, role, status) {
     if (role === 'settingsModel' && isDash(value('Compositions') ?? DASH)) report('error', page.file, def.line('Compositions'), 'settings-model-shape', 'a settings model is built from at least one settings composition');
   }
   if (role === 'data' || alias === 'siteSettings') {
-    ['Default template', 'Allowed templates'].forEach((key) => mustBeDash(key, 'template-named-after-alias', 'only routable pages get a template'));
+    ['Default template', 'Allowed templates'].forEach((key) => mustBeDash(key, 'template-named-after-alias', 'only pages get a template'));
   }
   if (role === 'page' && alias && alias !== 'siteSettings') checkPageTemplate(page, def, alias);
+  // Every page takes the SEO composition. A warning, not an error: a page is usable without it, and the
+  // skills add the composition in the same changeset when the site has none.
+  if (role === 'page' && alias && alias !== 'siteSettings' && value('Compositions') !== undefined && !/seo/i.test(value('Compositions')))
+    report('warning', page.file, def.line('Compositions'), 'page-seo', 'every page takes the SEO composition; none is listed in Compositions');
   if (atRoot === 'Yes' && alias && !(/HomePage$|^homePage$/.test(alias) || alias === 'siteSettings' || /Folder$/.test(alias)))
     report('error', page.file, def.line('Allowed at root'), 'allowed-at-root', `"${alias}" is allowed at root; only the home page, siteSettings and data folders are`);
   if (role === 'page' && /ListingPage$/.test(alias) && isDash(value('Collection') ?? DASH))
@@ -394,7 +398,7 @@ function checkPageTemplate(page, def, alias) {
   if (cell === undefined) return;
   const line = def.line('Default template');
   if (isDash(cell)) {
-    report('error', page.file, line, 'template-named-after-alias', 'a routable page has a default template');
+    report('error', page.file, line, 'template-named-after-alias', 'a page has a default template');
     return;
   }
   if (linkText(cell) !== def.get('Name')) report('error', page.file, line, 'template-named-after-alias', `the default template is named after the type: expected "${def.get('Name')}", found "${linkText(cell)}"`);

@@ -15,8 +15,14 @@ The rules behind it are in
 
 The settings model is attached to the content element where the block is registered in a Block
 Grid or Block List, not on the element itself. That registration belongs to
-[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md); this skill only
-makes the settings model exist and says which block it is for.
+[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md); this skill makes
+the settings model exist, says which block it is for, and registers the pair only in an existing
+area the user names ([workflow.md](workflow.md#2-decide)).
+
+Each settings model and settings composition is one element type, decided by
+[umbraco-add-element-type](../../umbraco-add-element-type/references/element-roles.md) in the role
+settings model or settings composition. A settings composition wanted on its own, with no block
+behind the request, is that skill's job; from here it is one part the block needs.
 
 ## Which settings model a block uses
 

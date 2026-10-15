@@ -9,23 +9,26 @@ description: >
   Use this whenever the user asks to "add a blog", "add a news section", "create a listing page",
   "add an events listing", "add an articles section with a list of articles", "set up a list view
   for the news items", or "configure the collection view for this listing".
-  SKIP: non-Umbraco projects or Umbraco < 17; one standalone page type (use umbraco-add-page-type);
-  non-routable data folders and items such as authors or categories (use umbraco-add-data-folder);
+  SKIP: non-Umbraco projects or Umbraco < 17; one standalone page (use umbraco-add-page); data
+  folders and items that are not pages, such as authors or categories (use umbraco-add-data-folder);
   compositions (use umbraco-add-composition); rendering the list, paging or filtering in Razor or
   C#.
 ---
 
 # Add Listing Page
 
-Adds **a listing pair**: a routable listing page (`articleListingPage`) and the routable item it
-lists (`articlePage`), made together because neither is useful alone. The listing gets its own
+Adds **a listing pair**: a listing page (`articleListingPage`) and the item page it lists
+(`articlePage`), made together because neither is useful alone. The listing gets its own
 collection view so editors manage items as a table, and the two types allow each other the way
 the conventions say. It works requirements-first: write the change down, stop for the user's
 approval, apply it, then read it back.
 
 One standalone page belongs to
-[`umbraco-add-page-type`](../umbraco-add-page-type/SKILL.md); this skill reuses its decisions for
-each of the two pages and adds only what the pairing needs.
+[`umbraco-add-page`](../umbraco-add-page/SKILL.md); this skill calls it once for each of the two
+pages, so each gets its template and takes the SEO composition, and adds only what the pairing
+needs. The schema of each page is decided by
+[`umbraco-add-document-type`](../umbraco-add-document-type/SKILL.md#used-by-another-skill) with
+the role page.
 
 The rules come from
 [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the
@@ -74,7 +77,10 @@ the connected tool list is the authority.
 - **Order by something the item holds.** Newest first by a date on the item is usually right; the
   create date is a fallback when the item has none.
 - **The parent is an existing type**, updated by a full-body replace: the riskiest call in the
-  change, as [`umbraco-add-page-type`](../umbraco-add-page-type/SKILL.md#best-practices) says.
+  change, as [`umbraco-add-page`](../umbraco-add-page/SKILL.md#best-practices) says.
+- **Every page takes SEO.** Both pages take the SEO composition; if the site has none, it joins
+  the change, as [SEO is mandatory](../umbraco-add-page/references/workflow.md#seo-is-mandatory)
+  says.
 - **"Just add a blog" is a request for the section, not approval** of a requirements doc the user
   has not yet seen; the gate is in
   [change-workflow.md](../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
@@ -84,7 +90,7 @@ the connected tool list is the authority.
 Objective assertions live in [`evals/evals.json`](evals/evals.json); run them with
 `umbraco-skill-evaluator`. Coverage tier: **Documented**. This skill ships no assets; its only
 code is the Razor layout stub borrowed from
-[`umbraco-add-page-type`](../umbraco-add-page-type/references/workflow.md#5-apply), which is
+[`umbraco-add-page`](../umbraco-add-page/references/workflow.md#5-apply), which is
 uncompiled context that no host builds; for real templates see the
 [Umbraco templates docs](https://docs.umbraco.com/umbraco-cms/fundamentals/design/templates.md)
 or the implementation plugin. The requirements docs it writes are checked by the linter in

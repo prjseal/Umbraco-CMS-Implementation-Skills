@@ -1,7 +1,7 @@
 ---
 name: umbraco-add-data-folder
 description: >
-  Add shared, non-routable content to an Umbraco 17+ site: a data folder document type at the
+  Add shared content that is not a page to an Umbraco 17+ site: a data folder document type at the
   content root, the data item it holds (authors, categories, locations, reusable content) and the
   picker data type pages use to choose items, including content-driven taxonomy. The change is
   written as a requirements doc, approved, applied through the Umbraco Developer MCP or a manual
@@ -9,8 +9,8 @@ description: >
   Use this whenever the user asks to "add authors", "add categories", "set up a taxonomy", "store
   reusable content", "add a data folder", "create a folder of locations editors can pick from",
   "let articles pick an author", or "where should shared data live in the content tree".
-  SKIP: non-Umbraco projects or Umbraco < 17; routable pages or listing sections (use
-  umbraco-add-page-type or umbraco-add-listing-page); the site settings singleton (use
+  SKIP: non-Umbraco projects or Umbraco < 17; pages or listing sections (use umbraco-add-page or
+  umbraco-add-listing-page); the site settings singleton (use
   umbraco-add-site-settings); free-form tags (use umbraco-add-data-type).
 ---
 
@@ -22,7 +22,9 @@ it instead of retyping the same name on every page. It works requirements-first:
 down, stop for the user's approval, apply it, then read it back.
 
 "Folder" here is a **document type** that holds content nodes, not the organisational folders in
-the Settings tree.
+the Settings tree. The schema of the folder and item types is decided by
+[`umbraco-add-document-type`](../umbraco-add-document-type/SKILL.md#used-by-another-skill) with
+the role data folder or item; this skill adds the content-tree behaviour and the picker.
 
 The rules come from
 [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the

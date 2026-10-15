@@ -4,14 +4,15 @@ description: >
   Change a document type, composition or element type that already exists on an Umbraco 17+ site:
   add, remove or reorder a property, make one mandatory, change its data type, rename a type or
   property, change allowed children or compositions, or move a type into a folder. Says which
-  changes lose content and which are safe. The change is written as a requirements doc, approved,
-  applied through the Umbraco Developer MCP or a manual backoffice walkthrough, and read back.
+  changes lose content. The change is written as a requirements doc, approved, applied through
+  the Umbraco Developer MCP or a manual backoffice walkthrough, and read back.
   Use this whenever the user asks to "add a field to the article page", "make the summary
   mandatory", "remove the old banner property", "rename this property", "change this field to a
   picker", "let the home page allow event pages", or "move this type into a folder".
-  SKIP: non-Umbraco projects or Umbraco < 17; creating a new type (use umbraco-add-page-type or
-  umbraco-add-element-type); applying a composition to several types (use umbraco-add-composition);
-  reconfiguring a data type itself (use umbraco-add-data-type); editing content nodes.
+  SKIP: non-Umbraco projects or Umbraco < 17; creating a new type (use umbraco-add-page,
+  umbraco-add-document-type, umbraco-add-element-type or umbraco-add-block); applying a
+  composition (use umbraco-add-composition); reconfiguring a data type (use
+  umbraco-add-data-type); editing content nodes.
 ---
 
 # Change Document Type

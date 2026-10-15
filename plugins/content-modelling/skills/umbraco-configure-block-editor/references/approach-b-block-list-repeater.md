@@ -13,8 +13,8 @@ editors combine different kinds of block into a layout, use
 [approach A, a Block Grid per placement](approach-a-block-grid-placement.md) instead.
 
 A repeater usually lives inside a parent block (`accordion.items`), and is created with that block
-by [`umbraco-add-element-type`](../../umbraco-add-element-type/SKILL.md) (see its
-[nested items](../../umbraco-add-element-type/references/nested-items.md)). Use this file when the
+by [`umbraco-add-block`](../../umbraco-add-block/SKILL.md) (see its
+[nested items](../../umbraco-add-block/references/nested-items.md)). Use this file when the
 repeater is configured on its own: a page-level list, a second list of the same items, a changed
 limit, or a repeater that allows a second kind of item.
 

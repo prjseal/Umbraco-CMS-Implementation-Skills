@@ -34,14 +34,14 @@
     {
       "id": 3,
       "prompt": "Umbraco MCP is connected to our Umbraco 17 site; evals/files/mcp/site-context.md holds what the read tools returned (this session can't call it; treat the file as the live site). Requirements docs go in docs/umbraco-schema/. Content pages need a sidebar where editors can add rich text, a promo and a newsletter signup. To keep things consistent, just reuse the Main Content Block Grid for the sidebar property.",
-      "expected_output": "The agent creates a separate Sidebar Block Grid (one data type per placement), registering richText and promo with their settings models, grid columns 12. It notices there is no newsletter signup element and leaves it to umbraco-add-element-type rather than inventing it. The sidebar property goes on contentPage in the global Sidebar tab (sort 500) as an Update. Everything is proposed and waits for approval.",
+      "expected_output": "The agent creates a separate Sidebar Block Grid (one data type per placement), registering richText and promo with their settings models, grid columns 12. It notices there is no newsletter signup element and leaves it to umbraco-add-block (or umbraco-add-element-type) rather than inventing it. The sidebar property goes on contentPage in the global Sidebar tab (sort 500) as an Update. Everything is proposed and waits for approval.",
       "files": [
         "evals/files/mcp/site-context.md"
       ],
       "expectations": [
         "A new Block Grid data type requirements page exists under docs/umbraco-schema/Data-Types/Block-Grid/ named for the placement (e.g. `Sidebar Block Grid`), and the agent explains why it does not reuse Main Content Block Grid (one data type per placement)",
         "The new grid registers `richText` with `blockSettings` and `promo` with `blockSettings`, and states its grid columns",
-        "The agent notes that no newsletter signup element exists and does not register an invented one as if it existed; it is flagged Missing, deferred, or named as a follow-up for umbraco-add-element-type",
+        "The agent notes that no newsletter signup element exists and does not register an invented one as if it existed; it is flagged Missing, deferred, or named as a follow-up for umbraco-add-block (or umbraco-add-element-type)",
         "The sidebar property is added to contentPage (an Update requirements page or checklist item) on a tab named `Sidebar` with Tab Sort 500",
         "Every requirements page and the changeset have the status `proposed`; the agent stops for approval and does not claim anything was created or verified on the site"
       ]

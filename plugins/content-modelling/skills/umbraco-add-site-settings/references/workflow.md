@@ -20,10 +20,7 @@ For site settings, establish:
 
 | Decision | For site settings | Rule |
 |---|---|---|
-| Name and alias | Site Settings, `siteSettings`: the one root type without a `Page` suffix | [naming.md](../../umbraco-content-model-conventions/references/naming.md) |
-| Folder | The Document Types root, beside the pages | [tree-organisation.md](../../umbraco-content-model-conventions/references/tree-organisation.md) |
-| Icon | `icon-settings color-green`, the data colour | [icons-and-colours.md](../../umbraco-content-model-conventions/references/icons-and-colours.md#colour-by-role) |
-| Description | What it holds ("Settings for the whole site: logo, navigation, footer and defaults.") | [descriptions.md](../../umbraco-content-model-conventions/references/descriptions.md) |
+| Schema: name, alias, folder, icon, description | Decided by `add-document-type` with the role site settings: Site Settings, `siteSettings`, the one root type without a `Page` suffix; the Document Types root, beside the pages; `icon-settings color-green`, the data colour; described by what it holds ("Settings for the whole site: logo, navigation, footer and defaults.") | [add-document-type workflow](../../umbraco-add-document-type/references/workflow.md#2-decide), [type-roles.md](../../umbraco-add-document-type/references/type-roles.md) |
 | Allowed at root | Yes, sorted after the home page | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-at-root) |
 | Allowed children, templates, compositions | None | [allowed-children-and-root.md](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#site-settings), [templates.md](../../umbraco-content-model-conventions/references/templates.md) |
 | Tabs and sorts | Its own tabs, 0 to 9 in reading order | [tab-layout.md](tab-layout.md) |
@@ -42,7 +39,7 @@ the values have moved. The same rule applies to any existing property moved betw
 | Page | From | Location | Action |
 |---|---|---|---|
 | Any new data type (pickers, a script text area) | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor-Kind>/<Name-Slug>.md` | Create |
-| Any repeater element and its Block List | via [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) | `Document-Types/Elements/<AliasPascalCase>.md`, `Data-Types/Block-List/<Name-Slug>.md` | Create |
+| Any repeater element and its Block List | via [umbraco-add-block](../../umbraco-add-block/SKILL.md) | `Document-Types/Elements/<AliasPascalCase>.md`, `Data-Types/Block-List/<Name-Slug>.md` | Create |
 | The settings type | [document-type.md](../../umbraco-content-requirements-documentation/assets/document-type.md) | `Document-Types/SiteSettings.md` | Create, or Update when one exists |
 | The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
@@ -83,7 +80,7 @@ For site settings, also:
   of first appearance, which is right only if the properties were passed in tab order.
 - **The content node** is created by the user in the Content section, at the root. Only one, and
   it must not become the first root node: the home page stays sorted first, or carries the domain
-  in Culture and Hostnames, because the first routable root owns `/`
+  in Culture and Hostnames, because the first root node that is a page owns `/`
   ([root order](../../umbraco-content-model-conventions/references/allowed-children-and-root.md#allowed-at-root)).
   Tell the user this with the step, and ask them to check the sort order once the node exists.
 

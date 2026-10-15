@@ -7,8 +7,9 @@ description: >
   the rule book the other content-modelling skills link into.
   Use this whenever the user asks about "Umbraco naming conventions", "what should I call this
   document type", "where does this go in the document types tree", "what sort order should this
-  tab have", "how should I structure compositions", "should this be allowed at root", or
-  "does this type need a template", or when another content-modelling skill needs a rule.
+  tab have", "how should I structure compositions", "should this be allowed at root",
+  "does this type need a template", "what is the difference between a page and a document type",
+  or when another content-modelling skill needs a rule.
   SKIP: non-Umbraco projects; writing or applying a schema requirements doc (use
   umbraco-content-requirements-documentation); auditing a whole model (use
   umbraco-review-content-model); media types, member types and C# or Razor code.
@@ -37,11 +38,30 @@ requirements doc and applying it to a site belong to the sibling skill
 - **An existing project disagrees with a rule:** the project's established convention wins for
   that project. Say which rule it departs from, follow the project, and stay consistent.
 
+## Terms
+
+The six concepts the content-modelling skills are built on. One skill owns each, and this table
+is the source of truth for the wording every skill uses.
+
+| Concept | What it is | Template | Examples | Skill |
+|---|---|---|---|---|
+| Page | A document type visitors are meant to land on. It has a template, takes the SEO composition and sits under a parent that allows it | Yes | Contact page, article page, search page | `umbraco-add-page` |
+| Document type | The schema of something: its tabs, fields and compositions. Its nodes can still have a URL, but nothing renders them as a page | No | Author, category, site settings | `umbraco-add-document-type` |
+| Element type | The schema of content that lives inside something else, never on its own in the content tree | No | Accordion, accordion item, a settings model | `umbraco-add-element-type` |
+| Block | A set of elements: the content element editors fill in, and the settings element that controls how it looks | No | An accordion and its settings | `umbraco-add-block` |
+| Composition | A reusable set of fields that does one job, added to the types that need it | No | SEO, Open Graph | `umbraco-add-composition` |
+| Block area | The place on a page where editors combine blocks | No | The main content Block Grid | `umbraco-configure-block-editor` |
+
+A template is what makes a page. Pages and plain document types can both have URLs; whether
+something is a page is a question of intent (will visitors land on it?), and the skills ask when
+it is unclear. Every page takes the SEO composition. Content and style stay apart: a block's
+content element holds what editors write, its settings element how it looks.
+
 ## Names
 
 | Convention | Look for | Reference |
 |---|---|---|
-| Document type names, aliases and suffixes | A routable type with no `Page` suffix, `SEO` written as an acronym in an alias | [naming.md](references/naming.md) |
+| Document type names, aliases and suffixes | A page type with no `Page` suffix, `SEO` written as an acronym in an alias | [naming.md](references/naming.md) |
 | Property aliases | `seoTitle`, `showBanner`, `heroTitle` on a block, unsuffixed overrides | [property-aliases.md](references/property-aliases.md) |
 | Descriptions | Empty descriptions, a composition not described as "Adds ..." | [descriptions.md](references/descriptions.md) |
 | Icons and colours | The default icon on everything, colour used at random | [icons-and-colours.md](references/icons-and-colours.md) |
@@ -59,7 +79,7 @@ requirements doc and applying it to a site belong to the sibling skill
 | Convention | Look for | Reference |
 |---|---|---|
 | Allowed children and allow-at-root | Several page types allowed at root, a listing that allows everything | [allowed-children-and-root.md](references/allowed-children-and-root.md) |
-| Templates | A routable type with no template, a template on a composition or element | [templates.md](references/templates.md) |
+| Templates | A page type with no template, a template on a composition or element | [templates.md](references/templates.md) |
 
 ## Out of scope
 

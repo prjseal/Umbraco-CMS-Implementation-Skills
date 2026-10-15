@@ -32,7 +32,7 @@ different sets of fields (for example `Primary` and `Secondary` navigation in He
   they follow pages that move; never a text field holding a URL.
 - **Repeated structured items are a repeater.** A list of social links with a network, a URL and an
   icon is a Block List of an element, made with
-  [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) and
+  [umbraco-add-block](../../umbraco-add-block/SKILL.md) and
   [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md).
 - **Descriptions say where the value appears** ("Shown in every page footer.") and what the
   fallback is for defaults ("Used when a page has no share image of its own.")

@@ -23,13 +23,15 @@ workflow; the others link into them.
 |-------|--------------|
 | `umbraco-content-model-conventions` | The rule book: names, aliases, tree, tabs and sorts, compositions, icons, allowed children, templates |
 | `umbraco-content-requirements-documentation` | The requirements doc format, the six-step change workflow, apply via MCP or manually, verify, and the requirements linter |
-| `umbraco-add-page-type` | One routable page type and its template, hung under the right parent |
+| `umbraco-add-page` | One page: its document type, template, SEO composition and parent, plus any block, block area or data type it needs, in one changeset |
+| `umbraco-add-document-type` | The schema of one document type that is not a page: data folders and items, site settings, plain types; never a template |
 | `umbraco-add-listing-page` | A listing page, its item type, the collection view and both templates |
 | `umbraco-add-composition` | One single-concern composition (SEO, sharing, page details) applied to the right types |
-| `umbraco-add-element-type` | One block: the element, its settings model, and a repeater's item children |
+| `umbraco-add-element-type` | One element type: a content element, a repeater item, a settings model or a settings composition |
+| `umbraco-add-block` | One block: the content element paired with its settings element, a repeater's items, placed in an existing block area |
 | `umbraco-configure-block-editor` | A Block Grid per placement or a Block List per repeater, and the property that uses it |
 | `umbraco-add-data-type` | Reuse or create a data type, pick the editor, name and file it |
-| `umbraco-add-data-folder` | Shared non-routable content (authors, categories) and the picker pages use |
+| `umbraco-add-data-folder` | Shared content that is not a page (authors, categories) and the picker pages use |
 | `umbraco-add-site-settings` | The `siteSettings` singleton at the content root |
 | `umbraco-change-document-type` | Change a type that already exists, saying which changes lose content |
 | `umbraco-review-content-model` | Audit a model against the conventions and report, ranked by severity; changes nothing |

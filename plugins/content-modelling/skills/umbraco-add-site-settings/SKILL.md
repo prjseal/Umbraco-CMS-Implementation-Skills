@@ -10,7 +10,7 @@ description: >
   go", "add global settings", "add a settings node", "store the social links for the whole site",
   "add a tracking code setting", or "move settings off the home page".
   SKIP: non-Umbraco projects or Umbraco < 17; fields for a single page (a composition, use
-  umbraco-add-composition); block styling settings (use umbraco-add-element-type); questions about
+  umbraco-add-composition); block styling settings (use umbraco-add-block); questions about
   naming only (use umbraco-content-model-conventions).
 ---
 
@@ -18,8 +18,11 @@ description: >
 
 Adds **the site settings singleton**: one `siteSettings` node at the root of the content tree that
 holds what belongs to the whole site (the logo, navigation, footer, social links, default sharing
-image, tracking codes). It is not the home page. It works requirements-first: write the change
-down, stop for the user's approval, apply it, then read it back.
+image, tracking codes). It is not the home page. Its schema is decided by
+[`umbraco-add-document-type`](../umbraco-add-document-type/SKILL.md#used-by-another-skill) with
+the role site settings; this skill adds the tabs, the root behaviour and the content node. It
+works requirements-first: write the change down, stop for the user's approval, apply it, then
+read it back.
 
 The rules come from
 [`umbraco-content-model-conventions`](../umbraco-content-model-conventions/SKILL.md), and the

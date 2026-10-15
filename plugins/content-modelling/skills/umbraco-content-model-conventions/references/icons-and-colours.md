@@ -21,7 +21,7 @@ The icon value is the icon name, optionally followed by a colour class:
 
 | Role | Colour | Example |
 |---|---|---|
-| Routable page | `color-light-blue` | `icon-newspaper color-light-blue` |
+| Page (has a template) | `color-light-blue` | `icon-newspaper color-light-blue` |
 | Data folder or data item | `color-green` | `icon-folder color-green` |
 | Site settings (`siteSettings`) | `color-green` | `icon-settings color-green` |
 | Composition | none | `icon-settings` |

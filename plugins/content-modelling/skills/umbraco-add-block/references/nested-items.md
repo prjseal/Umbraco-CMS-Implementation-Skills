@@ -15,7 +15,7 @@ accordion              parent element in Elements/      title, items
 |---|---|---|
 | Parent element | The block an editor picks | `accordion` |
 | Its repeating property | `items`, a Block List | `items` |
-| Child element | One entry in the list, suffixed `...Item` or `...Row` | `accordionItem`, `pricingRow` |
+| Child element | One entry in the list, suffixed `...Item` or `...Row`; one element in the role repeater item ([element-roles.md](../../umbraco-add-element-type/references/element-roles.md)) | `accordionItem`, `pricingRow` |
 | Block List data type | The plural of the child, in `Block List/` | `Accordion Items` |
 | How many | Minimum and maximum in the Block List's amount setting | min 1, max unlimited |
 
