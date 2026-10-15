@@ -32,7 +32,7 @@ folder the linter reports `allowed-at-root`, `template-named-after-alias` and
 
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
-| Page type with no default template | A type meant to be landed on (a `...Page` alias, or at the tree root) with no `defaultTemplate`, and no controller in the code base that renders it | High: the page's URL falls through to the 404 handler. Medium when a route-hijacking controller renders it; say which | [umbraco-add-page](../../umbraco-add-page/SKILL.md) |
+| Page type with no default template | A type meant to be landed on (a `...Page` alias, or at the tree root) with no `defaultTemplate`, and no controller in the code base that renders it | High: the page's URL falls through to the 404 handler. Medium when a route-hijacking controller renders it; say which | [umbraco-add-page](../../umbraco-add-page/SKILL.md) if visitors should land on it; otherwise the `Page` suffix is wrong, and the type is renamed by role ([type-roles.md](../../umbraco-add-document-type/references/type-roles.md)) |
 | Template alias differs from the type alias | `defaultTemplate` resolves to another alias | Low | the owning skill |
 | Template on a type that is not a page | A composition, element, data item or site settings with a template | Medium | the owning skill |
 | Several allowed templates | More than one allowed template with no stated alternate rendering | Low | the owning skill |

@@ -14,14 +14,9 @@ have seen and approved the requirements doc.
 One skill per concept. A template is what makes a page; everything else is schema that pages,
 blocks and block areas are built from.
 
-| Concept | What it is | Template | Examples | Skill |
-|---|---|---|---|---|
-| Page | A document type visitors are meant to land on. It has a template, takes the SEO composition and sits under a parent that allows it | Yes | Contact page, article page, search page | `umbraco-add-page` |
-| Document type | The schema of something: its tabs, fields and compositions. Its nodes can still have a URL, but nothing renders them as a page | No | Author, category, site settings | `umbraco-add-document-type` |
-| Element type | The schema of content that lives inside something else, never on its own in the content tree | No | Accordion, accordion item, a settings model | `umbraco-add-element-type` |
-| Block | A set of elements: the content element editors fill in, and the settings element that controls how it looks | No | An accordion and its settings | `umbraco-add-block` |
-| Composition | A reusable set of fields that does one job, added to the types that need it | No | SEO, Open Graph | `umbraco-add-composition` |
-| Block area | The place on a page where editors combine blocks | No | The main content Block Grid | `umbraco-configure-block-editor` |
+The definitions of the six concepts (page, document type, element type, block, composition and
+block area), with the skill that owns each, are in the
+[terms table](skills/umbraco-content-model-conventions/SKILL.md#terms).
 
 ## The skills at a glance
 
@@ -30,10 +25,10 @@ blocks and block areas are built from.
 | [`umbraco-content-model-conventions`](skills/umbraco-content-model-conventions/SKILL.md) | "What should I call this?", "Where does this go?" | Answers only. The rule book every other skill links into |
 | [`umbraco-content-requirements-documentation`](skills/umbraco-content-requirements-documentation/SKILL.md) | "Write a schema requirements doc", "Apply the approved changeset" | The requirements doc format, the approval lifecycle, apply through the MCP or a manual walkthrough, verify, and a linter |
 | [`umbraco-add-page`](skills/umbraco-add-page/SKILL.md) | "Add a contact page", "Add a landing page with a testimonial block" | One page: document type, template, SEO composition and parent, plus any block, block area or data type it needs, in one changeset with one approval |
-| [`umbraco-add-document-type`](skills/umbraco-add-document-type/SKILL.md) | "Add a document type for offices", "Model an author type" | The schema of one document type that is not a page, in the folder its role calls for; never a template |
+| [`umbraco-add-document-type`](skills/umbraco-add-document-type/SKILL.md) | "Add a document type for offices" | The schema of one document type in the folder its role calls for, never a template. Other skills use it for a page's schema |
 | [`umbraco-add-composition`](skills/umbraco-add-composition/SKILL.md) | "Add SEO fields to every page" | One single-concern composition, applied to the types that need it |
 | [`umbraco-add-element-type`](skills/umbraco-add-element-type/SKILL.md) | "Add a testimonial element", "Add a spacing settings composition" | One element type: a content element, a repeater item, a settings model or a settings composition |
-| [`umbraco-add-block`](skills/umbraco-add-block/SKILL.md) | "Add an accordion block" | A block: its content element paired with its settings element, settings compositions and repeater items, placed in an existing block area if you name one |
+| [`umbraco-add-block`](skills/umbraco-add-block/SKILL.md) | "Add an accordion block" | A block: its content element, with a settings element and settings compositions when it has style options, and repeater items, placed in an existing block area if you name one |
 | [`umbraco-add-data-type`](skills/umbraco-add-data-type/SKILL.md) | "Limit this to 160 characters", "Which editor should I use?" | Reuse or a new data type, the right property editor, name and folder |
 | [`umbraco-configure-block-editor`](skills/umbraco-configure-block-editor/SKILL.md) | "Make the block available on the page" | A Block Grid per placement, or a Block List per repeater |
 | [`umbraco-add-listing-page`](skills/umbraco-add-listing-page/SKILL.md) | "Add a blog", "Add a news section" | The listing and item page types as a pair, with a collection view |

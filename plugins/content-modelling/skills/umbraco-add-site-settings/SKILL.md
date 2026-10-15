@@ -10,8 +10,8 @@ description: >
   go", "add global settings", "add a settings node", "store the social links for the whole site",
   "add a tracking code setting", or "move settings off the home page".
   SKIP: non-Umbraco projects or Umbraco < 17; fields for a single page (a composition, use
-  umbraco-add-composition); block styling settings (use umbraco-add-block); questions about
-  naming only (use umbraco-content-model-conventions).
+  umbraco-add-composition); block styling settings (use umbraco-add-block); a page (use
+  umbraco-add-page); questions about naming only (use umbraco-content-model-conventions).
 ---
 
 # Add Site Settings

@@ -7,8 +7,10 @@
 // check them by eye: page layout, status lines, alias casing, suffix by folder and reserved aliases,
 // tab sorts, element and composition shape, templates, the Collection row, folder breadcrumbs,
 // dependency types and flags, changeset shape and status, links, leftover placeholders, and (as
-// warnings) property sorts not in hundreds, data type names, a page with no SEO composition and
-// values the Umbraco Developer MCP would refuse.
+// warnings) property sorts not in hundreds, data type names, a page with no SEO composition (unless
+// every changeset lists it only as an Update) and values the Umbraco Developer MCP would refuse.
+//
+// A type at the Document-Types root is a page (it has a template), except siteSettings.
 //
 // The format it enforces is documented in ../references/requirements-format.md. No dependencies.
 
@@ -336,7 +338,7 @@ function checkProperties(page, role, alias, dependencyNames, variesByCulture) {
 }
 
 const SUFFIX_RULES = {
-  page: (alias) => (/Page$/.test(alias) || alias === 'siteSettings' ? null : 'a page alias ends in "Page" (the only exception at the tree root is siteSettings)'),
+  page: (alias) => (/Page$/.test(alias) || alias === 'siteSettings' ? null : 'a type at the tree root is a page, and a page alias ends in "Page" (the only exception at the tree root is siteSettings)'),
   composition: (alias) => (/Composition$/.test(alias) ? null : 'an alias in Compositions/ ends in "Composition"'),
   data: (alias) => (/(Page|Composition)$/.test(alias) ? 'a type in Data/ is not a page and not a composition; use "...Folder", "...Item" or a plain noun' : null),
   element: (alias) => (/(Page|Composition|Settings|Folder)$/.test(alias) ? 'a block element alias is a plain noun, or ends in "Item", "Row" or "Block"' : null),
@@ -377,11 +379,16 @@ function checkContentType(page, kind, role, status) {
   if (role === 'data' || alias === 'siteSettings') {
     ['Default template', 'Allowed templates'].forEach((key) => mustBeDash(key, 'template-named-after-alias', 'only pages get a template'));
   }
-  if (role === 'page' && alias && alias !== 'siteSettings') checkPageTemplate(page, def, alias);
-  // Every page takes the SEO composition. A warning, not an error: a page is usable without it, and the
-  // skills add the composition in the same changeset when the site has none.
-  if (role === 'page' && alias && alias !== 'siteSettings' && value('Compositions') !== undefined && !/seo/i.test(value('Compositions')))
-    report('warning', page.file, def.line('Compositions'), 'page-seo', 'every page takes the SEO composition; none is listed in Compositions');
+  if (role === 'page' && alias && alias !== 'siteSettings') {
+    checkPageTemplate(page, def, alias);
+    // Every page takes the SEO composition. A warning, not an error: a page is usable without it, and the
+    // skills add the composition in the same changeset when the site has none. A page every changeset
+    // lists only as an Update is an existing page the change touches for another reason (a parent
+    // gaining a child), so its missing SEO is not this change's to fix and is not reported.
+    const compositions = value('Compositions');
+    if (compositions !== undefined && !/seo/i.test(compositions) && !UPDATE_ONLY.has(page.file))
+      report('warning', page.file, def.line('Compositions'), 'page-seo', `"${alias}" is a page and every page takes the SEO composition; add it to Compositions, in this changeset if the site has none`);
+  }
   if (atRoot === 'Yes' && alias && !(/HomePage$|^homePage$/.test(alias) || alias === 'siteSettings' || /Folder$/.test(alias)))
     report('error', page.file, def.line('Allowed at root'), 'allowed-at-root', `"${alias}" is allowed at root; only the home page, siteSettings and data folders are`);
   if (role === 'page' && /ListingPage$/.test(alias) && isDash(value('Collection') ?? DASH))
@@ -398,7 +405,7 @@ function checkPageTemplate(page, def, alias) {
   if (cell === undefined) return;
   const line = def.line('Default template');
   if (isDash(cell)) {
-    report('error', page.file, line, 'template-named-after-alias', 'a page has a default template');
+    report('error', page.file, line, 'template-named-after-alias', 'a page has a default template; a type with no template is not a page and does not sit at the tree root');
     return;
   }
   if (linkText(cell) !== def.get('Name')) report('error', page.file, line, 'template-named-after-alias', `the default template is named after the type: expected "${def.get('Name')}", found "${linkText(cell)}"`);
@@ -469,6 +476,21 @@ if (files.length === 0) {
   console.error(`no .md files under ${root}`);
   process.exit(2);
 }
+// The pages every changeset lists only with the Update action, read before any page is checked.
+const UPDATE_ONLY = (() => {
+  const actions = new Map();
+  for (const file of files) {
+    const page = parse(file);
+    if (classify(file, page).kind !== 'changeset') continue;
+    for (const row of table(page.sections['Requirements pages'])?.rows ?? []) {
+      const link = links(row.cells[1] ?? '')[0];
+      if (!link) continue;
+      const target = path.resolve(path.dirname(file), decodeURIComponent(link.target));
+      actions.set(target, [...(actions.get(target) ?? []), row.cells[3] ?? '']);
+    }
+  }
+  return new Set([...actions].filter(([, list]) => list.every((a) => a === 'Update')).map(([target]) => target));
+})();
 for (const file of files) {
   const page = parse(file);
   const { kind, role } = classify(file, page);

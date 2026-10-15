@@ -61,8 +61,8 @@ an implementation task, not to this schema change. Say that the controller is st
 when you report. Route hijacking finds its controller by the document type alias
 (`searchPage` is rendered by `SearchPageController`), so agree the alias with whoever writes the
 controller before the requirements doc is approved. A programmatic page allows no children and
-takes compositions selectively; a search results page wants SEO fields but rarely a sharing image,
-and it may want indexing off.
+takes compositions selectively beyond SEO, which every page takes; a search results page rarely
+wants a sharing image, and it may want indexing off.
 
 ### Listing
 

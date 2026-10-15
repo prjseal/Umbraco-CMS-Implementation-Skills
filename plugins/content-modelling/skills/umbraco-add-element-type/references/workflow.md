@@ -13,7 +13,7 @@ For an element, these are the answers you need before deciding anything:
 | Is there already an element for this noun or concern? | Do not create a second one; offer to extend the first |
 | Does the noun clash with a media type, data type or reserved word? | Only then does a content element's alias take the `...Block` suffix |
 | Do `Elements/`, `Elements/Settings/` and `Elements/Compositions/` exist? | The role's folder joins the change first if it is missing |
-| Which settings compositions and settings models exist, and what do they offer? | A settings model reuses them; a new settings composition is applied to the models that need it |
+| Which settings compositions and settings models exist, and what do they offer? | A settings model reuses them; a new settings composition must not duplicate one, and the models that should compose it are named as the follow-up |
 | Which data types exist for the fields? | Reuse before creating |
 | On a multi-language site, do the existing elements vary by culture? | A new element matches the elements beside it |
 | Where will the element be used? | Not changed here; named in the summary for [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md) or the block that owns it |
@@ -57,7 +57,6 @@ One element is these pages, as needed, in this order:
 |---|---|---|---|
 | A new data type for a field, only if needed | [data-type.md](../../umbraco-content-requirements-documentation/assets/data-type.md) | `Data-Types/<Editor-Kind>/<Name-Slug>.md` | Create |
 | The element, in its role's folder | [element-type.md](../../umbraco-content-requirements-documentation/assets/element-type.md) | `Document-Types/Elements/<AliasPascalCase>.md`, `Elements/Settings/...` or `Elements/Compositions/...` | Create |
-| A settings model that takes a new settings composition | [element-type.md](../../umbraco-content-requirements-documentation/assets/element-type.md) | `Document-Types/Elements/Settings/<AliasPascalCase>.md` | Update |
 | The changeset | [changeset.md](../../umbraco-content-requirements-documentation/assets/changeset.md) | `_changesets/<yyyy-mm-dd>-<slug>.md` | — |
 
 Points specific to an element:
@@ -72,9 +71,11 @@ Points specific to an element:
 - A missing `Elements`, `Elements/Settings` or `Elements/Compositions` folder is listed in
   Dependencies as a `document-type-container`, `New in this changeset`, with its index page from
   [folder-index.md](../../umbraco-content-requirements-documentation/assets/folder-index.md).
-- An existing settings model that gains the new composition is an **Update** page, written as
-  [requirements-lifecycle.md](../../umbraco-content-requirements-documentation/references/requirements-lifecycle.md#updating-a-type-that-already-exists)
-  describes, one checklist item per model.
+- A new **settings composition**'s `Used by` is `—`. The changeset summary names the settings
+  models that should compose it as the follow-up for
+  [umbraco-add-block](../../umbraco-add-block/SKILL.md) or
+  [umbraco-change-document-type](../../umbraco-change-document-type/SKILL.md); no existing
+  settings model is updated in this change.
 
 The changeset's checklist, in apply order:
 
@@ -82,14 +83,13 @@ The changeset's checklist, in apply order:
 - [ ] 1. Create data type folder `<Editor kind>` and data type `<Name>`                       (only if new)
 - [ ] 2. Create document type folder `Elements` (or `Elements/Settings`, `Elements/Compositions`)   (only if missing)
 - [ ] 3. Create element `<alias>`, move it into `<role folder>`, then fix-up (sorts, mandatory, descriptions, culture)
-- [ ] 4. Add `<alias>` to the compositions of `<settings model alias>`, keeping the existing ones   (settings composition only, one item per model)
-- [ ] 5. Verify every requirements doc against the site and set each status line
+- [ ] 4. Verify every requirements doc against the site and set each status line
 ```
 
 ## 4. Stop for approval
 
 Call out whether the element is shared (a settings composition or settings model other blocks
-will reuse) and every existing settings model that will change, then stop; see
+will reuse), then stop; see
 [the approval gate](../../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
 If the user asked for the backoffice steps without the MCP, see
 [apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md#asked-for-the-steps-before-approval).
@@ -106,9 +106,6 @@ For an element, also:
 - **The container.** A content element or item passes `group: "Content"` and no tab; the fix-up
   sets the group's sort to 0. A settings composition passes its tab (`Style` or `Settings`) and
   no group. A settings model passes no properties and its compositions' ids in `compositions`.
-- **A settings model gaining a composition.** Read it with `get-document-type-by-id`, append the
-  new composition to `compositions` after the ones it has, and send the whole body back with
-  `update-document-type`. Read it again: it still has no own properties.
 
 ## 6. Verify and report
 
@@ -120,5 +117,7 @@ exactly the compositions in the requirements doc.
 In the report, what is left is: registering the element where it will be used
 ([umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md)), pairing it with
 its settings or its items if those were not part of this change
-([umbraco-add-block](../../umbraco-add-block/SKILL.md)), anything in the Apply log, and the
-Razor partial that renders it, which is implementation work.
+([umbraco-add-block](../../umbraco-add-block/SKILL.md)), composing a new settings composition into
+the settings models that need it ([umbraco-add-block](../../umbraco-add-block/SKILL.md) or
+[umbraco-change-document-type](../../umbraco-change-document-type/SKILL.md)), anything in the
+Apply log, and the Razor partial that renders it, which is implementation work.

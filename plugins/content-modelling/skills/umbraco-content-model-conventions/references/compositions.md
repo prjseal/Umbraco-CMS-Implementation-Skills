@@ -40,6 +40,10 @@ Blocks follow the same idea one level down.
   blocks with a title. Create a bespoke `<block>Settings` only when a block needs style options
   the generic ones do not offer.
 - A repeater is a parent element with a Block List of `...Item` children, not a composition.
+- **An element is not a block.** A block is a content element registered in a Block Grid or
+  Block List. Settings models, settings compositions and repeater items are elements too, but they
+  are parts of a block, never blocks themselves.
+- **Settings are optional.** A block with no style options is registered with no settings element.
 
 **Related:** [Tabs, groups and sort orders](tabs-groups-sorts.md), [Names, aliases and
 suffixes](naming.md).

@@ -34,21 +34,13 @@ and the requirements doc format and the six-step workflow from
 both must be installed alongside this one, as must the peers below. If a link into any of them
 cannot be read, stop and say so.
 
-## What a page is made of
-
-| Part | Decided by | When |
-|---|---|---|
-| Kind, template, parent and children, the SEO rule | This skill | Always |
-| The document type's schema: name, alias, folder, icon, tabs, fields, compositions, culture | [umbraco-add-document-type](../umbraco-add-document-type/SKILL.md#used-by-another-skill), role page | Always |
-| The SEO composition | [umbraco-add-composition](../umbraco-add-composition/SKILL.md#used-by-another-skill) | Created only when the site has none; taken by the page always |
-| A data type for a field nothing on the site fits | [umbraco-add-data-type](../umbraco-add-data-type/SKILL.md#used-by-another-skill) | When the page needs one |
-| A block the user names that does not exist | [umbraco-add-block](../umbraco-add-block/SKILL.md#used-by-another-skill) | When the page needs one |
-| A single element with no settings and no repeater | [umbraco-add-element-type](../umbraco-add-element-type/SKILL.md#used-by-another-skill) | When the page needs one |
-| The block area where editors combine blocks | [umbraco-configure-block-editor](../umbraco-configure-block-editor/SKILL.md#used-by-another-skill), approach A | When the page has one |
-
+This skill decides the kind, the template, the parent and children, and the SEO rule. The
+document type's schema comes from
+[umbraco-add-document-type](../umbraco-add-document-type/SKILL.md#used-by-another-skill) with the
+role page; a block, a block area, the SEO composition or a new data type comes from its own peer.
 A peer called from here inspects, decides and writes its own requirements pages, then hands them
-back with their checklist rows. It does not stop for its own approval. How the pages merge into
-one changeset, and the order they are applied in, is in
+back with their checklist rows. It does not stop for its own approval. Which peer writes which
+part, how the pages merge into one changeset, and the order they are applied in, is in
 [combined-changeset.md](references/combined-changeset.md).
 
 ## Steps
@@ -65,6 +57,13 @@ one changeset, and the order they are applied in, is in
 
 When the user asks for "a page" and gives nothing more, propose the default in
 [minimum-viable-page.md](references/minimum-viable-page.md) rather than asking a list of questions.
+
+### The core page
+
+Most pages are four requirements pages and five checklist items: the page template, the page, the
+parent update and the changeset, with the SEO composition the site already has. Open
+[combined-changeset.md](references/combined-changeset.md) only when the page needs something
+beyond that: an SEO composition the site lacks, a new data type, a block or a block area.
 
 ### Page or document type?
 

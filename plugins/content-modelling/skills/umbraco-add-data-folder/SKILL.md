@@ -10,7 +10,8 @@ description: >
   reusable content", "add a data folder", "create a folder of locations editors can pick from",
   "let articles pick an author", or "where should shared data live in the content tree".
   SKIP: non-Umbraco projects or Umbraco < 17; pages or listing sections (use umbraco-add-page or
-  umbraco-add-listing-page); the site settings singleton (use
+  umbraco-add-listing-page); a single plain document type with no folder or picker (use
+  umbraco-add-document-type); the site settings singleton (use
   umbraco-add-site-settings); free-form tags (use umbraco-add-data-type).
 ---
 

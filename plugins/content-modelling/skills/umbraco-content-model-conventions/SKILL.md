@@ -48,14 +48,16 @@ is the source of truth for the wording every skill uses.
 | Page | A document type visitors are meant to land on. It has a template, takes the SEO composition and sits under a parent that allows it | Yes | Contact page, article page, search page | `umbraco-add-page` |
 | Document type | The schema of something: its tabs, fields and compositions. Its nodes can still have a URL, but nothing renders them as a page | No | Author, category, site settings | `umbraco-add-document-type` |
 | Element type | The schema of content that lives inside something else, never on its own in the content tree | No | Accordion, accordion item, a settings model | `umbraco-add-element-type` |
-| Block | A set of elements: the content element editors fill in, and the settings element that controls how it looks | No | An accordion and its settings | `umbraco-add-block` |
+| Block | A content element registered in a block area, optionally with a settings element that controls how it looks; a repeater adds its item element and Block List | No | An accordion and its settings | `umbraco-add-block` |
 | Composition | A reusable set of fields that does one job, added to the types that need it | No | SEO, Open Graph | `umbraco-add-composition` |
 | Block area | The place on a page where editors combine blocks | No | The main content Block Grid | `umbraco-configure-block-editor` |
 
 A template is what makes a page. Pages and plain document types can both have URLs; whether
 something is a page is a question of intent (will visitors land on it?), and the skills ask when
 it is unclear. Every page takes the SEO composition. Content and style stay apart: a block's
-content element holds what editors write, its settings element how it looks.
+content element holds what editors write, and its settings element, when it has style options,
+holds how it looks. An element is not a block: settings models, settings compositions and
+repeater items are elements that are parts of a block.
 
 ## Names
 

@@ -37,10 +37,35 @@ restating it.
 | Compositions | A page: the SEO composition always, the others by kind. A non-page: none | [when-to-apply.md](../../umbraco-add-composition/references/when-to-apply.md#which-types-take-it), [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
 | Vary by culture | `No` on a single-language site; otherwise ask, and name any invariant properties | [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md#properties), Culture paragraph |
 
+### Own properties
+
+Give the type a field only when no composition already supplies it, and reuse an existing data
+type whenever its configuration fits. Check each new alias against the compositions the type takes
+and against the reserved aliases in
+[property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md):
+a clash fails on create. When a field genuinely needs a configuration no data type on the site
+has, the new data type joins the changeset as its own requirements page, and reuse or create is
+decided by [umbraco-add-data-type](../../umbraco-add-data-type/SKILL.md). Block editors are
+configured separately, by
+[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md). A type with no
+own properties writes the one line the requirements doc format gives for that case; a page made
+only of compositions is normal.
+
+### Behaviour rows
+
 The behaviour rows are not decided here. For a page they are `add-page`'s: template, allowed at
 root, allowed children. For a data folder or item they are `add-data-folder`'s; for site settings
-`add-site-settings`'. A standalone plain type writes `—` for Default template and Allowed
-templates, `No` for Allowed at root, and `—` for Allowed children unless the user says it nests.
+`add-site-settings`'. A standalone plain type fills them in itself:
+
+| Row | Value |
+|---|---|
+| Allowed at root | `No` |
+| Default template, Allowed templates | `—` |
+| Allowed children | `—` unless the user names children |
+| Collection | Row deleted; it belongs to listing pages only |
+
+A plain type that no parent allows cannot be created in the content tree. Say so in the summary
+and, when the user names a parent, add it as an Update (step 3).
 
 ### A non-page asked for with page things
 

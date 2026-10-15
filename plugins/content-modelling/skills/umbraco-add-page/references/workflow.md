@@ -41,20 +41,25 @@ each row names the rule or the peer to open.
 
 ### SEO is mandatory
 
-Every page takes the SEO composition. What that means depends on what the site has:
+Every page takes the SEO composition, programmatic pages included: a search results page still
+needs a meta title and description. What that means depends on what the site has:
 
 - **The site has an SEO composition.** The page lists it in Compositions, flagged `Exists`.
 - **The site has none.** It joins this changeset, written by
   [`umbraco-add-composition`](../../umbraco-add-composition/SKILL.md#used-by-another-skill) with
-  its standard fields
-  ([standard-compositions.md](../../umbraco-add-composition/references/standard-compositions.md)):
-  `metaTitle`, `metaDescription`, `isIndexable` and `canonicalUrlOverride` on the `SEO` tab (600).
+  its standard fields (the SEO row of
+  [standard-compositions.md](../../umbraco-add-composition/references/standard-compositions.md#the-table)):
+  `metaTitle`, `metaDescription`, `isIndexable` and `canonicalUrlOverride` on the `SEO` tab (600),
+  moving into a `Search` group (0) only once another composition shares that tab.
   `isIndexable` needs a toggle that defaults on; if the site has no such data type, `Toggle
   (default on)` joins the changeset ahead of the composition, with the `Toggle/` folder and its
   index page. The page's Dependencies flag the composition **New in this changeset**, never
   **Missing**: Missing blocks approval, and the composition is in the change.
 - **Other existing pages lack SEO.** List them in the changeset summary as optional Updates for
-  the user to add at approval. They are not included by default; the change is one page.
+  the user to add at approval. They are not included by default; the change is one page. The
+  clash check in
+  [when-to-apply.md](../../umbraco-add-composition/references/when-to-apply.md#what-blocks-a-type-from-taking-it)
+  applies to each one the user adds.
 - **Sharing and page-details compositions** are not added when missing. Name them in the summary
   as a follow-up for `umbraco-add-composition`, and do not flag them Missing.
 
@@ -128,15 +133,17 @@ orders: the `Toggle (default on)` data type, then the `Compositions` folder and
 
 ## 4. Stop for approval
 
-One approval for the whole changeset. Call out:
+One approval for the whole changeset, including every part listed in
+[combined-changeset.md](combined-changeset.md). Call out:
 
 - every **existing** artefact that will change: the parent (it has content on it), an existing
-  block area gaining a block, a settings model gaining a composition;
+  Block Grid gaining a block, a settings model gaining a settings composition;
 - every new **shared** artefact: the SEO composition, a settings model or settings composition
-  other blocks will reuse, and which existing pages lack SEO and are left alone;
+  other blocks will reuse, a block other pages can use, and which existing pages lack SEO and are
+  left alone;
 - anything that rests on the user's word rather than a read of the site.
 
-Then stop; see
+What is left after the change belongs in the report (step 6), not here. Then stop; see
 [the approval gate](../../umbraco-content-requirements-documentation/references/change-workflow.md#4-stop-for-approval).
 If the user asked for the backoffice steps and the MCP is not connected, see
 [apply-manually.md](../../umbraco-content-requirements-documentation/references/apply-manually.md#asked-for-the-steps-before-approval).
@@ -178,6 +185,6 @@ a child of the master, that the page lists the SEO composition, and that the par
 type. Each peer's workflow says what to confirm for the artefacts it wrote.
 
 In the report, what is left (item 3) names: the template's markup, for a programmatic page the
-controller that renders it, the Razor partial for each new block, the optional sharing or
+controller that renders it, the Razor partial view for each new block, the optional sharing or
 page-details composition if the site lacks one, and the existing pages without SEO that were
 offered and not updated.

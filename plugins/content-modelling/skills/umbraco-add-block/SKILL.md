@@ -1,7 +1,7 @@
 ---
 name: umbraco-add-block
 description: >
-  Add one block to an Umbraco 17+ site: the content element editors fill in and the settings
+  Add one block to an Umbraco 17+ site: the content element editors fill in, an optional settings
   element that controls how it looks, built from settings compositions, and, for a repeater, its
   `...Item` child element and the Block List that holds the children. Can also place the block in
   an existing block area the user names. The change is written as a requirements doc, approved,
@@ -17,11 +17,12 @@ description: >
 
 # Add Block
 
-Adds **one block**: a set of elements. The content element holds what editors write; the settings
-element holds how it looks, assembled from small single-purpose settings compositions. A block
-that repeats something also has a child element and the Block List that holds the children. This
-skill decides which of those parts the block needs and how they fit together, then writes them
-up, stops for approval, applies them and reads them back.
+Adds **one block**: a set of elements. The content element holds what editors write. A settings
+element, which holds how it looks, assembled from small single-purpose settings compositions, is
+**optional**: only a block with style options has one. A block that repeats something also has a
+child element and the Block List that holds the children. This skill decides which of those parts
+the block needs and how they fit together, then writes them up, stops for approval, applies them
+and reads them back.
 
 Each element is one element type, and the rules for one element belong to
 [`umbraco-add-element-type`](../umbraco-add-element-type/SKILL.md); this skill calls it for each
@@ -41,10 +42,10 @@ both must be installed alongside this one. If a link into either cannot be read,
 | Part | Needed when | Lives in | Decided by |
 |---|---|---|---|
 | Content element (`accordion`) | Always | `Elements/` | [umbraco-add-element-type](../umbraco-add-element-type/SKILL.md#used-by-another-skill), role content element |
-| Settings model (`accordionSettings`, or a shared one) | The block has style options | `Elements/Settings/` | [settings-models.md](references/settings-models.md); the element by `umbraco-add-element-type`, role settings model |
+| Settings model (`accordionSettings`, or a shared one) | Optional: only when the block has style options | `Elements/Settings/` | [settings-models.md](references/settings-models.md); the element by `umbraco-add-element-type`, role settings model |
 | Settings composition (`backgroundColourSettingsComposition`) | A style option no existing settings composition gives | `Elements/Compositions/` | [settings-models.md](references/settings-models.md); the element by `umbraco-add-element-type`, role settings composition |
 | Child element and its Block List (`accordionItem`, `Accordion Items`) | The block repeats a set of fields | `Elements/`, `Data Types/Block List/` | [nested-items.md](references/nested-items.md); the element by `umbraco-add-element-type`, role repeater item |
-| Registration in an existing block area | The user names the area | `Data Types/Block Grid/` | [umbraco-configure-block-editor](../umbraco-configure-block-editor/SKILL.md#used-by-another-skill), approach A |
+| Registration in an existing block area | The user names the area | `Data Types/Block Grid/` | [workflow.md](references/workflow.md#registering-in-a-named-block-area), following [umbraco-configure-block-editor](../umbraco-configure-block-editor/SKILL.md#used-by-another-skill) approach A |
 
 The steps are the same for every block: inspect, decide, write the requirements doc, **stop for
 approval**, apply, verify. What a block adds at each step is in
@@ -79,6 +80,11 @@ the connected tool list is the authority.
 
 ## Best practices
 
+- **An element is not a block.** A block is a content element registered in a block area. Its
+  settings model, settings compositions and repeater items are elements too, but they are parts of
+  the block, never blocks of their own.
+- **Settings are optional.** A block with no style options gets no settings element and is
+  registered with settings `—`. Do not add a settings model "in case"; one can be added later.
 - **Content and style stay apart.** Colours, spacing and anchors never go on the element an
   editor fills in; they go on its settings element, built from settings compositions; see
   [compositions.md](../umbraco-content-model-conventions/references/compositions.md#blocks-settings-compositions-and-settings-models).
@@ -92,9 +98,9 @@ the connected tool list is the authority.
 - **Leaf first.** Settings compositions, then the settings model, then child elements, then the
   Block List, then the parent, then the block area that registers it: each needs the ids of the
   ones before.
-- **Placing the block is an Update of an existing data type.** It keeps every block the area
-  already offers; see
-  [approach A](../umbraco-configure-block-editor/references/approach-a-block-grid-placement.md#adding-a-block-to-an-existing-placement).
+- **Placing the block is an Update of an existing data type.** It registers the content element
+  with its settings model, when there is one, and keeps every block the area already offers; see
+  [Registering in a named block area](references/workflow.md#registering-in-a-named-block-area).
 - "Just build the block" is a request for the block, not approval of a requirements doc the user
   has not yet seen.
 
@@ -104,6 +110,6 @@ Objective assertions live in [`evals/evals.json`](evals/evals.json); run them wi
 `umbraco-skill-evaluator`. Coverage tier: **Documented**. This skill ships no code and no assets.
 The requirements docs it writes are checked by the linter in
 `umbraco-content-requirements-documentation`, and an eval graded the guidance. Nothing ran against
-a live site. The eval fixture under `evals/files/` is this skill's own copy; `umbraco-add-element-type`
+a live site. The eval fixtures under `evals/files/` are this skill's own copies; `umbraco-add-element-type`
 and `umbraco-add-page` keep theirs, because eval file paths resolve relative to the skill, so the
 copies can drift.

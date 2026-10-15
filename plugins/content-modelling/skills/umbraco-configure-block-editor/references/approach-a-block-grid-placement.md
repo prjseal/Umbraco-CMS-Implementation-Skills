@@ -39,6 +39,7 @@ the property's tab and sort from
   [naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types).
 - **Register each block with its settings model** (the site's shared ones, or the block's bespoke
   one). A block registered without its settings element loses its style options in that placement.
+  A block with no settings model is registered with settings `—`.
 - **Column spans say where a block may sit.** A full-width block offers 12 only; a card-like block
   offers 12, 6 and 4. Leave spans empty only for blocks that take any width.
 - **Layout blocks are opt-in.** Add areas only when editors need to put blocks side by side. A

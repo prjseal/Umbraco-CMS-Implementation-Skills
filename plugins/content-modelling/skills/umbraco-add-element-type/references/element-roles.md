@@ -17,6 +17,7 @@ what it may compose. Settle the role first.
 | **Compositions** | None | None | Settings compositions only, at least one | None |
 | **Icon** | A noun that fits, no colour | A noun that fits, no colour | `icon-settings`, no colour | `icon-settings`, no colour |
 | **Used by** | A Block Grid or Block List registers it | Its parent's Block List | Registered beside a content element | Settings models |
+| **Linter role** | element | element | settings model | settings composition |
 
 Names and suffixes come from
 [naming.md](../../umbraco-content-model-conventions/references/naming.md#suffixes), folders from
@@ -63,21 +64,26 @@ to exist; the list is created with the parent, by
 
 ### Settings model
 
-No properties of its own; the linter rejects any. Built from at least one settings composition,
-passed in `compositions` on the create. Described by the blocks it serves ("Settings for blocks
-without a title: background colour, spacing and anchor."). A shared model is named for what it
-serves (`blockSettings`, `titledBlockSettings`); a bespoke one for its block (`accordionSettings`).
+Optional: a block has one only when it has style options. No properties of its own; the linter
+rejects any. Built from at least one settings composition, passed in `compositions` on the
+create. A shared model is named for what it serves (`blockSettings`, `titledBlockSettings`); a
+bespoke one for its block (`accordionSettings`). Which settings model a block uses, whether a new
+one is needed at all, and how it is described are decided in
+[settings-models.md](../../umbraco-add-block/references/settings-models.md#which-settings-model-a-block-uses).
 
 ### Settings composition
 
 Follows the composition rules: one concern, flat, no template, never composed into a content
 element or a page type. Its tab is `Style` (50) for how the block looks or `Settings` (100) for
-how it behaves. A field whose values come from a fixed list (sizes, colours) gets its own purpose
-data type, named and foldered by
-[naming.md](../../umbraco-content-model-conventions/references/naming.md#data-types) and decided
-by [umbraco-add-data-type](../../umbraco-add-data-type/SKILL.md); it joins the changeset ahead of
-the composition. Applying the new composition to an existing settings model is an **Update** of
-that model, listed in the changeset so the user approves the exact list, and applied by
-read-modify-write.
+how it behaves. The usual concerns, the purpose data type a fixed list of choices needs (it joins
+the changeset ahead of the composition) and the description are in
+[settings-models.md](../../umbraco-add-block/references/settings-models.md#settings-compositions).
+
+A new settings composition does nothing until a settings model composes it. When the user asks
+for one on its own, do not update any settings model here: name composing it into the settings
+models that need it as the follow-up, for [umbraco-add-block](../../umbraco-add-block/SKILL.md)
+or [umbraco-change-document-type](../../umbraco-change-document-type/SKILL.md). A request that
+starts from the blocks ("give our blocks a spacing option") is a block change: hand it to
+`umbraco-add-block`, which makes the composition and updates the models in one changeset.
 
 **Related:** [workflow.md](workflow.md).

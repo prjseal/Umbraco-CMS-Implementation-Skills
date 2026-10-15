@@ -17,23 +17,35 @@ For a block, these are the answers you need before deciding anything:
 | Which settings models and settings compositions exist, and what do they offer? | Reuse a shared settings model before creating one |
 | Which data types exist for the fields (text, rich text, media, link, colour)? | Reuse before creating |
 | On a multi-language site, do the existing elements vary by culture? | A new block matches the blocks beside it; see step 2 |
-| Where will the block be used? | If the user names an existing block area, read its Block Grid with `get-data-type`: the block is registered there in this change. Otherwise the placement is named in the summary as the follow-up for [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md) |
+| Where will the block be used? | A block area the user names is updated in this change; otherwise the placement is named in the summary as the follow-up for [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md) |
+| If a block area is named, what does its Block Grid register now? | Read it with `get-data-type`: the Update keeps every existing entry ([Registering in a named block area](#registering-in-a-named-block-area)) |
 
 ## 2. Decide
 
 | Decision | For a block | Rule |
 |---|---|---|
 | The content element: name, alias, folder, container, fields, icon, description | One element in the role content element: plain noun alias, `Elements/`, one `Content` group, content fields only | [add-element-type workflow](../../umbraco-add-element-type/references/workflow.md#2-decide), [element-roles.md](../../umbraco-add-element-type/references/element-roles.md) |
-| Style options | None, a shared settings model, or a bespoke one built from settings compositions | [settings-models.md](settings-models.md) |
+| Style options | None (no settings element; settings are optional), a shared settings model, or a bespoke one built from settings compositions | [settings-models.md](settings-models.md) |
 | Repeated fields | A child element in the role repeater item, and its Block List | [nested-items.md](nested-items.md) |
 | Compositions on the content element | None. Page compositions never go on elements | [compositions.md](../../umbraco-content-model-conventions/references/compositions.md) |
 | Vary by culture | `No` on a single-language site; `Yes` when blocks must be translated, which needs the type and its properties to vary | [requirements-format.md](../../umbraco-content-requirements-documentation/references/requirements-format.md#properties), Culture paragraph |
-| Placement | An existing block area the user names: the block and its settings model are registered there as an Update of that Block Grid, keeping every existing entry. A new area, or any other change to an area, is a separate change | [approach A](../../umbraco-configure-block-editor/references/approach-a-block-grid-placement.md#adding-a-block-to-an-existing-placement) |
+| Placement | An existing block area the user names is updated in this change; otherwise a follow-up | [Registering in a named block area](#registering-in-a-named-block-area) |
 
 Element types have no allowed children, are never allowed at root and have no template. They do
 vary by culture when the site's blocks are translated: a block can vary by language only when its
 element type (and each property on it) does, so a settings model and its settings compositions
 vary with the content element they serve.
+
+### Registering in a named block area
+
+When the user names an existing block area ("add it to the main content grid"), the block is
+registered there in the same changeset. Its Block Grid becomes an **Update** page that adds one
+row, the content element with its settings model (or `—` when it has none), and keeps every
+existing row, as
+[approach A](../../umbraco-configure-block-editor/references/approach-a-block-grid-placement.md#adding-a-block-to-an-existing-placement)
+describes; its spans and group follow the blocks already there. A block area that does not exist
+yet, or any other change to an area, is not made here: name it as the follow-up for
+[umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md).
 
 ## 3. Write the requirements doc
 
@@ -74,7 +86,7 @@ The changeset's checklist, in apply order:
 - [ ] 5. Create element `<child alias>`, move it into `Elements`, then fix-up              (repeater only)
 - [ ] 6. Create data type folder `Block List` and data type `<Plural of child>`             (repeater only)
 - [ ] 7. Create element `<alias>`, move it into `Elements`, then fix-up
-- [ ] 8. Update data type `<Placement> Block Grid`: add `<alias>` with `<settings alias>`, keeping the existing entries   (only when the user named the area)
+- [ ] 8. Update data type `<Placement> Block Grid`: add `<alias>` with `<settings alias or —>`, keeping the existing entries   (only when the user named the area)
 - [ ] 9. Verify every requirements doc against the site and set each status line
 ```
 
@@ -90,22 +102,17 @@ If the user asked for the backoffice steps without the MCP, see
 
 For a block, also:
 
-- **Create, then move, then fix-up.** Every element is created at the tree root
-  ([apply-via-mcp.md](../../umbraco-content-requirements-documentation/references/apply-via-mcp.md#tools)).
-  Move it with `move-document-type` into `Elements/`, `Elements/Settings/` or
-  `Elements/Compositions/` straight away, looking up the folder id at apply time, and confirm the
-  move with `get-document-type-ancestors`.
-- **The container.** Pass `group: "Content"` and no tab for content elements; the fix-up sets the
-  group's sort to 0. Settings compositions pass their tab (`Style` or `Settings`) and no group.
-- **Compositions on a settings model.** Pass the settings compositions' ids in `compositions` on
-  the create; the model has no properties of its own.
+- **Each element** is created at the tree root, moved into its folder and fixed up as
+  [umbraco-add-element-type](../../umbraco-add-element-type/references/workflow.md#5-apply)
+  describes for its role.
 - **The Block List.** Create it with `create-data-type` after the child element exists, copying
   the shape of its `values` from an existing Block List on the site read with `get-data-type`.
   The block entry references the child element's id; the amount holds the minimum and maximum.
 - **The parent.** Its `items` property takes the Block List's id, so it is created after it.
 - **The block area.** Last, and only when the user named one: read the Block Grid with
-  `get-data-type`, add one entry with the content element's id, the settings element's id, root
-  or areas and column spans, keep every existing entry unchanged, and write the whole
+  `get-data-type`, add one entry with the content element's id, the settings element's id (none
+  when the block has no settings), root or areas and column spans, keep every existing entry
+  unchanged, and write the whole
   configuration back with `update-data-type`, as
   [approach A](../../umbraco-configure-block-editor/references/approach-a-block-grid-placement.md#5-apply)
   describes.
@@ -115,7 +122,7 @@ For a block, also:
 For a block, also confirm on the read-back that each element sits in the right folder, has no
 tab and exactly one `Content` group, that the settings model has no own properties, that the
 Block List registers the child with the specified amount, and, when the block was placed, that
-the Block Grid lists every block it had before plus this one, with its settings element.
+the Block Grid lists every block it had before plus this one, with its settings element or none.
 
 In the report, what is left is: registering the block (and its settings model) in any block area
 it was not placed in, with [umbraco-configure-block-editor](../../umbraco-configure-block-editor/SKILL.md),

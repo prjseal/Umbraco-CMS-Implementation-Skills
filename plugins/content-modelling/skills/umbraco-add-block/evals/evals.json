@@ -36,17 +36,48 @@
     {
       "id": 3,
       "prompt": "Umbraco MCP is connected to our Umbraco 17 site; evals/files/mcp/site-context.md holds what the read tools returned (this session can't call it; treat the file as the live site). Keep requirements docs in docs/umbraco-schema/. We need a Team block for the About page: a heading, then up to 6 team members, each with a photo, name, job title and LinkedIn link. To keep it simple, just give the block fixed fields for 6 members (member1Photo, member1Name and so on). Then add the block to the Main Content Block Grid so editors can use it straight away.",
-      "expected_output": "The agent rejects numbered fields in favour of a repeater: a parent element (e.g. `team`) with `title` and `items`, a child element ending Item with short aliases (image, name, jobTitle, link), and a Block List named as the child's plural with a maximum of 6. It reuses a shared settings model (titledBlockSettings, since the block has a title). Because the user named the Main Content Block Grid, the block is registered there in the same changeset as an Update of that data type that keeps hero and richText. Everything is proposed, the create-then-move for elements is planned, and nothing is claimed as done.",
+      "expected_output": "The agent rejects numbered fields in favour of a repeater: a parent element (e.g. `team`) with `title` and `items`, a child element ending Item with short aliases (image, fullName, jobTitle, link; never the reserved `name`), and a Block List named as the child's plural with a maximum of 6. It reuses a shared settings model (titledBlockSettings, since the block has a title). Because the user named the Main Content Block Grid, the block is registered there in the same changeset as an Update of that data type that keeps hero and richText. Everything is proposed, the create-then-move for elements is planned, and nothing is claimed as done.",
       "files": [
         "evals/files/mcp/site-context.md"
       ],
       "expectations": [
         "The agent does not specify numbered fields (no `member1Photo`-style aliases) and explains that repeated members belong in a Block List of child elements",
-        "A child element requirements page exists in docs/umbraco-schema/Document-Types/Elements/ with an alias ending in Item (or Row), whose property aliases are short and generic (e.g. `image`, `name`, `jobTitle`, `link`), not prefixed with member or team",
+        "A child element requirements page exists in docs/umbraco-schema/Document-Types/Elements/ with an alias ending in Item (or Row), whose property aliases are short and generic (e.g. `image`, `fullName`, `jobTitle`, `link`), not prefixed with member or team and never a reserved alias such as `name`",
         "A Block List data type requirements page exists under docs/umbraco-schema/Data-Types/Block-List/, named as the plural of the child element, with a maximum of 6 in its amount configuration",
         "The parent element has short generic aliases for its own fields (e.g. `title` and `items`) and one `Content` group with Group Sort 0 and no tab",
         "The Main Content Block Grid requirements page under docs/umbraco-schema/Data-Types/Block-Grid/ is an Update in the same changeset that adds the team block with its settings model (`titledBlockSettings` or `blockSettings`) and keeps the existing `hero` and `richText` registrations with their settings elements; it is ordered after the team element and the agent does not create a second Block Grid",
         "The apply plan (changeset checklist or apply notes) creates each element and then moves it into Elements/, because create-element-type has no folder parameter",
+        "Every requirements page and the changeset have the status `proposed`; the agent stops for approval and does not claim anything was created or verified on the site"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "The Umbraco MCP is connected to our Umbraco 17 site; this session can't call it, so evals/files/mcp/no-settings-site-context.md has what the read tools returned. Treat it as the live site. Requirements docs go in docs/umbraco-schema/ (only a README so far). Add a Call to Action block: a heading, a short text and a button link. Editors need to pick a background colour for it. Put it in the Main Content Block Grid.",
+      "expected_output": "The site has no settings models, so the agent creates a shared settings model (e.g. `blockSettings`) rather than a bespoke callToActionSettings, built from a new background colour settings composition (Style tab 50) backed by a purpose-built colour picker data type, and says the next block can reuse it. The content element `callToAction` holds only content. The Main Content Block Grid is updated to register it with the shared settings model, keeping richText. Leaf first, one changeset, proposed.",
+      "files": [
+        "evals/files/mcp/no-settings-site-context.md"
+      ],
+      "expectations": [
+        "A content element requirements page exists in docs/umbraco-schema/Document-Types/Elements/ with a plain-noun alias such as `callToAction` (not `callToActionBlock`), holding only content fields (heading, text, link) in one `Content` group, with no colour field",
+        "A settings model requirements page exists under docs/umbraco-schema/Document-Types/Elements/Settings/ with a shared, generic alias (e.g. `blockSettings` or `titledBlockSettings`) rather than a block-specific one such as `callToActionSettings`, with no own properties, and the agent says other blocks can reuse it",
+        "A settings composition requirements page exists under docs/umbraco-schema/Document-Types/Elements/Compositions/ for the background colour (alias ending in SettingsComposition), its field on the `Style` tab with Tab Sort 50 and no group",
+        "A purpose-built colour picker data type has its own requirements page under docs/umbraco-schema/Data-Types/ in a folder named after its editor kind (e.g. `Color-Picker/`), ordered before the settings composition",
+        "The Main Content Block Grid is updated (an Update requirements page or checklist item) to register the new block with the shared settings model while keeping the existing `richText` entry",
+        "The changeset orders the work leaf first: data type, folders, settings composition, settings model, content element, then the Block Grid update",
+        "Every requirements page and the changeset have the status `proposed`; the agent stops for approval and does not claim anything was created or verified on the site"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Umbraco MCP is connected to our Umbraco 17 site; evals/files/mcp/site-context.md holds what the read tools returned (this session can't call it; treat the file as the live site). Requirements docs go in docs/umbraco-schema/. Add a Quote block to the Main Content Block Grid: the quote and who said it. It always looks the same, so editors don't need any styling options for it.",
+      "expected_output": "The agent specifies a content element `quote` with short generic aliases in one Content group and no settings element: settings are optional, and the block has no style options, so it neither reuses blockSettings nor creates a settings model. The Main Content Block Grid is updated to register quote with settings —, keeping hero and richText. Proposed, stops for approval.",
+      "files": [
+        "evals/files/mcp/site-context.md"
+      ],
+      "expectations": [
+        "A content element requirements page exists in docs/umbraco-schema/Document-Types/Elements/ with a plain-noun alias such as `quote`, with short generic aliases (e.g. `quote` or `text`, and `attribution` or `author`) in one `Content` group with Group Sort 0 and no tab",
+        "No settings model or settings composition requirements page is written, and the block is registered with no settings element (—) rather than with blockSettings or titledBlockSettings; the agent says settings are optional and this block has no style options",
+        "The Main Content Block Grid is updated (an Update requirements page or checklist item) to add the quote block and keeps the existing `hero` and `richText` entries with their settings models",
         "Every requirements page and the changeset have the status `proposed`; the agent stops for approval and does not claim anything was created or verified on the site"
       ]
     }

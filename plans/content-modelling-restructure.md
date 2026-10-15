@@ -77,6 +77,17 @@ Operational decisions that follow from the principles. All settled.
 | 4 | SEO is enforced | A `page-seo` linter warning and a review check |
 | 5 | No version bump yet | Plugin stays at 1.2.0 until the user decides |
 
+### Decisions after the plan
+
+Settled on 15 Oct 2026, after comparing this branch with PR #4, a second implementation of the
+same plan. PR #4's better parts were merged into this branch, which is the one carried forward.
+
+| # | Decision | Detail |
+|---|---|---|
+| 6 | A block's settings element is optional | A block with no style options is registered with settings `—`. This narrows principle 3: content and style stay apart, but a block with no style has no settings element |
+| 7 | A lone settings composition does not update settings models | `add-element-type` writes only the composition and names composing it into settings models as a follow-up for `add-block` or `change-document-type`. "Give blocks an option" goes to `add-block`, which does both in one changeset |
+| 8 | `page-seo` ignores Update-only pages | The linter does not warn on a page every changeset lists only as an Update: an existing page the change touches for another reason |
+
 The linter already accepts mixed-kind changesets. It assigns a type's role by folder: anything at
 the Document Types root except `siteSettings` is a page and needs a `...Page` alias and a template.
 So `add-document-type` places plain types by role, never at the root.

@@ -21,7 +21,8 @@ Configures **one block editor data type**: which blocks it offers, with which se
 how many, and the property that uses it. It works requirements-first: write the change down, stop
 for the user's approval, apply it, then read it back.
 
-The blocks themselves (content elements paired with settings models, child items) are made by
+The blocks themselves (content elements, with a settings model when they have style options, and
+child items) are made by
 [`umbraco-add-block`](../umbraco-add-block/SKILL.md), and a single element by
 [`umbraco-add-element-type`](../umbraco-add-element-type/SKILL.md). This skill registers them in a
 block area; see [the terms](../umbraco-content-model-conventions/SKILL.md#terms).
@@ -73,7 +74,7 @@ Two skills call this one, both for approach A:
   existing entry if it has one, and the `mainContent` (or sidebar) property on the page.
 - [`umbraco-add-block`](../umbraco-add-block/SKILL.md), to place one new block in an existing
   block area the user names: an Update of that Block Grid adding one entry with the block's
-  settings model, keeping every existing entry.
+  settings model (or `—` when it has none), keeping every existing entry.
 
 When called from another skill:
 
@@ -100,8 +101,9 @@ the connected tool list is the authority.
 
 - **Two places that allow different blocks get two data types**, so changing one never changes
   the other; see [naming.md](../umbraco-content-model-conventions/references/naming.md#data-types).
-- **Register blocks with their settings models.** A block's styling is chosen where it is
-  registered; register the content element and its settings element together.
+- **Register blocks with their settings models, when they have one.** A block's styling is chosen
+  where it is registered; register the content element and its settings element together.
+  Settings are optional: a block with no style options is registered with settings `—`.
 - **Changing a block editor changes existing content's options.** Adding a block is safe.
   Removing one, or tightening a limit, affects pages that already use it: read what uses the data
   type first, and never remove a block that content still uses.

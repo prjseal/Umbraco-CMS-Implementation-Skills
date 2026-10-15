@@ -2,17 +2,17 @@
 name: umbraco-add-document-type
 description: >
   Add the schema of one document type to an Umbraco 17+ site: name, alias, folder by role, icon,
-  description, tabs, properties, compositions and culture variation, never a template. Roles: the
-  schema half of a page (called by umbraco-add-page), a data folder or item, site settings, or a
-  standalone type visitors never land on. Asks whether visitors will land on it and hands a page
-  to umbraco-add-page. The change is written as a requirements doc, approved, applied through the
-  MCP or a manual walkthrough, and read back.
-  Use this whenever the user asks to "add a document type", "create a document type", "add a type
-  for offices", "model an author type", or "add a document type with no template".
-  SKIP: non-Umbraco projects or Umbraco < 17; anything with a template or that visitors land on
-  (use umbraco-add-page); element types (use umbraco-add-element-type); blocks (use
-  umbraco-add-block); compositions (use umbraco-add-composition); changing a type that exists
-  (use umbraco-change-document-type).
+  description, tabs, properties, compositions and culture, never a template. Used directly for a
+  type visitors never land on; other skills call it for the schema of a page, data folder or site
+  settings. Asks whether visitors will land on it and hands a page to umbraco-add-page. Written as
+  a requirements doc, approved, applied through the Umbraco Developer MCP or a manual backoffice
+  walkthrough, and read back.
+  Use this whenever the user asks to "add a document type", "create a document type with these
+  fields", or "add a document type with no template".
+  SKIP: non-Umbraco projects or Umbraco < 17; anything visitors land on (use umbraco-add-page);
+  element types and blocks (use umbraco-add-element-type or umbraco-add-block); compositions (use
+  umbraco-add-composition); data folders (use umbraco-add-data-folder); site settings (use
+  umbraco-add-site-settings); changing a type that exists (use umbraco-change-document-type).
 ---
 
 # Add Document Type

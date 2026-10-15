@@ -3,14 +3,15 @@
 Rules: [naming.md](../../umbraco-content-model-conventions/references/naming.md),
 [property-aliases.md](../../umbraco-content-model-conventions/references/property-aliases.md).
 On a requirements folder the linter already reports alias casing and suffixes (`alias-casing`,
-`alias-suffix`); carry its findings into the report instead of re-checking by eye.
+`alias-suffix`); carry its findings into the report instead of re-checking by eye. A `...Page`
+alias with no template is one finding, reported once under
+[Page type with no default template](checks-structure.md#templates), not here as well.
 
 ## Types
 
 | Check | How to detect | Severity | Fix with |
 |---|---|---|---|
 | Page without the `Page` suffix | A type with a template (or at the tree root) whose alias does not end `Page`, other than `siteSettings` | Medium | a rename, specified with the skill that owns the type |
-| `...Page` alias with no template | An alias ending `Page` whose type has no `defaultTemplate`: the suffix promises a page the schema does not deliver | Low | [umbraco-add-page](../../umbraco-add-page/SKILL.md) if visitors should land on it (a template), otherwise a rename by role ([umbraco-add-document-type](../../umbraco-add-document-type/references/type-roles.md)) |
 | Listing not named after its item | A type with a collection and allowed children whose alias is not `<noun>ListingPage` listing `<noun>Page` | Medium | [umbraco-add-listing-page](../../umbraco-add-listing-page/SKILL.md) |
 | Composition without the `Composition` suffix | A type used as a composition (`get-document-type-composition-references` returns users) or in `Compositions/` | Medium | [umbraco-add-composition](../../umbraco-add-composition/SKILL.md) |
 | Element with a page or composition suffix, or `...Block` without a clash | An element type alias ending `Page`, `Composition`, `Folder`, or `Block` where the plain noun is free | Low | [umbraco-add-element-type](../../umbraco-add-element-type/SKILL.md) |

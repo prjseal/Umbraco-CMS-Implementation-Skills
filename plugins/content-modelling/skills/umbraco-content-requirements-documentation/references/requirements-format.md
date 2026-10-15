@@ -149,12 +149,13 @@ nothing else. It exits 0 when there are no errors, 1 when there are, and prints 
 finding with the file, line and rule. It checks: required headings and Definition rows, the
 twelve-column header, the status line, alias casing, suffix by folder and reserved aliases, tab
 sorts against the global table, element and composition shape, a template named after the alias
-for every page (a type with a template), the `Collection` row only on a listing, the `Folder` breadcrumb, the
-dependency types and flags, the changeset's actions and that an applied changeset has every page
-applied and every step ticked, that links resolve, and that no `<placeholder>` is left, whatever
-its casing. Four things are warnings rather than errors: a property sort that is not a multiple
-of 100, a data type name that follows no pattern, a page whose Compositions row lists no SEO
-composition (every page takes SEO), and a name, tab, group or description containing `?`, `&`, a
+for every page (a type with a template), the `Collection` row only on a listing, the `Folder`
+breadcrumb, the dependency types and flags, the changeset's actions and that an applied changeset
+has every page applied and every step ticked, that links resolve, and that no `<placeholder>` is
+left, whatever its casing. Four things are warnings rather than errors: a property sort that is
+not a multiple of 100, a data type name that follows no pattern, a page whose Compositions row has
+no SEO composition (`page-seo`; every page takes it, but a page every changeset lists only as an
+Update is left alone), and a name, tab, group or description containing `?`, `&`, a
 percent-encoded sequence or `../`, which the Umbraco Developer MCP refuses.
 
 If Node.js is not available, say the requirements doc was not linted. Do not report it as
